@@ -1,5 +1,5 @@
 {
-  "name": "my-first-clock",
+  "name": "fitbit",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
@@ -8,9 +8,9 @@
     "@fitbit/sdk-cli": "^1.7.3"
   },
   "fitbit": {
-    "appUUID": "d4fe14f6-9ed8-4ca2-9111-9b7a46b35446",
-    "appType": "app",
-    "appDisplayName": "lifesavers-smartwatch-app",
+    "appUUID": "2204713d-897c-4d8f-954d-c41864d07aae",
+    "appType": "clockface",
+    "appDisplayName": "Fitbit",
     "iconFile": "resources/icon.png",
     "wipeColor": "#ffffff",
     "requestedPermissions": [],
@@ -24,5 +24,10 @@
   "scripts": {
     "build": "fitbit-build",
     "debug": "fitbit"
+  },
+  "dependencies": {
+    "clock": "^1.0.2",
+    "document": "^0.4.7",
+    "user-settings": "^0.2.0"
   }
 }
