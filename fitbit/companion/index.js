@@ -1,5 +1,5 @@
 import * as messaging from "messaging";
-import { settingsStorage } from "settings";
+import {settingsStorage} from "settings";
 
 // Fetch Sleep Data from Fitbit Web API
 async function fetchSleepData(accessToken) {
@@ -28,12 +28,33 @@ async function fetchSleepData(accessToken) {
     }
 }
 
+// Fetch User Data from Fitbit Web API
+async function fetchUserProfile(accessToken) {
+    try {
+        // Sleep API docs - https://dev.fitbit.com/reference/web-api/sleep/
+        const response = await fetch(`https://api.fitbit.com/1.2/user/-/profile.json`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`
+            }
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+    } catch (err) {
+        console.log('[FETCH]: ' + err);
+    }
+}
+
 // A user changes Settings
 settingsStorage.onchange = evt => {
     if (evt.key === "oauth") {
         // Settings page sent us an oAuth token
         let data = JSON.parse(evt.newValue);
+        console.log(data.user_id);
         fetchSleepData(data.access_token);
+        fetchUserProfile(data.access_token);
     }
 };
 
