@@ -12,7 +12,7 @@ function mySettings(props) {
                     requestTokenUrl="https://api.fitbit.com/oauth2/token"
                     clientId="***REMOVED***"
                     clientSecret="***REMOVED***"
-                    scope="sleep"
+                    scope="sleep profile"
                 />
             </Section>
         </Page>
