@@ -1,6 +1,7 @@
 import clock from "clock";
 import * as document from "document";
-import { preferences } from "user-settings";
+import {preferences} from "user-settings";
+import * as messaging from "messaging";
 
 function zeroPad(i) {
     if (i < 10) {
@@ -14,6 +15,19 @@ clock.granularity = "minutes";
 
 // Get a handle on the <text> element
 const myLabel = document.getElementById("myLabel");
+const testText = document.getElementById("testText");
+
+// Message is received from companion
+messaging.peerSocket.onmessage = evt => {
+    // Am I Tired?
+    if (evt.data.totalMinutesAsleep >= 300) {
+        // Had at least 5 hours sleep
+        testText.text = "Awake!";
+    } else {
+        // Had less than 5 hours sleep
+        testText.text = "Sleepy...";
+    }
+};
 
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => {
