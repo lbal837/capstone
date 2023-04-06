@@ -8,7 +8,8 @@ function fetchSleepData(userId, accessToken) {
 
     let responseData = {
         userId: userId,
-        totalMinutesAsleep: 0
+        totalMinutesAsleep: 0,
+        fullName: "",
     }
 
     // Fetch Sleep Data from Fitbit Web API
@@ -21,24 +22,21 @@ function fetchSleepData(userId, accessToken) {
         .then(response => response.json())
         .then(data => {
             responseData.totalMinutesAsleep = data.summary.totalMinutesAsleep;
+            return fetch(`https://api.fitbit.com/1/user/-/profile.json`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            })
         })
-        .catch(err => console.log('[FETCH SLEEP DATA]: ' + err));
-
-    // Fetch Heart Rate Variability from Fitbit Web API
-    fetch(`https://api.fitbit.com/1.2/user/-/hrv/date/${todayDate}/all.json`, {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${accessToken}`
-        }
-    })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            responseData.fullName = data.user.fullName;
             if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
                 messaging.peerSocket.send(responseData);
             }
         })
-        .catch(err => console.log('[FETCH SLEEP DATA]: ' + err));
+        .catch(err => console.log('[REQUEST FAILED]: ' + err));
 }
 
 // A user changes Settings
