@@ -8,15 +8,16 @@ import {settingsStorage} from "settings";
 // TODO: Make this an env variable
 const ENDPOINT = "***REMOVED***";
 
-function fetchSleepData(userId, accessToken) {
+function fetchPatientData(userId, accessToken) {
     // Initialise variables
     let date = new Date();
     let todayDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; //YYYY-MM-DD
 
     let responseData = {
-        userId: userId,
-        totalMinutesAsleep: 0,
-        fullName: "",
+        UserId: userId,
+        TotalMinutesAsleep: 0,
+        FullName: "",
+        DateTime: getCurrentDateInNZST()
     }
 
     // Fetch Sleep Data from Fitbit Web API
@@ -28,7 +29,7 @@ function fetchSleepData(userId, accessToken) {
     })
         .then(response => response.json())
         .then(data => {
-            responseData.totalMinutesAsleep = data.summary.totalMinutesAsleep;
+            responseData.TotalMinutesAsleep = data.summary.totalMinutesAsleep;
             return fetch(`https://api.fitbit.com/1/user/-/profile.json`, {
                 method: "GET",
                 headers: {
@@ -38,7 +39,7 @@ function fetchSleepData(userId, accessToken) {
         })
         .then(response => response.json())
         .then(data => {
-            responseData.fullName = data.user.fullName;
+            responseData.FullName = data.user.fullName;
             console.log(responseData);
             if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
                 messaging.peerSocket.send(responseData);
@@ -59,10 +60,10 @@ settingsStorage.onchange = evt => {
         let data = JSON.parse(evt.newValue);
 
         // Sends data to the watch every 15 seconds -> disabled cause it drains your requests
-        // setInterval(() => fetchSleepData(data.user_id, data.access_token), 15 * 1000);
+        // setInterval(() => fetchPatientData(data.user_id, data.access_token), 15 * 1000);
 
         // Temporary fetch instead
-        fetchSleepData(data.user_id, data.access_token);
+        fetchPatientData(data.user_id, data.access_token);
     }
 };
 
@@ -75,10 +76,52 @@ function restoreSettings() {
             let data = JSON.parse(settingsStorage.getItem(key));
 
             // Sends data to the watch every 15 seconds -> disabled cause it drains your requests
-            // setInterval(() => fetchSleepData(data.user_id, data.access_token), 15 * 1000);
+            // setInterval(() => fetchPatientData(data.user_id, data.access_token), 15 * 1000);
 
             // Temporary fetch instead
-            fetchSleepData(data.user_id, data.access_token);
+            fetchPatientData(data.user_id, data.access_token);
         }
     }
+}
+
+function isNZDST(date) {
+    const lastSundayOfSeptember = new Date(date.getFullYear(), 8, -0).getLastSunday();
+    const firstSundayOfApril = new Date(date.getFullYear(), 3, 1).getFirstSunday();
+
+    return date >= lastSundayOfSeptember && date < firstSundayOfApril;
+}
+
+Date.prototype.getLastSunday = function () {
+    const lastDayOfMonth = new Date(this.getFullYear(), this.getMonth() + 1, 0);
+    const day = lastDayOfMonth.getDay();
+    return new Date(lastDayOfMonth.setDate(lastDayOfMonth.getDate() - day));
+};
+
+Date.prototype.getFirstSunday = function () {
+    const firstDayOfMonth = new Date(this.getFullYear(), this.getMonth(), 1);
+    const day = firstDayOfMonth.getDay();
+    return new Date(firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (7 - day) % 7));
+};
+
+function getCurrentDateInNZST() {
+    const now = new Date();
+
+    const nzOffset = 12 * 60;
+    const nzdtOffset = 13 * 60;
+
+    const isDaylightSaving = isNZDST(now);
+    const nzCurrentOffset = isDaylightSaving ? nzdtOffset : nzOffset;
+
+    const nzMilliseconds = now.getTime() + (nzCurrentOffset * 60 * 1000);
+    const nzDate = new Date(nzMilliseconds);
+
+    return nzDate.toLocaleString('en-NZ', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
 }
