@@ -1,6 +1,9 @@
 import * as messaging from "messaging";
 import {settingsStorage} from "settings";
 
+// TODO: Make this an env variable
+const ENDPOINT = "***REMOVED***";
+
 function fetchSleepData(userId, accessToken) {
     // Initialise variables
     let date = new Date();
@@ -32,9 +35,15 @@ function fetchSleepData(userId, accessToken) {
         .then(response => response.json())
         .then(data => {
             responseData.fullName = data.user.fullName;
+            console.log(responseData);
             if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
                 messaging.peerSocket.send(responseData);
             }
+            return fetch(ENDPOINT, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(responseData)
+            })
         })
         .catch(err => console.log('[REQUEST FAILED]: ' + err));
 }
@@ -69,8 +78,3 @@ function restoreSettings() {
         }
     }
 }
-
-// Message socket opens
-messaging.peerSocket.onopen = () => {
-    restoreSettings();
-};
