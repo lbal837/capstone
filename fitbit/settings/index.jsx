@@ -12,7 +12,7 @@ function mySettings() {
                     requestTokenUrl="https://api.fitbit.com/oauth2/token"
                     clientId="***REMOVED***"
                     clientSecret="***REMOVED***"
-                    scope="sleep profile"
+                    scope="sleep heartrate"
                 />
             </Section>
         </Page>
