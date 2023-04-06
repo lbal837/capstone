@@ -1,3 +1,7 @@
+/**
+ * Code related to the visual design of the companion app.
+ */
+
 function mySettings() {
     return (
         <Page>
