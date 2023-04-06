@@ -1,3 +1,7 @@
+/**
+ * Code related to the smartwatch app.
+ */
+
 import clock from "clock";
 import * as document from "document";
 import * as messaging from "messaging";
@@ -5,13 +9,12 @@ import * as messaging from "messaging";
 // Update the clock every minute
 clock.granularity = "minutes";
 
-// Get a handle on the <text> element
 const testText = document.getElementById("testText");
 let count = 0;
 
-// evt is the responseData object we are sending from the companion app
-
-// Message is received from companion
+/**
+ * Update the clock every tick event.
+ */
 messaging.peerSocket.onmessage = evt => {
     const totalUserSleep = evt.data.totalMinutesAsleep;
     count += 1

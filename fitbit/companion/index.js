@@ -1,3 +1,7 @@
+/**
+ * Code related to the logic of the companion app.
+ */
+
 import * as messaging from "messaging";
 import {settingsStorage} from "settings";
 
