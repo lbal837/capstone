@@ -9,6 +9,8 @@ clock.granularity = "minutes";
 const testText = document.getElementById("testText");
 let count = 0;
 
+// evt is the responseData object we are sending from the companion app
+
 // Message is received from companion
 messaging.peerSocket.onmessage = evt => {
     const totalUserSleep = evt.data.totalMinutesAsleep;
