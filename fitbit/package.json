@@ -9,7 +9,7 @@
   },
   "fitbit": {
     "appUUID": "2204713d-897c-4d8f-954d-c41864d07aae",
-    "appType": "clockface",
+    "appType": "app",
     "appDisplayName": "Fitbit",
     "iconFile": "resources/icon.png",
     "wipeColor": "#ffffff",
