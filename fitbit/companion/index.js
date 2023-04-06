@@ -47,8 +47,11 @@ settingsStorage.onchange = evt => {
         // Settings page sent us an oAuth token
         let data = JSON.parse(evt.newValue);
 
-        // Sends data to the watch every 15 seconds
-        setInterval(() => fetchSleepData(data.user_id, data.access_token), 15 * 1000);
+        // Sends data to the watch every 15 seconds -> disabled cause it drains your requests
+        // setInterval(() => fetchSleepData(data.user_id, data.access_token), 15 * 1000);
+
+        // Temporary fetch instead
+        fetchSleepData(data.user_id, data.access_token);
     }
 };
 
@@ -60,8 +63,11 @@ function restoreSettings() {
             // We already have an oauth token
             let data = JSON.parse(settingsStorage.getItem(key));
 
-            // Sends data to the watch every 15 seconds
-            setInterval(() => fetchSleepData(data.user_id, data.access_token), 15 * 1000);
+            // Sends data to the watch every 15 seconds -> disabled cause it drains your requests
+            // setInterval(() => fetchSleepData(data.user_id, data.access_token), 15 * 1000);
+
+            // Temporary fetch instead
+            fetchSleepData(data.user_id, data.access_token);
         }
     }
 }
