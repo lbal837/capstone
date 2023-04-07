@@ -4,7 +4,7 @@
 
 import * as messaging from "messaging";
 import {settingsStorage} from "settings";
-import getCurrentDateInNZST from "./getDate";
+import getCurrentDateInNZST from "./dateUtils";
 
 const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/SendPatientData";
 
