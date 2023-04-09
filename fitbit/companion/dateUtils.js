@@ -5,8 +5,8 @@
  * @returns {boolean} True if the date is within NZDST, false otherwise.
  */
 function isNZDST(date) {
-    const lastSundayOfSeptember = new Date(date.getFullYear(), 8, 0).getLastSunday();
-    const firstSundayOfApril = new Date(date.getFullYear(), 3, 1).getFirstSunday();
+    const lastSundayOfSeptember = new Date(date.getFullYear(), 8, 0).getLastSunday(date);
+    const firstSundayOfApril = new Date(date.getFullYear(), 3, 1).getFirstSunday(date);
 
     return date >= lastSundayOfSeptember && date < firstSundayOfApril;
 }
@@ -16,19 +16,18 @@ function isNZDST(date) {
  *
  * @returns {Date} The last Sunday of the month.
  */
-Date.prototype.getLastSunday = function () {
-    const lastDayOfMonth = new Date(this.getFullYear(), this.getMonth() + 1, 0);
+Date.prototype.getLastSunday = function (date) {
+    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     const day = lastDayOfMonth.getDay();
     return new Date(lastDayOfMonth.setDate(lastDayOfMonth.getDate() - day));
 };
-
 /**
  * Gets the first Sunday of the current month for the Date object.
  *
  * @returns {Date} The first Sunday of the month.
  */
-Date.prototype.getFirstSunday = function () {
-    const firstDayOfMonth = new Date(this.getFullYear(), this.getMonth(), 1);
+Date.prototype.getFirstSunday = function (date) {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const day = firstDayOfMonth.getDay();
     return new Date(firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (7 - day) % 7));
 };
@@ -38,7 +37,7 @@ Date.prototype.getFirstSunday = function () {
  *
  * @returns {string} The formatted date and time string in NZST.
  */
-function getCurrentDateInNZST(date) {
+export default function getCurrentDateInNZST(date) {
     const nzOffset = 12 * 60;
     const nzdtOffset = 13 * 60;
 
@@ -59,8 +58,3 @@ function getCurrentDateInNZST(date) {
     });
     return currentDate.replace(/[\u00A0\u202F]/g, ' ');
 }
-
-module.exports = {
-    getCurrentDateInNZST,
-    isNZDST,
-};
