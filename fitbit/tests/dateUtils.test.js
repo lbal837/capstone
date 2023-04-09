@@ -1,4 +1,4 @@
-let {getCurrentDateInNZST} = require('../companion/dateUtils');
+import getCurrentDateInNZST from '../companion/dateUtils.js';
 
 describe('New Zealand Daylight Saving Time utilities', () => {
 
