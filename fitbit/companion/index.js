@@ -9,13 +9,37 @@ import getCurrentDateInNZST from "./dateUtils";
 
 const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/SendPatientData";
 
-/**
- * Fetches patient data and sends it to the smartwatch app.
- *
- * @param {string} userId - The user's Fitbit user ID.
- * @param {string} accessToken - The access token for the Fitbit API.
- */
-export function fetchPatientData(userId, accessToken) {
+async function fetchSleepData(date, accessToken, fetchFn = fetch) {
+    const response = await fetchFn(`https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+
+    return response.json();
+}
+
+async function fetchUserProfile(accessToken, fetchFn = fetch) {
+    const response = await fetchFn(`https://api.fitbit.com/1/user/-/profile.json`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+
+    return response.json();
+}
+
+async function sendDataToEndpoint(data, endpoint = ENDPOINT, fetchFn = fetch) {
+    await fetchFn(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    });
+}
+
+async function fetchPatientData(userId, accessToken) {
     const date = new Date();
     const todayDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; // YYYY-MM-DD
     const currentDateInNZST = getCurrentDateInNZST(date);
@@ -24,39 +48,25 @@ export function fetchPatientData(userId, accessToken) {
         UserId: userId,
         TotalMinutesAsleep: 0,
         FullName: "",
-        DateTime: currentDateInNZST
+        DateTime: currentDateInNZST,
     };
 
-    fetch(`https://api.fitbit.com/1.2/user/-/sleep/date/${todayDate}.json`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            responseData.TotalMinutesAsleep = data.summary.totalMinutesAsleep;
-            return fetch(`https://api.fitbit.com/1/user/-/profile.json`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            });
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            responseData.FullName = data.user.fullName;
-            console.log(responseData);
-            if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
-                messaging.peerSocket.send(responseData);
-            }
-            return fetch(ENDPOINT, {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(responseData),
-            });
-        })
-        .catch((err) => console.log("[REQUEST FAILED]: " + err));
+    try {
+        const sleepData = await fetchSleepData(todayDate, accessToken);
+        responseData.TotalMinutesAsleep = sleepData.summary.totalMinutesAsleep;
+
+        const userProfile = await fetchUserProfile(accessToken);
+        responseData.FullName = userProfile.user.fullName;
+
+        console.log(responseData);
+        if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+            messaging.peerSocket.send(responseData);
+        }
+
+        await sendDataToEndpoint(responseData);
+    } catch (err) {
+        console.log("[REQUEST FAILED]: " + err);
+    }
 }
 
 // Handle user settings changes
