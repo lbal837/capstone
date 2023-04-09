@@ -22,7 +22,7 @@ function fetchPatientData(userId, accessToken) {
         UserId: userId,
         TotalMinutesAsleep: 0,
         FullName: "",
-        DateTime: getCurrentDateInNZST(),
+        DateTime: getCurrentDateInNZST(Date.now),
     };
 
     fetch(`https://api.fitbit.com/1.2/user/-/sleep/date/${todayDate}.json`, {
