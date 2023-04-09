@@ -38,19 +38,17 @@ Date.prototype.getFirstSunday = function () {
  *
  * @returns {string} The formatted date and time string in NZST.
  */
-function getCurrentDateInNZST() {
-    const now = new Date();
-
+function getCurrentDateInNZST(date) {
     const nzOffset = 12 * 60;
     const nzdtOffset = 13 * 60;
 
-    const isDaylightSaving = isNZDST(now);
+    const isDaylightSaving = isNZDST(date);
     const nzCurrentOffset = isDaylightSaving ? nzdtOffset : nzOffset;
 
-    const nzMilliseconds = now.getTime() + (nzCurrentOffset * 60 * 1000);
+    const nzMilliseconds = date.getTime() + (nzCurrentOffset * 60 * 1000);
     const nzDate = new Date(nzMilliseconds);
 
-    return nzDate.toLocaleString('en-NZ', {
+    let currentDate = nzDate.toLocaleString('en-NZ', {
         timeZone: 'UTC',
         year: 'numeric',
         month: 'long',
@@ -59,6 +57,10 @@ function getCurrentDateInNZST() {
         minute: '2-digit',
         second: '2-digit'
     });
+    return currentDate.replace(/[\u00A0\u202F]/g, ' ');
 }
 
-export default getCurrentDateInNZST;
+module.exports = {
+    getCurrentDateInNZST,
+    isNZDST,
+};
