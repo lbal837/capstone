@@ -6,6 +6,7 @@ import * as messaging from "messaging";
 import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
 
+
 const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/SendPatientData";
 
 /**
@@ -17,12 +18,13 @@ const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Pr
 function fetchPatientData(userId, accessToken) {
     const date = new Date();
     const todayDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; // YYYY-MM-DD
+    const currentDateInNZST = getCurrentDateInNZST(date);
 
     const responseData = {
         UserId: userId,
         TotalMinutesAsleep: 0,
         FullName: "",
-        DateTime: getCurrentDateInNZST(Date.now),
+        DateTime: currentDateInNZST
     };
 
     fetch(`https://api.fitbit.com/1.2/user/-/sleep/date/${todayDate}.json`, {
