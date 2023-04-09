@@ -1,4 +1,4 @@
-let {getCurrentDateInNZST, isNZDST} = require('../companion/dateUtils');
+let {getCurrentDateInNZST} = require('../companion/dateUtils');
 
 describe('New Zealand Daylight Saving Time utilities', () => {
 
@@ -26,7 +26,7 @@ describe('New Zealand Daylight Saving Time utilities', () => {
         });
     });
 
-    describe('getCurrentDateInNZST', (object, method) => {
+    describe('getCurrentDateInNZST', () => {
         test('returns a formatted NZST date string', () => {
             // Arrange
             const sut = new Date('2021-09-30T10:00:00Z');
