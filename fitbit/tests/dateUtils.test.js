@@ -8,7 +8,7 @@ describe('New Zealand Daylight Saving Time utilities', () => {
             const sut = new Date('2021-08-01');
 
             // Act
-            const result = sut.getLastSunday();
+            const result = sut.getLastSunday(sut);
 
             // Assert
             expect(result.toISOString()).toBe('2021-08-28T12:00:00.000Z');
@@ -19,7 +19,7 @@ describe('New Zealand Daylight Saving Time utilities', () => {
             const sut = new Date('2021-08-01');
 
             // Act
-            const result = sut.getFirstSunday();
+            const result = sut.getFirstSunday(sut);
 
             // Assert
             expect(result.toISOString()).toBe('2021-07-31T12:00:00.000Z');

@@ -15,7 +15,7 @@ const ENDPOINT = "***REMOVED***";
  * @param {string} userId - The user's Fitbit user ID.
  * @param {string} accessToken - The access token for the Fitbit API.
  */
-function fetchPatientData(userId, accessToken) {
+export function fetchPatientData(userId, accessToken) {
     const date = new Date();
     const todayDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; // YYYY-MM-DD
     const currentDateInNZST = getCurrentDateInNZST(date);
