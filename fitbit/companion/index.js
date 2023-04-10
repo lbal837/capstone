@@ -6,6 +6,7 @@ import * as messaging from "messaging";
 import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
 
+let latestHeartRate = null;
 
 const ENDPOINT = "***REMOVED***";
 
@@ -77,6 +78,7 @@ async function fetchPatientData(userId, accessToken) {
         TotalMinutesAsleep: 0,
         FullName: "",
         DateTime: currentDateInNZST,
+        HeartRate: latestHeartRate
     };
 
     try {
@@ -101,8 +103,9 @@ async function fetchPatientData(userId, accessToken) {
 }
 
 messaging.peerSocket.addEventListener("message", (event) => {
-    console.log(event);
     if (event.data.type === "heart_rate") {
+        latestHeartRate = event.data.value;
+
         const oauthData = JSON.parse(settingsStorage.getItem("oauth"));
         if (oauthData) {
             fetchPatientData(oauthData.user_id, oauthData.access_token);
