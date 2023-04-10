@@ -9,6 +9,14 @@ import getCurrentDateInNZST from "./dateUtils";
 
 const ENDPOINT = "***REMOVED***";
 
+/**
+ * Fetches sleep data for the given date using the provided access token.
+ *
+ * @param {string} date - The date to fetch sleep data for (YYYY-MM-DD).
+ * @param {string} accessToken - The Fitbit API access token.
+ * @param {function} [fetchFn=fetch] - Optional fetch function (useful for testing).
+ * @returns {Promise<object>} - The sleep data response as a JSON object.
+ */
 async function fetchSleepData(date, accessToken, fetchFn = fetch) {
     const response = await fetchFn(`https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`, {
         method: "GET",
@@ -20,6 +28,13 @@ async function fetchSleepData(date, accessToken, fetchFn = fetch) {
     return response.json();
 }
 
+/**
+ * Fetches user profile data using the provided access token.
+ *
+ * @param {string} accessToken - The Fitbit API access token.
+ * @param {function} [fetchFn=fetch] - Optional fetch function (useful for testing).
+ * @returns {Promise<object>} - The user profile data response as a JSON object.
+ */
 async function fetchUserProfile(accessToken, fetchFn = fetch) {
     const response = await fetchFn(`https://api.fitbit.com/1/user/-/profile.json`, {
         method: "GET",
@@ -31,14 +46,27 @@ async function fetchUserProfile(accessToken, fetchFn = fetch) {
     return response.json();
 }
 
+/**
+ * Sends patient data to the specified endpoint.
+ *
+ * @param {object} data - The patient data object to send.
+ * @param {string} [endpoint=ENDPOINT] - Optional API endpoint URL.
+ * @param {function} [fetchFn=fetch] - Optional fetch function (useful for testing).
+ */
 async function sendDataToEndpoint(data, endpoint = ENDPOINT, fetchFn = fetch) {
     await fetchFn(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
     });
 }
 
+/**
+ * Fetches patient data and sends it to the device and endpoint.
+ *
+ * @param {string} userId - The user ID.
+ * @param {string} accessToken - The Fitbit API access token.
+ */
 async function fetchPatientData(userId, accessToken) {
     const date = new Date();
     const todayDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; // YYYY-MM-DD
@@ -69,7 +97,9 @@ async function fetchPatientData(userId, accessToken) {
     }
 }
 
-// Handle user settings changes
+/**
+ * Handles user settings changes and fetches patient data when OAuth settings change.
+ */
 settingsStorage.onchange = (evt) => {
     if (evt.key === "oauth") {
         const data = JSON.parse(evt.newValue);
@@ -77,7 +107,9 @@ settingsStorage.onchange = (evt) => {
     }
 };
 
-// Restore previously saved settings and send to the device
+/**
+ * Restores previously saved settings and sends the patient data to the device.
+ */
 function restoreSettings() {
     for (let index = 0; index < settingsStorage.length; index++) {
         const key = settingsStorage.key(index);
