@@ -114,13 +114,3 @@ messaging.peerSocket.addEventListener("message", (event) => {
         }
     }
 });
-
-/**
- * Handles user settings changes and fetches patient data when OAuth settings change.
- */
-settingsStorage.onchange = (evt) => {
-    if (evt.key === "oauth") {
-        const data = JSON.parse(evt.newValue);
-        fetchPatientData(data.user_id, data.access_token);
-    }
-};
