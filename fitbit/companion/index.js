@@ -97,6 +97,15 @@ async function fetchPatientData(userId, accessToken) {
     }
 }
 
+messaging.peerSocket.addEventListener("message", (event) => {
+    if (event.data.type === "heart_rate") {
+        if (event.key === "oauth") {
+            const data = JSON.parse(evt.newValue);
+            fetchPatientData(data.user_id, data.access_token);
+        }
+    }
+});
+
 /**
  * Handles user settings changes and fetches patient data when OAuth settings change.
  */
@@ -115,7 +124,7 @@ function restoreSettings() {
         const key = settingsStorage.key(index);
         if (key && key === "oauth") {
             const data = JSON.parse(settingsStorage.getItem(key));
-            fetchPatientData(data.user_id, data.access_token);
+            // fetchPatientData(data.user_id, data.access_token);
         }
     }
 }

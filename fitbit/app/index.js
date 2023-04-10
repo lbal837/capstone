@@ -1,6 +1,8 @@
 // Import necessary modules
 import clock from "clock";
 import * as document from "document";
+import {HeartRateSensor} from "heart-rate";
+import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 
 // Set the granularity to update the clock every minute
@@ -27,6 +29,38 @@ function handleMessage(evt) {
     } else {
         testText.text = `${count}`;
     }
+}
+
+function sendMessageToCompanion(data) {
+    if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+        messaging.peerSocket.send(data);
+    } else {
+        console.log("Error: Connection is not open");
+    }
+}
+
+function getHeartRate(hrm) {
+    if (appbit.permissions.granted("access_heart_rate")) {
+        console.log(`Current heart rate: ${hrm.heartRate}`);
+        sendMessageToCompanion({type: "heart_rate", value: hrm.heartRate});
+    } else {
+        console.log("No permission to access the heart rate API");
+    }
+}
+
+if (HeartRateSensor && appbit.permissions.granted("access_heart_rate")) {
+    const hrm = new HeartRateSensor();
+    hrm.start();
+
+    // Get the initial heart rate
+    getHeartRate(hrm);
+
+    // Get heart rate every 15 seconds
+    setInterval(() => {
+        getHeartRate(hrm);
+    }, 15 * 1000);
+} else {
+    console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }
 
 // Listen for messages from the companion app
