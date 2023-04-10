@@ -2,65 +2,16 @@
  * Code related to the logic of the companion app.
  */
 
+// Import necessary modules
 import * as messaging from "messaging";
 import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
+import {fetchSleepData} from "./fetchSleepData";
+import {fetchUserProfile} from "./fetchUserProfile";
+import {sendDataToEndpoint} from "./sendDataToEndpoint";
 
+// Initialize the latestHeartRate variable
 let latestHeartRate = null;
-
-const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/SendPatientData";
-
-/**
- * Fetches sleep data for the given date using the provided access token.
- *
- * @param {string} date - The date to fetch sleep data for (YYYY-MM-DD).
- * @param {string} accessToken - The Fitbit API access token.
- * @param {function} [fetchFn=fetch] - Optional fetch function (useful for testing).
- * @returns {Promise<object>} - The sleep data response as a JSON object.
- */
-async function fetchSleepData(date, accessToken, fetchFn = fetch) {
-    const response = await fetchFn(`https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-
-    return response.json();
-}
-
-/**
- * Fetches user profile data using the provided access token.
- *
- * @param {string} accessToken - The Fitbit API access token.
- * @param {function} [fetchFn=fetch] - Optional fetch function (useful for testing).
- * @returns {Promise<object>} - The user profile data response as a JSON object.
- */
-async function fetchUserProfile(accessToken, fetchFn = fetch) {
-    const response = await fetchFn(`https://api.fitbit.com/1/user/-/profile.json`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-
-    return response.json();
-}
-
-/**
- * Sends patient data to the specified endpoint.
- *
- * @param {object} data - The patient data object to send.
- * @param {string} [endpoint=ENDPOINT] - Optional API endpoint URL.
- * @param {function} [fetchFn=fetch] - Optional fetch function (useful for testing).
- */
-async function sendDataToEndpoint(data, endpoint = ENDPOINT, fetchFn = fetch) {
-    await fetchFn(endpoint, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data),
-    });
-}
 
 /**
  * Fetches patient data and sends it to the device and endpoint.
@@ -78,7 +29,7 @@ async function fetchPatientData(userId, accessToken) {
         TotalMinutesAsleep: 0,
         FullName: "",
         DateTime: currentDateInNZST,
-        HeartRate: latestHeartRate
+        HeartRate: latestHeartRate,
     };
 
     try {
@@ -102,11 +53,16 @@ async function fetchPatientData(userId, accessToken) {
     }
 }
 
+// Listen for messages from the device
 messaging.peerSocket.addEventListener("message", (event) => {
+    // Check if the message is of type "heart_rate"
     if (event.data.type === "heart_rate") {
         latestHeartRate = event.data.value;
 
+        // Get OAuth data from settingsStorage
         const oauthData = JSON.parse(settingsStorage.getItem("oauth"));
+
+        // Fetch and send patient data if OAuth data is available
         if (oauthData) {
             fetchPatientData(oauthData.user_id, oauthData.access_token);
         } else {
