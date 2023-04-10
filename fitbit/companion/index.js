@@ -87,10 +87,13 @@ async function fetchPatientData(userId, accessToken) {
         responseData.FullName = userProfile.user.fullName;
 
         console.log(responseData);
+
+        // Send data to device
         if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
             messaging.peerSocket.send(responseData);
         }
 
+        // Send data to endpoint
         await sendDataToEndpoint(responseData);
     } catch (err) {
         console.log("[REQUEST FAILED]: " + err);
@@ -98,10 +101,13 @@ async function fetchPatientData(userId, accessToken) {
 }
 
 messaging.peerSocket.addEventListener("message", (event) => {
+    console.log(event);
     if (event.data.type === "heart_rate") {
-        if (event.key === "oauth") {
-            const data = JSON.parse(evt.newValue);
-            fetchPatientData(data.user_id, data.access_token);
+        const oauthData = JSON.parse(settingsStorage.getItem("oauth"));
+        if (oauthData) {
+            fetchPatientData(oauthData.user_id, oauthData.access_token);
+        } else {
+            console.log("OAuth data not found in settingsStorage");
         }
     }
 });
