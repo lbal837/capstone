@@ -124,19 +124,3 @@ settingsStorage.onchange = (evt) => {
         fetchPatientData(data.user_id, data.access_token);
     }
 };
-
-/**
- * Restores previously saved settings and sends the patient data to the device.
- */
-function restoreSettings() {
-    for (let index = 0; index < settingsStorage.length; index++) {
-        const key = settingsStorage.key(index);
-        if (key && key === "oauth") {
-            const data = JSON.parse(settingsStorage.getItem(key));
-            // fetchPatientData(data.user_id, data.access_token);
-        }
-    }
-}
-
-// Invoke restoreSettings to apply saved settings
-restoreSettings();
