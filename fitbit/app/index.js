@@ -33,6 +33,7 @@ function handleMessage(evt) {
 
 function sendMessageToCompanion(data) {
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+        console.log("Message sent to companion");
         messaging.peerSocket.send(data);
     } else {
         console.log("Error: Connection is not open");
