@@ -56,10 +56,10 @@ if (HeartRateSensor && appbit.permissions.granted("access_heart_rate")) {
     // Get the initial heart rate
     getHeartRate(hrm);
 
-    // Get heart rate every 15 seconds
+    // Get heart rate every 60 seconds
     setInterval(() => {
         getHeartRate(hrm);
-    }, 15 * 1000);
+    }, 60 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }
