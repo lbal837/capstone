@@ -1,9 +1,10 @@
 // Import necessary modules
 import clock from "clock";
 import * as document from "document";
-import { HeartRateSensor } from "heart-rate";
-import { me as appbit } from "appbit";
+import {HeartRateSensor} from "heart-rate";
+import {me as appbit} from "appbit";
 import * as messaging from "messaging";
+import sleep from "sleep";
 
 // Set the granularity to update the clock every minute
 clock.granularity = "minutes";
@@ -34,42 +35,38 @@ function handleMessage(evt) {
 /**
  * Sends a message to the companion app.
  *
- * @param {Object} data - The data to be sent to the companion app.
+ * @param {Object} heartRateData - The heart rate data to be sent to the companion app.
  */
 function sendMessageToCompanion(data) {
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
-        messaging.peerSocket.send(data);
+        messaging.peerSocket.send({
+            type: "combined_data",
+            heartRate: data.heartRate,
+            sleep: data.sleep
+        });
     } else {
         console.log("Error: Connection is not open");
     }
 }
 
-/**
- * Gets and sends the heart rate to the companion app.
- *
- * @param {HeartRateSensor} hrm - The HeartRateSensor instance.
- */
-function getHeartRate(hrm) {
-    if (appbit.permissions.granted("access_heart_rate")) {
-        console.log(`Current heart rate: ${hrm.heartRate}`);
-        sendMessageToCompanion({ type: "heart_rate", value: hrm.heartRate });
+function getAndSendPatientData(hrm, sleep) {
+    if (appbit.permissions.granted("access_heart_rate") && appbit.permissions.granted("access_sleep")) {
+        console.log(`Current heart rate: ${hrm.heartRate}, Current sleep state: ${sleep.state}`);
+        sendMessageToCompanion({type: "combined_data", heartRate: hrm.heartRate, sleep: sleep.state});
     } else {
         console.log("No permission to access the heart rate API");
     }
 }
 
 // Start heart rate monitoring if the sensor is available and permission is granted
-if (HeartRateSensor && appbit.permissions.granted("access_heart_rate")) {
+if (HeartRateSensor && sleep) {
     const hrm = new HeartRateSensor();
     hrm.start();
 
-    // Get the initial heart rate
-    getHeartRate(hrm);
-
     // Get heart rate every 60 seconds
     setInterval(() => {
-        getHeartRate(hrm);
-    }, 60 * 1000);
+        getAndSendPatientData(hrm, sleep);
+    }, 15 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }
