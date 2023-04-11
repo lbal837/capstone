@@ -6,7 +6,6 @@
 import * as messaging from "messaging";
 import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
-import {fetchSleepData} from "./fetchSleepData";
 import {fetchUserProfile} from "./fetchUserProfile";
 import {sendDataToEndpoint} from "./sendDataToEndpoint";
 
@@ -22,12 +21,10 @@ let latestSleepStatus = null;
  */
 async function fetchPatientData(userId, accessToken) {
     const date = new Date();
-    const todayDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; // YYYY-MM-DD
     const currentDateInNZST = getCurrentDateInNZST(date);
 
     const responseData = {
         UserId: userId,
-        TotalMinutesAsleep: 0,
         FullName: "",
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
@@ -35,9 +32,6 @@ async function fetchPatientData(userId, accessToken) {
     };
 
     try {
-        const sleepData = await fetchSleepData(todayDate, accessToken);
-        responseData.TotalMinutesAsleep = sleepData.summary.totalMinutesAsleep;
-
         const userProfile = await fetchUserProfile(accessToken);
         responseData.FullName = userProfile.user.fullName;
 
