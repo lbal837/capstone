@@ -12,6 +12,8 @@ clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
+
+// Global variables to be passed to the companion app
 let latestLatitude = null;
 let latestLongitude = null;
 
@@ -25,19 +27,18 @@ let count = 0;
  * @param {Object} evt - The event object containing the data sent from the companion app.
  */
 function handleMessage(evt) {
+    // Extract total sleep time from the event data
     const totalUserSleep = evt.data.TotalMinutesAsleep;
     count += 1;
 
-    // Check if the user had enough sleep (at least 5 hours)
-    if (totalUserSleep && totalUserSleep >= 300) {
-        testText.text = `Awake! ${totalUserSleep}`;
-    } else {
-        testText.text = `${count}`;
-    }
+    // Update the text element based on the user's total sleep time
+    testText.text = totalUserSleep && totalUserSleep >= 300
+        ? `Awake! ${totalUserSleep}`
+        : `${count}`;
 }
 
 /**
- * Sends heart rate and sleep data to the companion app.
+ * Sends combined data (heart rate, sleep, location) to the companion app
  *
  * @param {Object} data - The combined heart rate and sleep data to be sent to the companion app.
  */
@@ -50,7 +51,7 @@ function sendMessageToCompanion(data) {
 }
 
 /**
- * Retrieves heart rate and sleep data and sends it to the companion app.
+ * Retrieves heart rate, sleep data, and geolocation and sends it to the companion app.
  *
  * @param {HeartRateSensor} hrm - The HeartRateSensor instance.
  * @param {Object} sleep - The sleep object containing sleep data.
@@ -69,8 +70,18 @@ function getAndSendPatientData(hrm, sleep) {
     }
 }
 
+/**
+ * Converts a float value to a decimal string with a specified number of decimal places
+ *
+ * @param value - The float value to be converted to a decimal string
+ * @param decimalPlaces - The number of decimal places to be included in the decimal string
+ */
 function floatToDecimalString(value, decimalPlaces) {
-    return value.toFixed(decimalPlaces);
+    if (value === null) {
+        console.log("Geolocation data has not been initialised yet");
+    } else {
+        return value.toFixed(decimalPlaces);
+    }
 }
 
 // Start heart rate monitoring if the sensor is available and permission is granted
@@ -82,16 +93,26 @@ if (HeartRateSensor && sleep) {
     setInterval(() => {
         geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 60 * 1000});
         getAndSendPatientData(hrm, sleep);
-    }, 15 * 1000);
+    }, 60 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }
 
+/**
+ * Updates latestLatitude and latestLongitude on successful geolocation retrieval
+ *
+ * @param position - The position object containing the latitude and longitude.
+ */
 function locationSuccess(position) {
     latestLatitude = position.coords.latitude;
     latestLongitude = position.coords.longitude;
 }
 
+/**
+ * Logs an error message if geolocation retrieval fails
+ *
+ * @param error - The error object containing the error code and message.
+ */
 function locationError(error) {
     console.log("Error: " + error.code, "Message: " + error.message);
 }
