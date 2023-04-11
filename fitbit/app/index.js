@@ -5,15 +5,12 @@ import {HeartRateSensor} from "heart-rate";
 import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
-import {geolocation} from "geolocation";
 
 // Set the granularity to update the clock every minute
 clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
-let latestLatitude = null;
-let latestLongitude = null;
 
 // Initialize the count variable
 let count = 0;
@@ -57,20 +54,11 @@ function sendMessageToCompanion(data) {
  */
 function getAndSendPatientData(hrm, sleep) {
     if (appbit.permissions.granted("access_heart_rate") && appbit.permissions.granted("access_sleep")) {
-        sendMessageToCompanion({
-            type: "combined_data",
-            heartRate: hrm.heartRate,
-            sleep: sleep.state,
-            positionLongitude: floatToDecimalString(latestLongitude, 6),
-            positionLatitude: floatToDecimalString(latestLatitude, 6)
-        });
+        console.log(`Current heart rate: ${hrm.heartRate}, Current sleep state: ${sleep.state}`);
+        sendMessageToCompanion({type: "combined_data", heartRate: hrm.heartRate, sleep: sleep.state});
     } else {
         console.log("No permission to access the heart rate API");
     }
-}
-
-function floatToDecimalString(value, decimalPlaces) {
-    return value.toFixed(decimalPlaces);
 }
 
 // Start heart rate monitoring if the sensor is available and permission is granted
@@ -80,20 +68,10 @@ if (HeartRateSensor && sleep) {
 
     // Get heart rate and sleep data every 60 seconds
     setInterval(() => {
-        geolocation.getCurrentPosition(locationSuccess, locationError, {timeout: 60 * 1000});
         getAndSendPatientData(hrm, sleep);
-    }, 15 * 1000);
+    }, 60 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
-}
-
-function locationSuccess(position) {
-    latestLatitude = position.coords.latitude;
-    latestLongitude = position.coords.longitude;
-}
-
-function locationError(error) {
-    console.log("Error: " + error.code, "Message: " + error.message);
 }
 
 // Listen for messages from the companion app
