@@ -5,6 +5,7 @@ import {HeartRateSensor} from "heart-rate";
 import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
+import {minuteHistory} from "user-activity";
 
 // Set the granularity to update the clock every minute
 clock.granularity = "minutes";
@@ -53,9 +54,14 @@ function sendMessageToCompanion(data) {
  * @param {Object} sleep - The sleep object containing sleep data.
  */
 function getAndSendPatientData(hrm, sleep) {
-    if (appbit.permissions.granted("access_heart_rate") && appbit.permissions.granted("access_sleep")) {
-        console.log(`Current heart rate: ${hrm.heartRate}, Current sleep state: ${sleep.state}`);
-        sendMessageToCompanion({type: "combined_data", heartRate: hrm.heartRate, sleep: sleep.state});
+    if (appbit.permissions.granted("access_heart_rate") && appbit.permissions.granted("access_sleep") && appbit.permissions.granted("access_activity")) {
+        const minuteRecords = minuteHistory.query({limit: 1});
+        sendMessageToCompanion({
+            type: "combined_data",
+            heartRate: hrm.heartRate,
+            sleep: sleep.state,
+            steps: minuteRecords[0].steps || 0
+        });
     } else {
         console.log("No permission to access the heart rate API");
     }
@@ -69,7 +75,7 @@ if (HeartRateSensor && sleep) {
     // Get heart rate and sleep data every 60 seconds
     setInterval(() => {
         getAndSendPatientData(hrm, sleep);
-    }, 60 * 1000);
+    }, 15 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }

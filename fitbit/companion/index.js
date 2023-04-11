@@ -13,6 +13,7 @@ import {geolocation} from "geolocation";
 // Initialize the latestHeartRate and latestSleepStatus variables
 let latestHeartRate = null;
 let latestSleepStatus = null;
+let latestSteps = null;
 
 /**
  * Fetches patient data and sends it to the device and endpoint.
@@ -64,6 +65,7 @@ messaging.peerSocket.addEventListener("message", (event) => {
     if (event.data.type === "combined_data") {
         latestHeartRate = event.data.heartRate;
         latestSleepStatus = event.data.sleep;
+        latestSteps = event.data.steps;
 
         // Get OAuth data from settingsStorage
         const oauthData = JSON.parse(settingsStorage.getItem("oauth"));
