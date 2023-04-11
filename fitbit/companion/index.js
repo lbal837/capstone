@@ -12,6 +12,7 @@ import {sendDataToEndpoint} from "./sendDataToEndpoint";
 
 // Initialize the latestHeartRate variable
 let latestHeartRate = null;
+let latestSleepStatus = null;
 
 /**
  * Fetches patient data and sends it to the device and endpoint.
@@ -30,6 +31,7 @@ async function fetchPatientData(userId, accessToken) {
         FullName: "",
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
+        SleepStatus: latestSleepStatus,
     };
 
     try {
@@ -55,9 +57,11 @@ async function fetchPatientData(userId, accessToken) {
 
 // Listen for messages from the device
 messaging.peerSocket.addEventListener("message", (event) => {
+    console.log(event.data);
     // Check if the message is of type "heart_rate"
-    if (event.data.type === "heart_rate") {
-        latestHeartRate = event.data.value;
+    if (event.data.type === "combined_data") {
+        latestHeartRate = event.data.heartRate;
+        latestSleepStatus = event.data.sleep;
 
         // Get OAuth data from settingsStorage
         const oauthData = JSON.parse(settingsStorage.getItem("oauth"));
