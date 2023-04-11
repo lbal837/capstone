@@ -4,10 +4,11 @@
 
 // Import necessary modules
 import * as messaging from "messaging";
-import { settingsStorage } from "settings";
+import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
-import { fetchUserProfile } from "./fetchUserProfile";
-import { sendDataToEndpoint } from "./sendDataToEndpoint";
+import {fetchUserProfile} from "./fetchUserProfile";
+import {sendDataToEndpoint} from "./sendDataToEndpoint";
+import {geolocation} from "geolocation";
 
 // Initialize the latestHeartRate and latestSleepStatus variables
 let latestHeartRate = null;
@@ -29,11 +30,18 @@ async function fetchPatientData(userId, accessToken) {
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
         SleepStatus: latestSleepStatus,
+        Latitude: null,
+        Longitude: null,
     };
 
     try {
         const userProfile = await fetchUserProfile(accessToken);
         responseData.FullName = userProfile.user.fullName;
+
+        geolocation.getCurrentPosition(function (position) {
+            responseData.Latitude = position.coords.latitude;
+            responseData.Longitude = position.coords.longitude;
+        })
 
         console.log(responseData);
 
