@@ -4,14 +4,16 @@
 
 // Import necessary modules
 import * as messaging from "messaging";
-import { settingsStorage } from "settings";
+import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
-import { fetchUserProfile } from "./fetchUserProfile";
-import { sendDataToEndpoint } from "./sendDataToEndpoint";
+import {fetchUserProfile} from "./fetchUserProfile";
+import {sendDataToEndpoint} from "./sendDataToEndpoint";
 
 // Initialize the latestHeartRate and latestSleepStatus variables
 let latestHeartRate = null;
 let latestSleepStatus = null;
+let latestPositionLongitude = null;
+let latestPositionLatitude = null;
 
 /**
  * Fetches patient data and sends it to the device and endpoint.
@@ -29,6 +31,8 @@ async function fetchPatientData(userId, accessToken) {
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
         SleepStatus: latestSleepStatus,
+        PositionLongitude: latestPositionLongitude,
+        PositionLatitude: latestPositionLatitude,
     };
 
     try {
@@ -56,6 +60,8 @@ messaging.peerSocket.addEventListener("message", (event) => {
     if (event.data.type === "combined_data") {
         latestHeartRate = event.data.heartRate;
         latestSleepStatus = event.data.sleep;
+        latestPositionLongitude = event.data.positionLongitude;
+        latestPositionLatitude = event.data.positionLatitude;
 
         // Get OAuth data from settingsStorage
         const oauthData = JSON.parse(settingsStorage.getItem("oauth"));
