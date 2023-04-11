@@ -27,6 +27,7 @@ async function fetchPatientData(userId, accessToken) {
 
     const responseData = {
         UserId: userId,
+        AvatarImage: "",
         FullName: "",
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
@@ -38,6 +39,7 @@ async function fetchPatientData(userId, accessToken) {
     try {
         const userProfile = await fetchUserProfile(accessToken);
         responseData.FullName = userProfile.user.fullName;
+        responseData.AvatarImage = userProfile.user.avatar640;
 
         geolocation.getCurrentPosition(function (position) {
             responseData.Latitude = position.coords.latitude;
