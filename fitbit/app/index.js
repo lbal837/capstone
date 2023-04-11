@@ -75,7 +75,7 @@ if (HeartRateSensor && sleep) {
     // Get heart rate and sleep data every 60 seconds
     setInterval(() => {
         getAndSendPatientData(hrm, sleep);
-    }, 15 * 1000);
+    }, 60 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }
