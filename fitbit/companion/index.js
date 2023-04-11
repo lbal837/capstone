@@ -4,12 +4,12 @@
 
 // Import necessary modules
 import * as messaging from "messaging";
-import {settingsStorage} from "settings";
+import { settingsStorage } from "settings";
 import getCurrentDateInNZST from "./dateUtils";
-import {fetchUserProfile} from "./fetchUserProfile";
-import {sendDataToEndpoint} from "./sendDataToEndpoint";
+import { fetchUserProfile } from "./fetchUserProfile";
+import { sendDataToEndpoint } from "./sendDataToEndpoint";
 
-// Initialize the latestHeartRate variable
+// Initialize the latestHeartRate and latestSleepStatus variables
 let latestHeartRate = null;
 let latestSleepStatus = null;
 
@@ -37,7 +37,7 @@ async function fetchPatientData(userId, accessToken) {
 
         console.log(responseData);
 
-        // Send data to device
+        // Send data to device if the connection is open
         if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
             messaging.peerSocket.send(responseData);
         }
@@ -49,10 +49,10 @@ async function fetchPatientData(userId, accessToken) {
     }
 }
 
-// Listen for messages from the device
+// Listen for messages from the device and handle "combined_data" messages
 messaging.peerSocket.addEventListener("message", (event) => {
-    console.log(event.data);
-    // Check if the message is of type "heart_rate"
+
+    // Check if the message is of type "combined_data"
     if (event.data.type === "combined_data") {
         latestHeartRate = event.data.heartRate;
         latestSleepStatus = event.data.sleep;

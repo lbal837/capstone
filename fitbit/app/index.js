@@ -16,7 +16,8 @@ const testText = document.getElementById("testText");
 let count = 0;
 
 /**
- * Handler for messages from the companion app.
+ * Handles incoming messages from the companion app.
+ * Updates the text element based on the total sleep time received.
  *
  * @param {Object} evt - The event object containing the data sent from the companion app.
  */
@@ -33,22 +34,24 @@ function handleMessage(evt) {
 }
 
 /**
- * Sends a message to the companion app.
+ * Sends heart rate and sleep data to the companion app.
  *
- * @param {Object} heartRateData - The heart rate data to be sent to the companion app.
+ * @param {Object} data - The combined heart rate and sleep data to be sent to the companion app.
  */
 function sendMessageToCompanion(data) {
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
-        messaging.peerSocket.send({
-            type: "combined_data",
-            heartRate: data.heartRate,
-            sleep: data.sleep
-        });
+        messaging.peerSocket.send(data);
     } else {
         console.log("Error: Connection is not open");
     }
 }
 
+/**
+ * Retrieves heart rate and sleep data and sends it to the companion app.
+ *
+ * @param {HeartRateSensor} hrm - The HeartRateSensor instance.
+ * @param {Object} sleep - The sleep object containing sleep data.
+ */
 function getAndSendPatientData(hrm, sleep) {
     if (appbit.permissions.granted("access_heart_rate") && appbit.permissions.granted("access_sleep")) {
         console.log(`Current heart rate: ${hrm.heartRate}, Current sleep state: ${sleep.state}`);
@@ -63,7 +66,7 @@ if (HeartRateSensor && sleep) {
     const hrm = new HeartRateSensor();
     hrm.start();
 
-    // Get heart rate every 60 seconds
+    // Get heart rate and sleep data every 15 seconds
     setInterval(() => {
         getAndSendPatientData(hrm, sleep);
     }, 15 * 1000);
