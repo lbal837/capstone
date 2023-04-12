@@ -34,6 +34,7 @@ async function fetchPatientData(userId, accessToken) {
         SleepStatus: latestSleepStatus,
         Latitude: null,
         Longitude: null,
+        Steps: latestSteps
     };
 
     try {
