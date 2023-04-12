@@ -43,8 +43,8 @@ async function fetchPatientData(userId, accessToken) {
         responseData.AvatarImage = userProfile.user.avatar640;
 
         geolocation.getCurrentPosition(function (position) {
-            responseData.Latitude = position.coords.latitude;
-            responseData.Longitude = position.coords.longitude;
+            responseData.Latitude = floatToDecimalString(position.coords.latitude, 6);
+            responseData.Longitude = floatToDecimalString(position.coords.longitude, 6);
         })
 
         console.log(responseData);
@@ -59,6 +59,10 @@ async function fetchPatientData(userId, accessToken) {
     } catch (err) {
         console.log("[REQUEST FAILED]: " + err);
     }
+}
+
+function floatToDecimalString(value, decimalPlaces) {
+    return value.toFixed(decimalPlaces);
 }
 
 // Listen for messages from the device and handle "combined_data" messages
