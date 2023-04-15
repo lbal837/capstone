@@ -27,3 +27,21 @@ jobs:
           yarn install
           yarn build
           yarn jest
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - name: Change to Flutter directory, build and run tests
+        run: |
+          cd frontend
+          flutter pub get
+          flutter test
+          flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: frontend/build/app/outputs/flutter-apk/app-release.apk
