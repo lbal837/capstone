@@ -29,7 +29,7 @@ jobs:
           yarn jest
 
       - name: Set up Flutter
-        uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
 
@@ -41,7 +41,7 @@ jobs:
           flutter build apk --release
 
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: release-apk
           path: frontend/build/app/outputs/flutter-apk/app-release.apk
