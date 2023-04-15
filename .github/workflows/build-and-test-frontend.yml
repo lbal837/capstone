@@ -1,0 +1,45 @@
+name: Build and Test Frontend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    env:
+      FLUTTER_PROJECT_DIRECTORY: frontend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: |
+          cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
+          flutter pub get
+
+      - name: Run tests
+        run: |
+          cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
+          flutter test
+
+#      Commented out because building and uploading the APK takes way too long -> useful only if we're deploying imho
+#      - name: Build APK
+#        run: |
+#          cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
+#          flutter build apk --release
+#
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: release-apk
+#          path: ${{ env.FLUTTER_PROJECT_DIRECTORY }}/build/app/outputs/flutter-apk/app-release.apk
