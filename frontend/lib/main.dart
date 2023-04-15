@@ -65,29 +65,58 @@ class _MyHomePageState extends State<MyHomePage> {
 class ProfileBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: [
-          Container(
-              padding: EdgeInsets.all(30.0),
-              child: const Icon(Icons.account_circle, size: 100),
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 2.0,
-                  ))),
-          Container(
-            padding: EdgeInsets.all(5.0),
-            alignment: Alignment.center,
-            child: Text("Patient Name/ Number"),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            alignment: Alignment.center,
-            child: Text("Status"),
-          ),
-        ],
+    return InkWell(
+      //inkwell should make card clickable
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const MyDataPage(title: 'LifeSavers')),
+        );
+      },
+      child: Card(
+        child: Row(
+          children: [
+            Container(
+                padding: EdgeInsets.all(30.0),
+                child: const Icon(Icons.account_circle, size: 100),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2.0,
+                    ))),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              alignment: Alignment.center,
+              child: Text("Patient Name/ Number"),
+            ),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              alignment: Alignment.center,
+              child: Text("Status"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyDataPage extends StatefulWidget {
+  //i made this stateful so we can chuck in patient details but atm it just has the title lifesavers
+  const MyDataPage({super.key, required this.title});
+  final String title;
+  @override
+  State<MyDataPage> createState() => _MyDataPageState();
+}
+
+class _MyDataPageState extends State<MyDataPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('data page'),
       ),
     );
   }
