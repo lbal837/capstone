@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -120,4 +121,14 @@ class _MyDataPageState extends State<MyDataPage> {
       ),
     );
   }
+}
+
+void fetchUser() async {
+  //maybe feed in the user id later idk
+  const url =
+      'https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/GetPatientData?UserId=BHL33M&fbclid=IwAR376I2nF832P7srLAglRfsJV_ENvLJ1FDYYjLaN7j3UUXro544mD1fvwH8';
+  final uri = Uri.parse(url);
+  final response = await http.get(uri);
+  final body = response.body;
+  final json = jsonDecode(body);
 }
