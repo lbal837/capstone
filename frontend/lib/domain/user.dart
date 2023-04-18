@@ -12,7 +12,7 @@ class User {
   /// Decode user from Cognito User Attributes
   factory User.fromUserAttributes(List<CognitoUserAttribute> attributes) {
     final user = User();
-    attributes.forEach((attribute) {
+    for (final attribute in attributes) {
       if (attribute.getName() == 'email') {
         user.email = attribute.getValue();
       } else if (attribute.getName() == 'name') {
@@ -22,7 +22,7 @@ class User {
           user.confirmed = true;
         }
       }
-    });
+    }
     return user;
   }
 }
