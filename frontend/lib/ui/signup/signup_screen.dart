@@ -64,8 +64,11 @@ class SignUpScreenState extends State<SignUpScreen> {
       ),
       duration: const Duration(seconds: 30),
     );
+    void showSnackBar() {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    showSnackBar();
   }
 
   @override
