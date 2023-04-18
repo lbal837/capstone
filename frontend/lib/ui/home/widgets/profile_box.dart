@@ -18,20 +18,20 @@ class ProfileBox extends StatelessWidget {
           children: [
             Container(
                 padding: const EdgeInsets.all(30.0),
-                child: const Icon(Icons.account_circle, size: 70),
                 decoration: BoxDecoration(
                   color: Colors.deepPurple,
                   borderRadius: BorderRadius.circular(15),
-                )),
+                ),
+                child: const Icon(Icons.account_circle, size: 70)),
             Container(
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
-              child: Text("Patient Name/ Number"),
+              child: const Text('Patient Name/ Number'),
             ),
             Container(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
-              child: Text("Status"),
+              child: const Text('Status'),
             ),
           ],
         ),
