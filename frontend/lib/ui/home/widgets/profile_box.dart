@@ -17,7 +17,7 @@ class ProfileBox extends StatelessWidget {
         child: Row(
           children: [
             Container(
-                padding: EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(30.0),
                 child: const Icon(Icons.account_circle, size: 70),
                 decoration: BoxDecoration(
                   color: Colors.deepPurple,
