@@ -38,6 +38,7 @@ dependencies:
   amazon_cognito_identity_dart_2: ^3.3.0
 
   http: ^0.13.5
+  shared_preferences: ^2.1.0
   
 dev_dependencies:
   lint: ^1.5.3
