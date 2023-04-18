@@ -113,12 +113,12 @@ class MyDataPage extends StatefulWidget {
 }
 
 class _MyDataPageState extends State<MyDataPage> {
-  late Future<User> futureUser;
+  late Future<Patient> futurePatient;
   @override
   void initState() {
     //we may have a problem with reloading data w init
     super.initState();
-    futureUser = fetchUser(); //we could put user id here i think
+    futurePatient = fetchPatient(); //we could put user id here i think
   }
 
   @override
@@ -128,8 +128,8 @@ class _MyDataPageState extends State<MyDataPage> {
         title: const Text('data page'),
       ),
       body: Center(
-        child: FutureBuilder<User>(
-          future: futureUser,
+        child: FutureBuilder<Patient>(
+          future: futurePatient,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Text(snapshot.data!.longitude);
@@ -146,17 +146,18 @@ class _MyDataPageState extends State<MyDataPage> {
   }
 }
 
-Future<User> fetchUser() async {
+Future<Patient> fetchPatient() async {
   //maybe feed in the user id later idk
   const url =
-      '***REMOVED***/GetPatientData?UserId=BHL33M&fbclid=IwAR376I2nF832P7srLAglRfsJV_ENvLJ1FDYYjLaN7j3UUXro544mD1fvwH8';
+      '***REMOVED***/GetPatientData?UserId=BHL33M';
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
+    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    final r = Response.fromJson(jsonDecode(response.body));
-    return User.fromJson(r.userData);
+    Patient patient = Patient.fromJson(jsonResponse['data']);
+    return patient;
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
@@ -164,22 +165,7 @@ Future<User> fetchUser() async {
   }
 }
 
-class Response {
-  final String message;
-  final Map<String, dynamic> userData;
-  const Response({
-    required this.message,
-    required this.userData,
-  });
-  factory Response.fromJson(Map<String, dynamic> json) {
-    return Response(
-      message: json['message'],
-      userData: json['data'],
-    );
-  }
-}
-
-class User {
+class Patient {
   final String userId;
   final String avatarImage;
   final String fullName;
@@ -190,7 +176,7 @@ class User {
   final double steps;
   final String sleepStatus;
 
-  const User({
+  const Patient({
     required this.userId,
     required this.avatarImage,
     required this.fullName,
@@ -201,8 +187,8 @@ class User {
     required this.steps,
     required this.sleepStatus,
   });
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Patient.fromJson(Map<String, dynamic> json) {
+    return Patient(
       userId: json['UserId'],
       avatarImage: json['AvatarImage'],
       fullName: json['FullName'],
