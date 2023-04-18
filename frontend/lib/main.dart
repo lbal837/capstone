@@ -24,34 +24,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfileHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-              padding: EdgeInsets.all(30.0),
-              child: const Icon(Icons.account_circle, size: 100),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-              )),
-          Container(
-            padding: EdgeInsets.all(5.0),
-            alignment: Alignment.center,
-            child: Text("Patient Name/ Number"),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            alignment: Alignment.center,
-            child: Text("Status"),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 Future<Patient> fetchPatient() async {
   //maybe feed in the user id later idk
   const url =
