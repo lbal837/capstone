@@ -24,37 +24,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyDataPage extends StatefulWidget {
-  const MyDataPage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyDataPage> createState() => _MyDataPageState();
-}
-
-class _MyDataPageState extends State<MyDataPage> {
-  late Future<Patient> futurePatient;
-  @override
-  void initState() {
-    //we may have a problem with reloading data w init
-    super.initState();
-    futurePatient = fetchPatient(); //we could put user id here i think
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('data page'),
-      ),
-      body: ListView(
-        children: [
-          ProfileHeader(),
-        ],
-      ),
-    );
-  }
-}
-
 class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -124,6 +93,7 @@ class Patient {
     required this.steps,
     required this.sleepStatus,
   });
+
   factory Patient.fromJson(Map<String, dynamic> json) {
     return Patient(
       userId: json['UserId'],

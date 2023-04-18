@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/ui/patient/patient.dart';
 
 class ProfileBox extends StatelessWidget {
+  const ProfileBox({super.key});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -10,7 +12,7 @@ class ProfileBox extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const MyDataPage(title: 'LifeSavers')),
+              builder: (context) => const PatientPage(title: 'LifeSavers')),
         );
       },
       child: Card(

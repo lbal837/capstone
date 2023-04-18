@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/main.dart';
 
-class _MyDataPageState extends State<MyDataPage> {
+class _PatientPageState extends State<PatientPage> {
   late Future<Patient> futurePatient;
   @override
   void initState() {
@@ -14,7 +14,7 @@ class _MyDataPageState extends State<MyDataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('data page'),
+        title: const Text('Data Page'),
       ),
       body: ListView(
         children: [
@@ -25,9 +25,10 @@ class _MyDataPageState extends State<MyDataPage> {
   }
 }
 
-class MyDataPage extends StatefulWidget {
-  const MyDataPage({super.key, required this.title});
+class PatientPage extends StatefulWidget {
+  const PatientPage({super.key, required this.title});
   final String title;
   @override
-  State<MyDataPage> createState() => _MyDataPageState();
+  State<PatientPage> createState() => _PatientPageState();
 }
+

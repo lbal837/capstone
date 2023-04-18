@@ -12,7 +12,12 @@ class _MyHomePageState extends State<MyHomePage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [ProfileBox(), ProfileBox(), ProfileBox(), ProfileBox()],
+          children: const [
+            ProfileBox(),
+            ProfileBox(),
+            ProfileBox(),
+            ProfileBox()
+          ],
         ),
       ]),
     );
