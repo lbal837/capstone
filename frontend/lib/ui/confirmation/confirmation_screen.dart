@@ -64,7 +64,11 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
       duration: const Duration(seconds: 30),
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    void showSnackBar() {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    showSnackBar();
   }
 
   Future _resendConfirmation(BuildContext context) async {
@@ -98,7 +102,11 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
       duration: const Duration(seconds: 30),
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    void showSnackBar() {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    showSnackBar();
   }
 
   @override

@@ -84,7 +84,11 @@ class LoginScreenState extends State<LoginScreen> {
       duration: const Duration(seconds: 30),
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    void showSnackBar() {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    showSnackBar();
   }
 
   @override
