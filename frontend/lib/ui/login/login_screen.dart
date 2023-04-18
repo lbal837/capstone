@@ -2,7 +2,9 @@ import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
+import 'package:frontend/main.dart';
 import 'package:frontend/secrets.dart';
+import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
@@ -73,7 +75,8 @@ class LoginScreenState extends State<LoginScreen> {
               await Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SecureCounterScreen()));
+                      builder: (context) =>
+                          const MyHomePage(title: 'Login Successful')));
             }
           }
         },
@@ -91,7 +94,7 @@ class LoginScreenState extends State<LoginScreen> {
         builder: (context, AsyncSnapshot<UserService> snapshot) {
           if (snapshot.hasData) {
             if (_isAuthenticated) {
-              return SecureCounterScreen();
+              return const MyHomePage(title: 'You are authenticated');
             }
             final screenSize = MediaQuery.of(context).size;
             return Scaffold(
