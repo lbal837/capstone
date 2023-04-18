@@ -1,8 +1,8 @@
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 
 class Cognito {
-  final String _userPoolId = 'your_user_pool_id';
-  final String _appClientId = 'your_app_client_id';
+  final String _userPoolId = 'ap-southeast-2_ka6kEdifi';
+  final String _appClientId = '51olflpcem5i0ffunuhg7k6165';
   final CognitoUserPool _userPool;
 
   Cognito()
