@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/patient_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/patient/widgets/profile_header.dart';
+import 'package:frontend/ui/patient_info/widgets/profile_header.dart';
 
-class _PatientPageState extends State<PatientPage> {
+class _PatientInfoPageState extends State<PatientPage> {
   late Future<Patient> futurePatient;
 
   @override
@@ -37,5 +37,5 @@ class PatientPage extends StatefulWidget {
   final String title;
 
   @override
-  State<PatientPage> createState() => _PatientPageState();
+  State<PatientPage> createState() => _PatientInfoPageState();
 }
