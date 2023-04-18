@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/main.dart';
+import 'package:frontend/ui/patient/widgets/profile_header.dart';
 
 class _PatientPageState extends State<PatientPage> {
   late Future<Patient> futurePatient;
+
   @override
   void initState() {
     //we may have a problem with reloading data w init
@@ -17,7 +19,7 @@ class _PatientPageState extends State<PatientPage> {
         title: const Text('Data Page'),
       ),
       body: ListView(
-        children: [
+        children: const [
           ProfileHeader(),
         ],
       ),
@@ -27,8 +29,9 @@ class _PatientPageState extends State<PatientPage> {
 
 class PatientPage extends StatefulWidget {
   const PatientPage({super.key, required this.title});
+
   final String title;
+
   @override
   State<PatientPage> createState() => _PatientPageState();
 }
-
