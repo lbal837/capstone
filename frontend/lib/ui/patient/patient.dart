@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/main.dart';
+import 'package:frontend/data/patient_repository.dart';
+import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/patient/widgets/profile_header.dart';
 
 class _PatientPageState extends State<PatientPage> {
@@ -9,7 +10,10 @@ class _PatientPageState extends State<PatientPage> {
   void initState() {
     //we may have a problem with reloading data w init
     super.initState();
-    futurePatient = fetchPatient(); //we could put user id here i think
+    final PatientDefaultRepository patientRepository =
+        PatientDefaultRepository();
+    futurePatient = patientRepository
+        .fetchPatient('BHL33M'); //we could put user id here i think
   }
 
   @override

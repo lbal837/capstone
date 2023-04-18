@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/home/home.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,63 +21,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       home: const MyHomePage(title: 'LifeSavers'),
-    );
-  }
-}
-
-Future<Patient> fetchPatient() async {
-  //maybe feed in the user id later idk
-  const url =
-      '***REMOVED***/GetPatientData?UserId=BHL33M';
-  final response = await http.get(Uri.parse(url));
-
-  if (response.statusCode == 200) {
-    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    Patient patient = Patient.fromJson(jsonResponse['data']);
-    return patient;
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load data');
-  }
-}
-
-class Patient {
-  final String userId;
-  final String avatarImage;
-  final String fullName;
-  final String longitude;
-  final String latitude;
-  final String dateTime;
-  final double heartRate;
-  final double steps;
-  final String sleepStatus;
-
-  const Patient({
-    required this.userId,
-    required this.avatarImage,
-    required this.fullName,
-    required this.longitude,
-    required this.latitude,
-    required this.dateTime,
-    required this.heartRate,
-    required this.steps,
-    required this.sleepStatus,
-  });
-
-  factory Patient.fromJson(Map<String, dynamic> json) {
-    return Patient(
-      userId: json['UserId'],
-      avatarImage: json['AvatarImage'],
-      fullName: json['FullName'],
-      longitude: json['Longitude'],
-      latitude: json['Latitude'],
-      dateTime: json['DateTime'],
-      heartRate: json['HeartRate'],
-      steps: json['Steps'],
-      sleepStatus: json['SleepStatus'],
     );
   }
 }
