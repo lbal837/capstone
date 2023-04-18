@@ -38,13 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: ListView(children: [
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [ProfileBox(), ProfileBox(), ProfileBox(), ProfileBox()],
         ),
-      ),
+      ]),
     );
   }
 }
@@ -110,8 +110,10 @@ class _MyDataPageState extends State<MyDataPage> {
       appBar: AppBar(
         title: const Text('data page'),
       ),
-      body: SingleChildScrollView(
-        child: ProfileHeader(),
+      body: ListView(
+        children: [
+          ProfileHeader(),
+        ],
       ),
     );
   }
