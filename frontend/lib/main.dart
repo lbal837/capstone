@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
@@ -104,7 +106,6 @@ class ProfileBox extends StatelessWidget {
 }
 
 class MyDataPage extends StatefulWidget {
-  //i made this stateful so we can chuck in patient details but atm it just has the title lifesavers
   const MyDataPage({super.key, required this.title});
   final String title;
   @override
@@ -112,12 +113,91 @@ class MyDataPage extends StatefulWidget {
 }
 
 class _MyDataPageState extends State<MyDataPage> {
+  late Future<Patient> futurePatient;
+  @override
+  void initState() {
+    //we may have a problem with reloading data w init
+    super.initState();
+    futurePatient = fetchPatient(); //we could put user id here i think
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('data page'),
       ),
+      body: Center(
+        child: FutureBuilder<Patient>(
+          future: futurePatient,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text(snapshot.data!.longitude);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+
+            // By default, show a loading spinner.
+            return const CircularProgressIndicator();
+          },
+        ),
+      ),
+    );
+  }
+}
+
+Future<Patient> fetchPatient() async {
+  //maybe feed in the user id later idk
+  const url =
+      'https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/GetPatientData?UserId=BHL33M';
+  final response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    Patient patient = Patient.fromJson(jsonResponse['data']);
+    return patient;
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load data');
+  }
+}
+
+class Patient {
+  final String userId;
+  final String avatarImage;
+  final String fullName;
+  final String longitude;
+  final String latitude;
+  final String dateTime;
+  final double heartRate;
+  final double steps;
+  final String sleepStatus;
+
+  const Patient({
+    required this.userId,
+    required this.avatarImage,
+    required this.fullName,
+    required this.longitude,
+    required this.latitude,
+    required this.dateTime,
+    required this.heartRate,
+    required this.steps,
+    required this.sleepStatus,
+  });
+  factory Patient.fromJson(Map<String, dynamic> json) {
+    return Patient(
+      userId: json['UserId'],
+      avatarImage: json['AvatarImage'],
+      fullName: json['FullName'],
+      longitude: json['Longitude'],
+      latitude: json['Latitude'],
+      dateTime: json['DateTime'],
+      heartRate: json['HeartRate'],
+      steps: json['Steps'],
+      sleepStatus: json['SleepStatus'],
     );
   }
 }
