@@ -5,6 +5,7 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/widgets/input_user_confirmation.dart';
 import 'package:frontend/ui/confirmation/widgets/input_user_email.dart';
+import 'package:frontend/ui/confirmation/widgets/resend_user_confirmation.dart';
 import 'package:frontend/ui/confirmation/widgets/submit_user_confirmation.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
@@ -114,7 +115,6 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Confirm Account'),
@@ -132,17 +132,9 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                     SubmitUserConfirmation(onPressed: () {
                       _submit(context);
                     }),
-                    Center(
-                      child: InkWell(
-                        onTap: () {
-                          _resendConfirmation(context);
-                        },
-                        child: const Text(
-                          'Resend Confirmation Code',
-                          style: TextStyle(color: Colors.blueAccent),
-                        ),
-                      ),
-                    ),
+                    ResendUserConfirmation(onTap: () {
+                      _resendConfirmation(context);
+                    }),
                   ],
                 ),
               )),
