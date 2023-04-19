@@ -123,7 +123,14 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                 child: ListView(
                   children: <Widget>[
                     InputEmail(widget: widget, user: _user),
-                    inputConfirmationCode(),
+                    ListTile(
+                      leading: const Icon(Icons.lock),
+                      title: TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'Confirmation Code'),
+                        onSaved: (c) => confirmationCode = c ?? '',
+                      ),
+                    ),
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       width: screenSize.width,
@@ -155,16 +162,5 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                 ),
               )),
     );
-  }
-
-  ListTile inputConfirmationCode() {
-    return ListTile(
-                    leading: const Icon(Icons.lock),
-                    title: TextFormField(
-                      decoration: const InputDecoration(
-                          labelText: 'Confirmation Code'),
-                      onSaved: (c) => confirmationCode = c ?? '',
-                    ),
-                  );
   }
 }
