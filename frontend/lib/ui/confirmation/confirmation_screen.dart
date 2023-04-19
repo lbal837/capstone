@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirmation/widgets/input_email.dart';
+import 'package:frontend/ui/confirmation/widgets/input_user_confirmation.dart';
+import 'package:frontend/ui/confirmation/widgets/input_user_email.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class ConfirmationScreen extends StatefulWidget {
 
 class ConfirmationScreenState extends State<ConfirmationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String confirmationCode;
+  late String confirmationCode = '';
   final User _user = User();
   final _userService = UserService(userPool);
 
@@ -122,14 +123,10 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                 key: _formKey,
                 child: ListView(
                   children: <Widget>[
-                    InputEmail(widget: widget, user: _user),
-                    ListTile(
-                      leading: const Icon(Icons.lock),
-                      title: TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: 'Confirmation Code'),
-                        onSaved: (c) => confirmationCode = c ?? '',
-                      ),
+                    InputUserEmail(widget: widget, user: _user),
+                    InputUserConfirmation(
+                      confirmationCode: confirmationCode,
+                      onSaved: (c) => confirmationCode = c ?? '',
                     ),
                     Container(
                       padding: const EdgeInsets.all(20.0),
