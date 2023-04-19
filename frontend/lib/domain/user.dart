@@ -9,7 +9,7 @@ class User {
 
   User({this.email, this.name});
 
-  /// Decode user from Cognito User Attributes
+  /// Decode user from Cognito User Attributes.
   factory User.fromUserAttributes(List<CognitoUserAttribute> attributes) {
     final user = User();
     for (final attribute in attributes) {
