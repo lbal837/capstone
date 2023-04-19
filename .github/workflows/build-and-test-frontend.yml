@@ -17,17 +17,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
       - name: Decode base64 secrets
         run: |
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
           echo $SECRETS_FILE_CONTENTS | base64 -d > lib/secrets.dart
         env:
           SECRETS_FILE_CONTENTS: ${{ secrets.SECRETS_FILE_CONTENTS }}
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
 
       - name: Install dependencies
         run: |
