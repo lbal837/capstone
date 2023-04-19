@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/patient_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/patient_info/widgets/profile_header.dart';
+import 'package:frontend/ui/patient_info/widgets/patient_data_profile_header.dart';
 
 class _PatientInfoPageState extends State<PatientPage> {
   late Future<Patient> futurePatient;

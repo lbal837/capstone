@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/home/widgets/profile_box.dart';
+import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
