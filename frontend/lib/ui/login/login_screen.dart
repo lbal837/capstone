@@ -2,9 +2,9 @@ import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
-import 'package:frontend/main.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
+import 'package:frontend/ui/home/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
