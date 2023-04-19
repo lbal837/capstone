@@ -25,7 +25,7 @@ jobs:
       - name: Decode base64 secrets
         run: |
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
-          echo $SECRETS_FILE_CONTENTS | base64 -d > lib/secrets.dart
+          echo $SECRETS_FILE_CONTENTS | base64 -di > lib/secrets.dart
         env:
           SECRETS_FILE_CONTENTS: ${{ secrets.SECRETS_FILE_CONTENTS }}
 
