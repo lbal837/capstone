@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
+import 'package:frontend/ui/confirmation/widgets/input_email.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
@@ -121,24 +122,8 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                 key: _formKey,
                 child: ListView(
                   children: <Widget>[
-                    ListTile(
-                      leading: const Icon(Icons.email),
-                      title: TextFormField(
-                        initialValue: widget.email,
-                        decoration: const InputDecoration(
-                            hintText: 'example@inspire.my', labelText: 'Email'),
-                        keyboardType: TextInputType.emailAddress,
-                        onSaved: (n) => _user.email = n ?? '',
-                      ),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.lock),
-                      title: TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: 'Confirmation Code'),
-                        onSaved: (c) => confirmationCode = c ?? '',
-                      ),
-                    ),
+                    InputEmail(widget: widget, user: _user),
+                    inputConfirmationCode(),
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       width: screenSize.width,
@@ -170,5 +155,16 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                 ),
               )),
     );
+  }
+
+  ListTile inputConfirmationCode() {
+    return ListTile(
+                    leading: const Icon(Icons.lock),
+                    title: TextFormField(
+                      decoration: const InputDecoration(
+                          labelText: 'Confirmation Code'),
+                      onSaved: (c) => confirmationCode = c ?? '',
+                    ),
+                  );
   }
 }
