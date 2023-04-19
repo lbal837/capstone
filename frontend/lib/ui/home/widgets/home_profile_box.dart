@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/patient_info/patient_data.dart';
+import 'package:frontend/ui/patient_data/patient_data.dart';
 
 class ProfileBox extends StatelessWidget {
   const ProfileBox({super.key});
