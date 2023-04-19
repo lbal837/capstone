@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirmation/confirmation_screen.dart';
-import 'package:frontend/ui/login/login_screen.dart';
-import 'package:frontend/ui/signup/signup_screen.dart';
-import 'package:http/http.dart' as http;
 import 'package:frontend/ui/home/home.dart';
 
 void main() {
