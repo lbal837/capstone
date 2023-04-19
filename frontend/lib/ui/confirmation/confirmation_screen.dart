@@ -5,6 +5,7 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/widgets/input_user_confirmation.dart';
 import 'package:frontend/ui/confirmation/widgets/input_user_email.dart';
+import 'package:frontend/ui/confirmation/widgets/submit_user_confirmation.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
@@ -128,22 +129,9 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                       confirmationCode: confirmationCode,
                       onSaved: (c) => confirmationCode = c ?? '',
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(20.0),
-                      width: screenSize.width,
-                      margin: const EdgeInsets.only(
-                        top: 10.0,
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _submit(context);
-                        },
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
+                    SubmitUserConfirmation(onPressed: () {
+                      _submit(context);
+                    }),
                     Center(
                       child: InkWell(
                         onTap: () {
