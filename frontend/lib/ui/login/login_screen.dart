@@ -5,6 +5,7 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home.dart';
+import 'package:frontend/ui/login/widgets/input_user_login.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
@@ -111,17 +112,7 @@ class LoginScreenState extends State<LoginScreen> {
                     key: _formKey,
                     child: ListView(
                       children: <Widget>[
-                        ListTile(
-                          leading: const Icon(Icons.email),
-                          title: TextFormField(
-                            initialValue: widget.email,
-                            decoration: const InputDecoration(
-                                hintText: 'example@inspire.my',
-                                labelText: 'Email'),
-                            keyboardType: TextInputType.emailAddress,
-                            onSaved: (n) => _user.email = n,
-                          ),
-                        ),
+                        InputUserLogin(widget: widget, user: _user),
                         ListTile(
                           leading: const Icon(Icons.lock),
                           title: TextFormField(
