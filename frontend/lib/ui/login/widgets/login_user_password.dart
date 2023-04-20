@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 
-class InputUserPassword extends StatelessWidget {
-  const InputUserPassword({
+class LoginUserPassword extends StatelessWidget {
+  const LoginUserPassword({
     super.key,
     required User user,
   }) : _user = user;
