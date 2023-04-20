@@ -40,7 +40,7 @@ class LoginScreenState extends State<LoginScreen> {
           message = 'Could not login user';
         } else {
           _user = u;
-          message = 'User sucessfully logged in!';
+          message = 'User successfully logged in!';
           if (!_user.confirmed) {
             message = 'Please confirm user account';
           }
@@ -52,7 +52,7 @@ class LoginScreenState extends State<LoginScreen> {
             e.code == 'ResourceNotFoundException') {
           message = e.message ?? e.code ?? e.toString();
         } else {
-          message = 'An unknown client error occured';
+          message = 'An unknown client error occurred';
         }
       } catch (e) {
         message = 'An unknown error occurred';
