@@ -6,6 +6,7 @@ import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home.dart';
 import 'package:frontend/ui/login/widgets/input_user_login.dart';
+import 'package:frontend/ui/login/widgets/input_user_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
@@ -113,15 +114,7 @@ class LoginScreenState extends State<LoginScreen> {
                     child: ListView(
                       children: <Widget>[
                         InputUserLogin(widget: widget, user: _user),
-                        ListTile(
-                          leading: const Icon(Icons.lock),
-                          title: TextFormField(
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                            obscureText: true,
-                            onSaved: (n) => _user.password = n,
-                          ),
-                        ),
+                        InputUserPassword(user: _user),
                         Container(
                           padding: const EdgeInsets.all(20.0),
                           width: screenSize.width,
