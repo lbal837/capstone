@@ -4,6 +4,7 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_email.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_full_name.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_password.dart';
 
@@ -87,15 +88,7 @@ class SignUpScreenState extends State<SignUpScreen> {
             child: ListView(
               children: <Widget>[
                 SignupUserFullName(user: _user),
-                ListTile(
-                  leading: const Icon(Icons.email),
-                  title: TextFormField(
-                    decoration: const InputDecoration(
-                        hintText: 'example@inspire.my', labelText: 'Email'),
-                    keyboardType: TextInputType.emailAddress,
-                    onSaved: (n) => _user.email = n,
-                  ),
-                ),
+                SignupUserEmail(user: _user),
                 SignupUserPassword(user: _user),
                 Container(
                   padding: const EdgeInsets.all(20.0),
