@@ -5,6 +5,7 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/signup/widgets/input_user_full_name.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_password.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -95,16 +96,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     onSaved: (n) => _user.email = n,
                   ),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.lock),
-                  title: TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Password!',
-                    ),
-                    obscureText: true,
-                    onSaved: (n) => _user.password = n,
-                  ),
-                ),
+                SignupUserPassword(user: _user),
                 Container(
                   padding: const EdgeInsets.all(20.0),
                   width: screenSize.width,
