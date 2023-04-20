@@ -4,6 +4,7 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_button.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_email.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_full_name.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_password.dart';
@@ -90,22 +91,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                 SignupUserFullName(user: _user),
                 SignupUserEmail(user: _user),
                 SignupUserPassword(user: _user),
-                Container(
-                  padding: const EdgeInsets.all(20.0),
-                  width: screenSize.width,
-                  margin: const EdgeInsets.only(
-                    top: 10.0,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      submit(context);
-                    },
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
+                SignupUserButton(onPressed: () => submit(context)),
               ],
             ),
           );
