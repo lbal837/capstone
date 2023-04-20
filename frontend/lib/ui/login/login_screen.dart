@@ -5,7 +5,6 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home.dart';
-import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/login/widgets/input_user_login.dart';
 import 'package:frontend/ui/login/widgets/input_user_password.dart';
 import 'package:frontend/ui/login/widgets/login_user_button.dart';
@@ -104,7 +103,6 @@ class LoginScreenState extends State<LoginScreen> {
             if (_isAuthenticated) {
               return const MyHomePage(title: 'You are authenticated');
             }
-            final screenSize = MediaQuery.of(context).size;
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Login'),
