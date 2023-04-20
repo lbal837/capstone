@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
-class InputUserLogin extends StatelessWidget {
-  const InputUserLogin({
+class InputUserEmail extends StatelessWidget {
+  const InputUserEmail({
     super.key,
     required this.widget,
     required User user,
