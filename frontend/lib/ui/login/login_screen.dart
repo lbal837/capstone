@@ -5,8 +5,10 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home.dart';
+import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/login/widgets/input_user_login.dart';
 import 'package:frontend/ui/login/widgets/input_user_password.dart';
+import 'package:frontend/ui/login/widgets/login_user_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
@@ -115,20 +117,7 @@ class LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         InputUserLogin(widget: widget, user: _user),
                         InputUserPassword(user: _user),
-                        Container(
-                          padding: const EdgeInsets.all(20.0),
-                          width: screenSize.width,
-                          margin: const EdgeInsets.only(
-                            top: 10.0,
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () => submit(context),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
+                        UserLoginButton(onPressed: () => submit(context)),
                       ],
                     ),
                   );
