@@ -4,7 +4,7 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
-import 'package:frontend/ui/signup/widgets/input_user_full_name.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_full_name.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_password.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -86,7 +86,7 @@ class SignUpScreenState extends State<SignUpScreen> {
             key: _formKey,
             child: ListView(
               children: <Widget>[
-                InputUserFullName(user: _user),
+                SignupUserFullName(user: _user),
                 ListTile(
                   leading: const Icon(Icons.email),
                   title: TextFormField(

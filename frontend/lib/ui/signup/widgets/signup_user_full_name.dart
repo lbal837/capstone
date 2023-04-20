@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 
-class InputUserFullName extends StatelessWidget {
-  const InputUserFullName({
+class SignupUserFullName extends StatelessWidget {
+  const SignupUserFullName({
     super.key,
     required User user,
   }) : _user = user;
