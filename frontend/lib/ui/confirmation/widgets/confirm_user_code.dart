@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InputUserConfirmation extends StatelessWidget {
-  const InputUserConfirmation(
+class ConfirmUserCode extends StatelessWidget {
+  const ConfirmUserCode(
       {Key? key, required this.confirmationCode, required this.onSaved})
       : super(key: key);
 
