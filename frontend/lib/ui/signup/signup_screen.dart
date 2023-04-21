@@ -4,6 +4,10 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_button.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_email.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_full_name.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_password.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -73,7 +77,6 @@ class SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign Up'),
@@ -84,48 +87,10 @@ class SignUpScreenState extends State<SignUpScreen> {
             key: _formKey,
             child: ListView(
               children: <Widget>[
-                ListTile(
-                  leading: const Icon(Icons.account_box),
-                  title: TextFormField(
-                    decoration: const InputDecoration(labelText: 'Name'),
-                    onSaved: (n) => _user.name = n,
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.email),
-                  title: TextFormField(
-                    decoration: const InputDecoration(
-                        hintText: 'example@inspire.my', labelText: 'Email'),
-                    keyboardType: TextInputType.emailAddress,
-                    onSaved: (n) => _user.email = n,
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.lock),
-                  title: TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Password!',
-                    ),
-                    obscureText: true,
-                    onSaved: (n) => _user.password = n,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(20.0),
-                  width: screenSize.width,
-                  margin: const EdgeInsets.only(
-                    top: 10.0,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      submit(context);
-                    },
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
+                SignupUserFullName(user: _user),
+                SignupUserEmail(user: _user),
+                SignupUserPassword(user: _user),
+                SignupUserButton(onPressed: () => submit(context)),
               ],
             ),
           );

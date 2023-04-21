@@ -5,6 +5,9 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home.dart';
+import 'package:frontend/ui/login/widgets/login_user_button.dart';
+import 'package:frontend/ui/login/widgets/login_user_email.dart';
+import 'package:frontend/ui/login/widgets/login_user_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
@@ -37,7 +40,7 @@ class LoginScreenState extends State<LoginScreen> {
           message = 'Could not login user';
         } else {
           _user = u;
-          message = 'User sucessfully logged in!';
+          message = 'User successfully logged in!';
           if (!_user.confirmed) {
             message = 'Please confirm user account';
           }
@@ -49,7 +52,7 @@ class LoginScreenState extends State<LoginScreen> {
             e.code == 'ResourceNotFoundException') {
           message = e.message ?? e.code ?? e.toString();
         } else {
-          message = 'An unknown client error occured';
+          message = 'An unknown client error occurred';
         }
       } catch (e) {
         message = 'An unknown error occurred';
@@ -100,7 +103,6 @@ class LoginScreenState extends State<LoginScreen> {
             if (_isAuthenticated) {
               return const MyHomePage(title: 'You are authenticated');
             }
-            final screenSize = MediaQuery.of(context).size;
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Login'),
@@ -111,40 +113,9 @@ class LoginScreenState extends State<LoginScreen> {
                     key: _formKey,
                     child: ListView(
                       children: <Widget>[
-                        ListTile(
-                          leading: const Icon(Icons.email),
-                          title: TextFormField(
-                            initialValue: widget.email,
-                            decoration: const InputDecoration(
-                                hintText: 'example@inspire.my',
-                                labelText: 'Email'),
-                            keyboardType: TextInputType.emailAddress,
-                            onSaved: (n) => _user.email = n,
-                          ),
-                        ),
-                        ListTile(
-                          leading: const Icon(Icons.lock),
-                          title: TextFormField(
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                            obscureText: true,
-                            onSaved: (n) => _user.password = n,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(20.0),
-                          width: screenSize.width,
-                          margin: const EdgeInsets.only(
-                            top: 10.0,
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () => submit(context),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
+                        LoginUserEmail(widget: widget, user: _user),
+                        LoginUserPassword(user: _user),
+                        LoginSubmitButton(onPressed: () => submit(context)),
                       ],
                     ),
                   );

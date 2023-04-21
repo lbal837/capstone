@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirmation/widgets/input_user_confirmation.dart';
-import 'package:frontend/ui/confirmation/widgets/input_user_email.dart';
-import 'package:frontend/ui/confirmation/widgets/resend_user_confirmation.dart';
-import 'package:frontend/ui/confirmation/widgets/submit_user_confirmation.dart';
+import 'package:frontend/ui/confirmation/widgets/confirm_resend_code.dart';
+import 'package:frontend/ui/confirmation/widgets/confirm_user_button.dart';
+import 'package:frontend/ui/confirmation/widgets/confirm_user_code.dart';
+import 'package:frontend/ui/confirmation/widgets/confirm_user_email.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
@@ -124,15 +124,15 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
                 key: _formKey,
                 child: ListView(
                   children: <Widget>[
-                    InputUserEmail(widget: widget, user: _user),
-                    InputUserConfirmation(
+                    ConfirmUserEmail(widget: widget, user: _user),
+                    ConfirmUserCode(
                       confirmationCode: confirmationCode,
                       onSaved: (c) => confirmationCode = c ?? '',
                     ),
-                    SubmitUserConfirmation(onPressed: () {
+                    ConfirmUserButton(onPressed: () {
                       _submit(context);
                     }),
-                    ResendUserConfirmation(onTap: () {
+                    ConfirmResendCode(onTap: () {
                       _resendConfirmation(context);
                     }),
                   ],

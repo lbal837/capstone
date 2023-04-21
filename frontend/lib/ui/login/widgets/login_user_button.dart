@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SubmitUserConfirmation extends StatelessWidget {
-  const SubmitUserConfirmation({Key? key, required this.onPressed})
-      : super(key: key);
-
+class LoginSubmitButton extends StatelessWidget {
   final VoidCallback onPressed;
+
+  const LoginSubmitButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class SubmitUserConfirmation extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         child: const Text(
-          'Submit',
+          'Login',
           style: TextStyle(color: Colors.white),
         ),
       ),
