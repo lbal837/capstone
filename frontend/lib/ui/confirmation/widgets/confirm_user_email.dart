@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 
-class InputUserEmail extends StatelessWidget {
-  const InputUserEmail({
+class ConfirmUserEmail extends StatelessWidget {
+  const ConfirmUserEmail({
     super.key,
     required this.widget,
     required User user,
