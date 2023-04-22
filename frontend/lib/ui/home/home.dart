@@ -12,17 +12,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const ProfileBox(),
-            const ProfileBox(),
-            SignUpUserButton(screenSize: screenSize),
-            ConfirmUserButton(screenSize: screenSize),
-            LoginUserButton(screenSize: screenSize),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const ProfileBox(),
+              const ProfileBox(),
+              SignUpUserButton(screenSize: screenSize),
+              ConfirmUserButton(screenSize: screenSize),
+              LoginUserButton(screenSize: screenSize),
+            ],
+          ),
+        ],
       ),
     );
   }
