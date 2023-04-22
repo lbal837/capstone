@@ -35,6 +35,7 @@ class Patient {
     );
   }
 
+  // For debugging purposes
   @override
   String toString() {
     return 'Patient(userId: $userId, avatarImage: $avatarImage, fullName: $fullName, '
