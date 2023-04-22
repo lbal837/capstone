@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
 import 'package:http/http.dart' as http;
@@ -23,6 +24,8 @@ class PatientDefaultRepository extends PatientRepository {
       final Patient patient = Patient.fromJson(jsonResponse['data']);
       return patient;
     } else {
+      debugPrint(
+          'Error: status code ${response.statusCode}, response body: ${response.body}');
       throw Exception('Failed to load data');
     }
   }
@@ -42,6 +45,8 @@ class PatientDefaultRepository extends PatientRepository {
       }
       return patients;
     } else {
+      debugPrint(
+          'Error: status code ${response.statusCode}, response body: ${response.body}');
       throw Exception('Failed to load data');
     }
   }
