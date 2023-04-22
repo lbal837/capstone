@@ -10,14 +10,24 @@ class _PatientInfoPageState extends State<PatientPage> {
   @override
   void initState() {
     super.initState();
-    final PatientDefaultRepository patientRepository = PatientDefaultRepository();
+    final PatientDefaultRepository patientRepository =
+        PatientDefaultRepository();
+
+    // Example of accessing a single patient, converting to string is for debugging purposes.
     futurePatient = patientRepository.fetchPatient('BHL33M');
 
     futurePatient.then((patient) {
       debugPrint(patient.toString());
     });
 
+    // Example of accessing all patients in the repository.
     futurePatients = patientRepository.fetchAllPatients();
+
+    futurePatients.then((patients) {
+      for (final Patient patient in patients) {
+        debugPrint(patient.toString());
+      }
+    });
   }
 
   @override
