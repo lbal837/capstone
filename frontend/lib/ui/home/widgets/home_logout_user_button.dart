@@ -17,12 +17,12 @@ class LogoutUserButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           userService.signOut();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    const MyHomePage(title: 'Successfully logged out')),
-          );
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MyHomePage(title: 'Successfully logged out')),
+              (Route<dynamic> route) => false);
         },
         child: const Text(
           'Logout',
