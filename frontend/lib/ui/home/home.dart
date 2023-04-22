@@ -31,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 const ProfileBox(),
                 const ProfileBox(),
-                SignUpUserButton(screenSize: screenSize),
-                ConfirmUserButton(screenSize: screenSize),
+                if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
+                if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
                 if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
                 if (isLoggedIn)
                   LogoutUserButton(
