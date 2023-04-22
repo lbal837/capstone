@@ -69,6 +69,7 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
     );
 
     void showSnackBar() {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 

@@ -88,6 +88,7 @@ class LoginScreenState extends State<LoginScreen> {
     );
 
     void showSnackBar() {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
