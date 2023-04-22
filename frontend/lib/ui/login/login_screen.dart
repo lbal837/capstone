@@ -5,6 +5,7 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home.dart';
+import 'package:frontend/ui/login/widgets/login_go_back_button.dart';
 import 'package:frontend/ui/login/widgets/login_user_button.dart';
 import 'package:frontend/ui/login/widgets/login_user_email.dart';
 import 'package:frontend/ui/login/widgets/login_user_password.dart';
@@ -68,18 +69,19 @@ class LoginScreenState extends State<LoginScreen> {
           if (_user.hasAccess) {
             Navigator.pop(context);
             if (!_user.confirmed) {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ConfirmationScreen(
-                        email: _user.email ?? 'no email found')),
-              );
+              await Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ConfirmationScreen(
+                          email: _user.email ?? 'no email found')),
+                  (Route<dynamic> route) => false);
             } else {
-              await Navigator.push(
+              await Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const MyHomePage(title: 'Login Successful')));
+                          const MyHomePage(title: 'Login Successful')),
+                  (Route<dynamic> route) => false);
             }
           }
         },
@@ -107,6 +109,7 @@ class LoginScreenState extends State<LoginScreen> {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Login'),
+                automaticallyImplyLeading: false,
               ),
               body: Builder(
                 builder: (BuildContext context) {
@@ -116,7 +119,12 @@ class LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         LoginUserEmail(widget: widget, user: _user),
                         LoginUserPassword(user: _user),
-                        LoginUserButton(onPressed: () => submit(context)),
+                        LoginSubmitButton(onPressed: () => submit(context)),
+                        LoginGoBackButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        )
                       ],
                     ),
                   );

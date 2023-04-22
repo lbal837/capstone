@@ -16,10 +16,8 @@ class LoginUserButton extends StatelessWidget {
       width: screenSize.width,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-              (Route<dynamic> route) => false);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()));
         },
         child: const Text(
           'Login',
