@@ -3,6 +3,7 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
+import 'package:frontend/ui/home/widgets/home_logout_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
 
@@ -33,6 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 SignUpUserButton(screenSize: screenSize),
                 ConfirmUserButton(screenSize: screenSize),
                 if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
+                if (isLoggedIn)
+                  LogoutUserButton(
+                      userService: userService, screenSize: screenSize),
               ],
             );
           },
