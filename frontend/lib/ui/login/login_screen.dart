@@ -115,7 +115,7 @@ class LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         LoginUserEmail(widget: widget, user: _user),
                         LoginUserPassword(user: _user),
-                        LoginSubmitButton(onPressed: () => submit(context)),
+                        LoginUserButton(onPressed: () => submit(context)),
                       ],
                     ),
                   );
