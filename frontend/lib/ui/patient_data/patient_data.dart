@@ -5,15 +5,19 @@ import 'package:frontend/ui/patient_data/widgets/patient_data_profile_header.dar
 
 class _PatientInfoPageState extends State<PatientPage> {
   late Future<Patient> futurePatient;
+  late Future<List<Patient>> futurePatients;
 
   @override
   void initState() {
-    //we may have a problem with reloading data w init
     super.initState();
-    final PatientDefaultRepository patientRepository =
-        PatientDefaultRepository();
-    futurePatient = patientRepository
-        .fetchPatient('BHL33M'); //we could put user id here i think
+    final PatientDefaultRepository patientRepository = PatientDefaultRepository();
+    futurePatient = patientRepository.fetchPatient('BHL33M');
+
+    futurePatient.then((patient) {
+      debugPrint(patient.toString());
+    });
+
+    futurePatients = patientRepository.fetchAllPatients();
   }
 
   @override
