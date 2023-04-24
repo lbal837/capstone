@@ -1,4 +1,5 @@
 const ENDPOINT = "***REMOVED***";
+const APIKEY = "***REMOVED***";
 
 /**
  * Sends patient data to the specified endpoint.
@@ -10,7 +11,10 @@ const ENDPOINT = "***REMOVED***";
 export async function sendDataToEndpoint(data, endpoint = ENDPOINT, fetchFn = fetch) {
     await fetchFn(endpoint, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json",
+            "x-api-key": APIKEY
+        },
         body: JSON.stringify(data),
     });
 }

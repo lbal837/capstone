@@ -34,4 +34,12 @@ class Patient {
       sleepStatus: json['SleepStatus'],
     );
   }
+
+  // For debugging purposes
+  @override
+  String toString() {
+    return 'Patient(userId: $userId, avatarImage: $avatarImage, fullName: $fullName, '
+        'longitude: $longitude, latitude: $latitude, dateTime: $dateTime, '
+        'heartRate: $heartRate, steps: $steps, sleepStatus: $sleepStatus)';
+  }
 }
