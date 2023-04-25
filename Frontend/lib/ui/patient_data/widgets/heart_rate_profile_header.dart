@@ -13,7 +13,7 @@ class HeartRateWidget extends StatelessWidget {
           Container(
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 243, 0, 105),
+                color: const Color.fromARGB(255, 243, 0, 105),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const Icon(Icons.monitor_heart, size: 70)),
