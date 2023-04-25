@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HeartRateWidget extends StatelessWidget {
-  const HeartRateWidget({Key? key, required String? this.heartrate})
-      : super(key: key);
-  final heartrate;
+  const HeartRateWidget({Key? key, required this.heartRate}) : super(key: key);
+  final String? heartRate;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class HeartRateWidget extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10.0),
             alignment: Alignment.center,
-            child: Text(heartrate),
+            child: Text(heartRate!),
           ),
         ],
       ),
