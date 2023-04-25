@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({Key? key, required String? this.name}) : super(key: key);
-  final name;
+  const ProfileHeader({Key? key, required this.name}) : super(key: key);
+  final String? name;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ProfileHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(5.0),
           alignment: Alignment.center,
-          child: Text(name),
+          child: Text(name!),
         ),
         Container(
           padding: const EdgeInsets.all(10.0),

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class GPSWidget extends StatelessWidget {
   const GPSWidget({
     Key? key,
-    required String? this.latitude,
-    required String? this.longitude,
+    required this.latitude,
+    required this.longitude,
   }) : super(key: key);
-  final latitude;
-  final longitude;
+  final String? latitude;
+  final String? longitude;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class GPSWidget extends StatelessWidget {
             padding: const EdgeInsets.only(
                 left: 10.0, top: 10.0, right: 0.1, bottom: 10.0),
             alignment: Alignment.center,
-            child: Text(latitude),
+            child: Text(latitude!),
           ),
           Container(
             padding: const EdgeInsets.only(
@@ -42,7 +42,7 @@ class GPSWidget extends StatelessWidget {
             padding: const EdgeInsets.only(
                 left: 5.0, top: 10.0, right: 10.0, bottom: 10.0),
             alignment: Alignment.center,
-            child: Text(longitude),
+            child: Text(longitude!),
           ),
         ],
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Sleep extends StatelessWidget {
-  const Sleep({Key? key, required String? this.sleepStatus}) : super(key: key);
-  final sleepStatus;
+  const Sleep({Key? key, required this.sleepStatus}) : super(key: key);
+  final String? sleepStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Sleep extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10.0),
             alignment: Alignment.center,
-            child: Text(sleepStatus),
+            child: Text(sleepStatus!),
           ),
         ],
       ),

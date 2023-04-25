@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StepCountWidget extends StatelessWidget {
-  const StepCountWidget({Key? key, required double? this.stepCount})
-      : super(key: key);
-  final stepCount;
+  const StepCountWidget({Key? key, required this.stepCount}) : super(key: key);
+  final double? stepCount;
 
   @override
   Widget build(BuildContext context) {
