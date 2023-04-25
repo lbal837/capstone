@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/ui/home/home.dart';
 
 void main() {
+  WidgetsFlutterBinding
+      .ensureInitialized(); //i had a binding error so i added this
   runApp(const MyApp());
 }
 
