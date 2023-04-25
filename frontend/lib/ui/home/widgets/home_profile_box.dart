@@ -6,7 +6,7 @@ class ProfileBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       //inkwell should make card clickable
       onTap: () {
         Navigator.push(
