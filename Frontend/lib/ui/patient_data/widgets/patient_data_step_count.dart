@@ -13,7 +13,7 @@ class StepCountWidget extends StatelessWidget {
           Container(
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 166, 0, 243),
+                color: const Color.fromARGB(255, 166, 0, 243),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const Icon(Icons.directions_walk, size: 70)),

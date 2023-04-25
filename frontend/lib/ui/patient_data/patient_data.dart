@@ -11,7 +11,7 @@ class _PatientInfoPageState extends State<PatientPage> {
   //late Future<Patient> futurePatient;
   //late Future<List<Patient>> futurePatients;
   Patient? patient;
-  var isLoaded = false;
+  bool isLoaded = false;
 
   @override
   void initState() {
@@ -51,7 +51,13 @@ class _PatientInfoPageState extends State<PatientPage> {
         ),
       );
     } else {
-      return Scaffold();
+      return Scaffold(
+          appBar: AppBar(
+            title: const Text('Data Page'),
+          ),
+          body: const Center(
+            child: CircularProgressIndicator(),
+          ));
     }
   }
 }
