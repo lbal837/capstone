@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/main.dart';
 import 'package:frontend/ui/home/home.dart';
+import 'package:frontend/ui/patient_data/patient_data.dart';
 
 void main() {
   group('MyApp Widget Tests', () {
@@ -20,6 +21,15 @@ void main() {
 
       final MyHomePage myHomePage = tester.firstWidget(find.byType(MyHomePage));
       expect(myHomePage.title, 'LifeSavers');
+    });
+
+    testWidgets('MyApp should display PatientPage with the correct title',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+
+      final PatientPage patientPage =
+          tester.firstWidget(find.byType(PatientPage));
+      expect(patientPage.title, 'LifeSavers');
     });
   });
 }
