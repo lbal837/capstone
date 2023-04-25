@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; //this is a card
+import 'package:flutter/material.dart'; //this is a card ...
 
 class HeartRateWidget extends StatelessWidget {
   const HeartRateWidget({Key? key, required String? this.heartrate})
