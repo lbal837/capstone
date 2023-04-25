@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/main.dart';
 import 'package:frontend/ui/home/home.dart';
-import 'package:frontend/ui/patient_data/patient_data.dart';
 
 void main() {
   group('MyApp Widget Tests', () {

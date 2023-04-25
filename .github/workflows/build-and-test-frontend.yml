@@ -34,6 +34,11 @@ jobs:
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
           flutter pub get
 
+      - name: Build project
+        run: |
+          cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
+          flutter build 
+
       - name: Run tests
         run: |
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
