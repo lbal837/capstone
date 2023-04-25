@@ -41,6 +41,7 @@ jobs:
 
       - name: Run tests
         run: |
+          find . -type f -name "*.dart"
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
           flutter test
 
