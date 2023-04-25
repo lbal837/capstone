@@ -17,7 +17,7 @@ class GPSWidget extends StatelessWidget {
           Container(
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 0, 57, 243),
+                color: const Color.fromARGB(255, 0, 57, 243),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const Icon(Icons.location_on, size: 70)),
@@ -36,7 +36,7 @@ class GPSWidget extends StatelessWidget {
             padding: const EdgeInsets.only(
                 left: 0.1, top: 10.0, right: 1.0, bottom: 10.0),
             alignment: Alignment.center,
-            child: Text(','),
+            child: const Text(','),
           ),
           Container(
             padding: const EdgeInsets.only(

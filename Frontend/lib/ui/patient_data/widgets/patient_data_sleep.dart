@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SleepWidget extends StatelessWidget {
-  const SleepWidget({Key? key, required String? this.sleepStatus})
-      : super(key: key);
+class Sleep extends StatelessWidget {
+  const Sleep({Key? key, required String? this.sleepStatus}) : super(key: key);
   final sleepStatus;
 
   @override
