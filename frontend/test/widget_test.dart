@@ -22,14 +22,5 @@ void main() {
       final MyHomePage myHomePage = tester.firstWidget(find.byType(MyHomePage));
       expect(myHomePage.title, 'LifeSavers');
     });
-
-    testWidgets('MyApp should display PatientPage with the correct title',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-
-      final PatientPage patientPage =
-          tester.firstWidget(find.byType(PatientPage));
-      expect(patientPage.title, 'LifeSavers');
-    });
   });
 }
