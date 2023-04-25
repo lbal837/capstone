@@ -34,8 +34,14 @@ jobs:
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
           flutter pub get
 
+      - name: Build project
+        run: |
+          cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
+          flutter build 
+
       - name: Run tests
         run: |
+          find . -type f -name "*.dart"
           cd ${{ env.FLUTTER_PROJECT_DIRECTORY }}
           flutter test
 

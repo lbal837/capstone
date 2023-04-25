@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  const ProfileHeader({Key? key, required this.name}) : super(key: key);
+  final String? name;
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +17,13 @@ class ProfileHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(5.0),
           alignment: Alignment.center,
-          child: const Text('Patient Name/ Number'),
+          child: Text(name!),
         ),
         Container(
           padding: const EdgeInsets.all(10.0),
           alignment: Alignment.center,
-          child: const Text('Status'),
+          child:
+              const Text('[insert status]'), //i dont think we have status atm
         ),
       ],
     );
