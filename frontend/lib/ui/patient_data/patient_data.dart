@@ -46,7 +46,7 @@ class _PatientInfoPageState extends State<PatientPage> {
             GPSWidget(
                 latitude: patient?.latitude, longitude: patient?.longitude),
             StepCountWidget(stepCount: patient?.steps),
-            SleepWidget(sleepStatus: patient?.sleepStatus)
+            SleepWidget(sleepStatus: patient?.sleepStatus),
           ],
         ),
       );
