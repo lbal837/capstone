@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HeartRateWidget extends StatelessWidget {
-  const HeartRateWidget({Key? key, required this.heartRate}) : super(key: key);
+class HeartRateProfileHeader extends StatelessWidget {
+  const HeartRateProfileHeader({Key? key, required this.heartRate}) : super(key: key);
   final String? heartRate;
 
   @override
