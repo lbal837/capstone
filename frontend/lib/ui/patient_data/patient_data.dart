@@ -1,33 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/patient_repository.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/ui/patient_data/widgets/heart_rate_profile_header.dart';
+import 'package:frontend/ui/patient_data/widgets/patient_data_location.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_profile_header.dart';
+import 'package:frontend/ui/patient_data/widgets/patient_data_sleep.dart';
+import 'package:frontend/ui/patient_data/widgets/patient_data_step_count.dart';
 
 class _PatientInfoPageState extends State<PatientPage> {
-  late Future<Patient> futurePatient;
+  //late Future<Patient> futurePatient;
+  //late Future<List<Patient>> futurePatients;
+  Patient? patient;
+  bool isLoaded = false;
 
   @override
   void initState() {
-    //we may have a problem with reloading data w init
     super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
     final PatientDefaultRepository patientRepository =
         PatientDefaultRepository();
-    futurePatient = patientRepository
-        .fetchPatient('BHL33M'); //we could put user id here i think
+    patient = await patientRepository.fetchPatient('BHL33M');
+    if (patient != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Data Page'),
-      ),
-      body: ListView(
-        children: const [
-          ProfileHeader(),
-        ],
-      ),
-    );
+    if (isLoaded) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Data Page'),
+        ),
+        body:
+            //final patient_name = patient.fullName,
+            ListView(
+          children: <Widget>[
+            ProfileHeader(name: patient?.fullName),
+            HeartRateWidget(heartRate: patient?.heartRate.toString()),
+            GPSWidget(
+                latitude: patient?.latitude, longitude: patient?.longitude),
+            StepCountWidget(stepCount: patient?.steps),
+            Sleep(sleepStatus: patient?.sleepStatus),
+          ],
+        ),
+      );
+    } else {
+      return Scaffold(
+          appBar: AppBar(
+            title: const Text('Data Page'),
+          ),
+          body: const Center(
+            child: CircularProgressIndicator(),
+          ));
+    }
   }
 }
 
