@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
+import 'package:frontend/data/patient_repository.dart';
+import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
@@ -9,6 +11,25 @@ import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
+  List<Patient> patientList = [];
+  bool isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    final PatientDefaultRepository patientRepository =
+        PatientDefaultRepository();
+    patientList = await patientRepository.fetchAllPatients();
+    if (patientList.isNotEmpty) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
