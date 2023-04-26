@@ -1,4 +1,5 @@
 const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production/SendPatientData";
+const APIKEY = "6iARIh8AkjalWSdsCbX084r9wJtq2Sd93MlLy3NX";
 
 /**
  * Sends patient data to the specified endpoint.
@@ -10,7 +11,10 @@ const ENDPOINT = "https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Pr
 export async function sendDataToEndpoint(data, endpoint = ENDPOINT, fetchFn = fetch) {
     await fetchFn(endpoint, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json",
+            "x-api-key": APIKEY
+        },
         body: JSON.stringify(data),
     });
 }

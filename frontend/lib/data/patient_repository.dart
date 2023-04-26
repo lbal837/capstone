@@ -1,30 +1,52 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/secrets.dart';
 import 'package:http/http.dart' as http;
 
 abstract class PatientRepository {
   Future<Patient> fetchPatient(String id);
+
+  Future<List<Patient>> fetchAllPatients();
 }
 
 class PatientDefaultRepository extends PatientRepository {
-  final String baseUrl =
-      'https://sog1p6r867.execute-api.ap-southeast-2.amazonaws.com/Production';
-
   @override
   Future<Patient> fetchPatient(String id) async {
-    final response =
-        await http.get(Uri.parse('$baseUrl/GetPatientData?UserId=$id'));
+    final response = await http
+        .get(Uri.parse('$apiEndpoint/GetPatientData?UserId=$id'), headers: {
+      'x-api-key': apiKey,
+    });
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
       final Patient patient = Patient.fromJson(jsonResponse['data']);
       return patient;
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
+      debugPrint(
+          'Error: status code ${response.statusCode}, response body: ${response.body}');
+      throw Exception('Failed to load data');
+    }
+  }
+
+  @override
+  Future<List<Patient>> fetchAllPatients() async {
+    final response =
+        await http.get(Uri.parse('$apiEndpoint/GetAllPatientData'), headers: {
+      'x-api-key': apiKey,
+    });
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+      final List<Patient> patients = [];
+      for (final patient in jsonResponse['data']) {
+        patients.add(Patient.fromJson(patient));
+      }
+      return patients;
+    } else {
+      debugPrint(
+          'Error: status code ${response.statusCode}, response body: ${response.body}');
       throw Exception('Failed to load data');
     }
   }

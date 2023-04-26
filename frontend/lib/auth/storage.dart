@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Extend CognitoStorage with Shared Preferences to persist account
 /// login sessions
 class Storage extends CognitoStorage {
   final SharedPreferences _prefs;
+
   Storage(this._prefs);
 
   @override
@@ -19,14 +21,14 @@ class Storage extends CognitoStorage {
 
       return json.decode(item);
     } on Object catch (e) {
-      print(e);
+      debugPrint(e as String?);
 
       return null;
     }
   }
 
   @override
-  Future setItem(String key, value) async {
+  Future setItem(String key, dynamic value) async {
     await _prefs.setString(key, json.encode(value));
     return getItem(key);
   }
@@ -49,14 +51,14 @@ class Storage extends CognitoStorage {
 
 class MemoryStorage extends CognitoStorage {
   @override
-  Future<dynamic> setItem(String key, value) async {
+  Future<dynamic> setItem(String key, dynamic value) async {
     _dataMemory[key] = value;
     return _dataMemory[key];
   }
 
   @override
   Future<dynamic> getItem(String key) async {
-    var item = _dataMemory[key];
+    final item = _dataMemory[key];
     if (item != null) {
       return item;
     }

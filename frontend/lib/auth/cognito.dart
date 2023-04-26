@@ -1,8 +1,7 @@
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+import 'package:flutter/cupertino.dart';
 
 class Cognito {
-  final String _userPoolId = 'ap-southeast-2_ka6kEdifi';
-  final String _appClientId = '51olflpcem5i0ffunuhg7k6165';
   final CognitoUserPool _userPool;
 
   Cognito()
@@ -13,9 +12,9 @@ class Cognito {
       final userAttributes = [AttributeArg(name: 'email', value: email)];
       final result = await _userPool.signUp(email, password,
           userAttributes: userAttributes);
-      print('Sign up successful: ${result.userConfirmed}');
+      debugPrint('Sign up successful: ${result.userConfirmed}');
     } catch (e) {
-      print('Failed to sign up: $e');
+      debugPrint('Failed to sign up: $e');
     }
   }
 
@@ -27,9 +26,9 @@ class Cognito {
 
     try {
       final session = await cognitoUser.authenticateUser(authDetails);
-      print('Sign in successful: ${session?.isValid()}');
+      debugPrint('Sign in successful: ${session?.isValid()}');
     } catch (e) {
-      print('Failed to sign in: $e');
+      debugPrint('Failed to sign in: $e');
     }
   }
 }

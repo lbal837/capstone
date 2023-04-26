@@ -114,6 +114,12 @@ class UserService {
     return _session!.isValid();
   }
 
+  // Check if user is logged in
+  Future<bool> isLoggedIn() async {
+    await init();
+    return checkAuthenticated();
+  }
+
   /// Sign up user
   Future<User> signUp(String email, String password, String name) async {
     CognitoUserPoolData data;
