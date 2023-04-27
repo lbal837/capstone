@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //if (isLoaded) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 //for (Patient patient in patientList)
                 //Text(
                 //patient.fullName,
