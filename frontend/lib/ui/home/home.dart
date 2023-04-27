@@ -47,16 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
             }
             final bool isLoggedIn = snapshot.data ?? false;
             debugPrint(isLoggedIn.toString());
-            //if (isLoaded) {
+            if (isLoaded) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                //for (Patient patient in patientList)
-                //Text(
-                //patient.fullName,
-                //),
-                const ProfileBox(),
-                const ProfileBox(),
+                for (Patient patient in patientList)
+                // Text(
+                // patient.fullName,
+                ProfileBox(name: patient.fullName, id: patient.userId),
+                // const ProfileBox(),
+                // const ProfileBox(),
                 if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
                 if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
                 if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
@@ -65,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       userService: userService, screenSize: screenSize),
               ],
             );
-            //} else {
-            //  return const CircularProgressIndicator();
-            //}
+            } else {
+             return const CircularProgressIndicator();
+            }
           },
         ),
       ),
