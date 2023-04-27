@@ -41,7 +41,7 @@ class _PatientInfoPageState extends State<PatientPage> {
             //final patient_name = patient.fullName,
             ListView(
           children: <Widget>[
-            ProfileHeader(name: patient?.fullName),
+            ProfileHeader(name: patient?.fullName, picture: patient?.avatarImage),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
                 latitude: patient?.latitude, longitude: patient?.longitude),
