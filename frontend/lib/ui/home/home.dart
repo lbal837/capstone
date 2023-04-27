@@ -38,8 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: FutureBuilder<bool>(
+      body: ListView(
+        children: [FutureBuilder<bool>(
           future: userService.isLoggedIn(),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
              return const CircularProgressIndicator();
             }
           },
-        ),
+        ),], 
       ),
     );
   }
