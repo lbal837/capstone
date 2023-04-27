@@ -2,18 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:frontend/ui/patient_data/patient_data.dart';
 
 class ProfileBox extends StatelessWidget {
-  const ProfileBox({super.key});
+  const ProfileBox({
+    Key? key,
+    required this.name,
+    required this.id,
+  }) : super(key: key);
+  final String? name;
+  final String? id;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       //inkwell should make card clickable
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const PatientPage(title: 'LifeSavers')),
-        );
+        if (id != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    PatientPage(title: 'LifeSavers', userid: id!)),
+          );
+          }
       },
       child: Card(
         child: Row(
@@ -28,7 +37,7 @@ class ProfileBox extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
-              child: const Text('Patient Name/ Number'),
+              child: Text(name!),
             ),
             Container(
               padding: const EdgeInsets.all(10.0),
