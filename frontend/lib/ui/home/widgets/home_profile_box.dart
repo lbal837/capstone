@@ -15,11 +15,14 @@ class ProfileBox extends StatelessWidget {
     return InkWell(
       //inkwell should make card clickable
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const PatientPage(title: 'LifeSavers')),
-        );
+        if (id != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    PatientPage(title: 'LifeSavers', userid: id!)),
+          );
+          }
       },
       child: Card(
         child: Row(

@@ -22,7 +22,7 @@ class _PatientInfoPageState extends State<PatientPage> {
   Future<void> getData() async {
     final PatientDefaultRepository patientRepository =
         PatientDefaultRepository();
-    patient = await patientRepository.fetchPatient('BHL33M');
+    patient = await patientRepository.fetchPatient(widget.userid!);
     if (patient != null) {
       setState(() {
         isLoaded = true;
@@ -63,9 +63,10 @@ class _PatientInfoPageState extends State<PatientPage> {
 }
 
 class PatientPage extends StatefulWidget {
-  const PatientPage({super.key, required this.title});
+  const PatientPage({super.key, required this.title, this.userid});
 
   final String title;
+  final String? userid;
 
   @override
   State<PatientPage> createState() => _PatientInfoPageState();
