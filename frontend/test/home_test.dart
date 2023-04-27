@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/patient_repository.dart';
+import 'package:frontend/main.dart';
+import 'package:frontend/ui/home/home.dart';
 import 'package:mockito/annotations.dart';
 
 @GenerateMocks([UserService])
@@ -8,8 +10,11 @@ import 'package:mockito/annotations.dart';
 class Mocks {}
 
 void main() {
-  testWidgets('Passing test', (WidgetTester tester) async {
-    const pass = true;
-    expect(pass, true);
+  testWidgets('MyApp should display MyHomePage with the correct title',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    final MyHomePage myHomePage = tester.firstWidget(find.byType(MyHomePage));
+    expect(myHomePage.title, 'LifeSavers');
   });
 }
