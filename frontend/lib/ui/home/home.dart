@@ -47,11 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
             }
             final bool isLoggedIn = snapshot.data ?? false;
             debugPrint(isLoggedIn.toString());
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const ProfileBox(),
-                const ProfileBox(),
+              children: [
+                for (Patient patient in patientList)
+                  Text(
+                    patient.fullName,
+                  ),
+
+                //const ProfileBox(),
                 if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
                 if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
                 if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
