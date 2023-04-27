@@ -47,24 +47,27 @@ class _MyHomePageState extends State<MyHomePage> {
             }
             final bool isLoggedIn = snapshot.data ?? false;
             debugPrint(isLoggedIn.toString());
-
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (Patient patient in patientList)
-                  Text(
-                    patient.fullName,
-                  ),
-
-                //const ProfileBox(),
-                if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
-                if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
-                if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
-                if (isLoggedIn)
-                  LogoutUserButton(
-                      userService: userService, screenSize: screenSize),
-              ],
-            );
+            if (isLoaded) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (Patient patient in patientList)
+                    Text(
+                      patient.fullName,
+                    ),
+                  const ProfileBox(),
+                  const ProfileBox(),
+                  if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
+                  if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
+                  if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
+                  if (isLoggedIn)
+                    LogoutUserButton(
+                        userService: userService, screenSize: screenSize),
+                ],
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
           },
         ),
       ),
