@@ -47,14 +47,5 @@ export default function getCurrentDateInNZST(date) {
     const nzMilliseconds = date.getTime() + (nzCurrentOffset * 60 * 1000);
     const nzDate = new Date(nzMilliseconds);
 
-    let currentDate = nzDate.toLocaleString('en-NZ', {
-        timeZone: 'UTC',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
-    return currentDate.replace(/[\u00A0\u202F]/g, ' ');
+    return nzDate.toISOString();
 }
