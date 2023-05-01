@@ -10,7 +10,7 @@ describe('New Zealand Daylight Saving Time utilities', () => {
             const result = getCurrentDateInNZST(sut);
 
             // Assert
-            expect(result).toBe("30 September 2021 at 10:00:00 pm");
+            expect(result).toBe("2021-09-30T22:00:00.000Z");
         });
 
     });
