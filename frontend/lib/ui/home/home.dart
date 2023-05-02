@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 for (Patient patient in patientList)
                 // Text(
                 // patient.fullName,
-                ProfileBox(name: patient.fullName, id: patient.userId),
+                ProfileBox(name: patient.fullName, id: patient.userId, picture: patient.avatarImage),
                 // const ProfileBox(),
                 // const ProfileBox(),
                 if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),

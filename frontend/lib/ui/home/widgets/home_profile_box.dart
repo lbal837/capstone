@@ -6,9 +6,11 @@ class ProfileBox extends StatelessWidget {
     Key? key,
     required this.name,
     required this.id,
+    required this.picture,
   }) : super(key: key);
   final String? name;
   final String? id;
+  final String? picture;
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +24,23 @@ class ProfileBox extends StatelessWidget {
                 builder: (context) =>
                     PatientPage(title: 'LifeSavers', userid: id!)),
           );
-          }
+        }
       },
       child: Card(
         child: Row(
           children: [
-            Container(
-                padding: const EdgeInsets.all(30.0),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: const Icon(Icons.account_circle, size: 70)),
+            Container(  
+              padding: const EdgeInsets.all(30.0),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: CircleAvatar(
+                  radius: 45, // Image radius
+                  backgroundImage: NetworkImage(
+                    picture!,
+                  )),
+            ), //size: 70)),
             Container(
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
