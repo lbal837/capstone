@@ -1,0 +1,2 @@
+Essentially any lambda functions that exceed a storage limit of 10MB can't be edited through the built-in editor. Hence,
+for documentation and accessibility we've stored all the lambda functions which are above 10MB in our local repository.
