@@ -8,4 +8,6 @@ for documentation and accessibility we've stored all the lambda functions which 
 To modify and use the lambda functions, edit them in their respective folder, then create a zip file, for
 example `AddCaregiverToRDS.zip`, which will hold all the folders and files in the `AddCareGiverToRDS` folder.
 
+Ensure you run `npm i` in the corresponding directory too.
+
 The upload the zip file into the respective lambda function.
