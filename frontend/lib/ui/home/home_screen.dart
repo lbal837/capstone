@@ -3,11 +3,8 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/patient_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
-import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
-import 'package:frontend/ui/home/widgets/home_logout_user_button.dart';
-import 'package:frontend/ui/home/widgets/home_profile_box.dart';
-import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
+import 'package:frontend/ui/home/widgets/home_auth_buttons_screen.dart';
+import 'package:frontend/ui/home/widgets/home_patients_portal_screen.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
@@ -39,37 +36,29 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView(
-        children: [FutureBuilder<bool>(
-          future: userService.isLoggedIn(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
-            final bool isLoggedIn = snapshot.data ?? false;
-            debugPrint(isLoggedIn.toString());
-            if (isLoaded) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                for (Patient patient in patientList)
-                // Text(
-                // patient.fullName,
-                ProfileBox(name: patient.fullName, id: patient.userId, picture: patient.avatarImage),
-                // const ProfileBox(),
-                // const ProfileBox(),
-                if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
-                if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
-                if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
-                if (isLoggedIn)
-                  LogoutUserButton(
-                      userService: userService, screenSize: screenSize),
-              ],
-            );
-            } else {
-             return const CircularProgressIndicator();
-            }
-          },
-        ),], 
+        children: [
+          FutureBuilder<bool>(
+            future: userService.isLoggedIn(),
+            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+              final bool isLoggedIn = snapshot.data ?? false;
+              debugPrint(isLoggedIn.toString());
+
+              if (isLoggedIn) {
+                return PatientPortalScreen(
+                  userService: userService,
+                  patientList: patientList,
+                  isLoggedIn: isLoggedIn,
+                  isLoaded: isLoaded,
+                );
+              } else {
+                return AuthButtonsScreen(screenSize: screenSize);
+              }
+            },
+          ),
+        ],
       ),
     );
   }
