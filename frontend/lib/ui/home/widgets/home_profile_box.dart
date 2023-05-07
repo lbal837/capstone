@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/patient_data/patient_data.dart';
+import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 
 class ProfileBox extends StatelessWidget {
   const ProfileBox({
@@ -29,7 +29,7 @@ class ProfileBox extends StatelessWidget {
       child: Card(
         child: Row(
           children: [
-            Container(  
+            Container(
               padding: const EdgeInsets.all(30.0),
               decoration: BoxDecoration(
                 color: Colors.deepPurple,
