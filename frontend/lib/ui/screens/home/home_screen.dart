@@ -3,8 +3,10 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/patient_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/screens/home/widgets/home_auth_buttons_screen.dart';
-import 'package:frontend/ui/screens/home/widgets/home_patients_portal_screen.dart';
+import 'package:frontend/ui/screens/patients_portal/patients_portal_screen.dart';
+import 'package:frontend/ui/widgets/confirm_user_button.dart';
+import 'package:frontend/ui/widgets/login_user_button.dart';
+import 'package:frontend/ui/widgets/sign_up_user_button.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
@@ -54,7 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   isLoaded: isLoaded,
                 );
               } else {
-                return AuthButtonsScreen(screenSize: screenSize);
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SignUpUserButton(screenSize: screenSize),
+                    ConfirmUserButton(screenSize: screenSize),
+                    LoginUserButton(screenSize: screenSize),
+                  ],
+                );
               }
             },
           ),
