@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/home/home.dart';
+import 'package:frontend/ui/home/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding
