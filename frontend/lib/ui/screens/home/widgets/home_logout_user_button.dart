@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
-import 'package:frontend/ui/home/home_screen.dart';
+import 'package:frontend/ui/screens/home/home_screen.dart';
 
 class LogoutUserButton extends StatelessWidget {
   final UserService userService;
