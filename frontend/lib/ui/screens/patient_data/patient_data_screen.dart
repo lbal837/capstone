@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/patient_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/screens/patient_data/widgets/heart_rate_profile_header.dart';
+import 'package:frontend/ui/screens/patient_data/widgets/patient_data_heart_rate_profile_header.dart';
 import 'package:frontend/ui/screens/patient_data/widgets/patient_data_location.dart';
 import 'package:frontend/ui/screens/patient_data/widgets/patient_data_profile_header.dart';
 import 'package:frontend/ui/screens/patient_data/widgets/patient_data_sleep.dart';
@@ -41,7 +41,8 @@ class _PatientInfoPageState extends State<PatientPage> {
             //final patient_name = patient.fullName,
             ListView(
           children: <Widget>[
-            ProfileHeader(name: patient?.fullName, picture: patient?.avatarImage),
+            ProfileHeader(
+                name: patient?.fullName, picture: patient?.avatarImage),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
                 latitude: patient?.latitude, longitude: patient?.longitude),
