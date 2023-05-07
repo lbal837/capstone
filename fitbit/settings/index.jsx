@@ -3,7 +3,7 @@
  */
 import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
 
-function mySettings() {
+function mySettings(props) {
     return (
         <Page>
             <Section
