@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
-import 'package:frontend/ui/login/login_screen.dart';
+import 'package:frontend/ui/screens/confirmation/confirmation_screen.dart';
 
-class LoginUserEmail extends StatelessWidget {
-  const LoginUserEmail({
+class ConfirmUserEmail extends StatelessWidget {
+  const ConfirmUserEmail({
     super.key,
     required this.widget,
     required User user,
   }) : _user = user;
 
-  final LoginScreen widget;
+  final ConfirmationScreen widget;
   final User _user;
 
   @override
@@ -21,7 +21,7 @@ class LoginUserEmail extends StatelessWidget {
         decoration: const InputDecoration(
             hintText: 'example@inspire.my', labelText: 'Email'),
         keyboardType: TextInputType.emailAddress,
-        onSaved: (n) => _user.email = n,
+        onSaved: (n) => _user.email = n ?? '',
       ),
     );
   }

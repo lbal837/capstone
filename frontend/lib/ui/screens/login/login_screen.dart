@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirmation/confirmation_screen.dart';
-import 'package:frontend/ui/home/home_screen.dart';
-import 'package:frontend/ui/login/widgets/login_go_back_button.dart';
-import 'package:frontend/ui/login/widgets/login_user_button.dart';
-import 'package:frontend/ui/login/widgets/login_user_email.dart';
-import 'package:frontend/ui/login/widgets/login_user_password.dart';
+import 'package:frontend/ui/screens/confirmation/confirmation_screen.dart';
+import 'package:frontend/ui/screens/home/home_screen.dart';
+import 'package:frontend/ui/screens/login/widgets/login_go_back_button.dart';
+import 'package:frontend/ui/screens/login/widgets/login_user_email.dart';
+import 'package:frontend/ui/screens/login/widgets/login_user_password.dart';
+import 'package:frontend/ui/screens/login/widgets/login_user_submit_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, this.email}) : super(key: key);
@@ -119,7 +119,7 @@ class LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         LoginUserEmail(widget: widget, user: _user),
                         LoginUserPassword(user: _user),
-                        LoginUserButton(onPressed: () => submit(context)),
+                        LoginUserSubmitButton(onPressed: () => submit(context)),
                         LoginGoBackButton(
                           onPressed: () {
                             Navigator.pop(context);

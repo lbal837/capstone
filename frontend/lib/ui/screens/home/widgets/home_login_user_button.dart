@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/signup/signup_screen.dart';
+import 'package:frontend/ui/screens/login/login_screen.dart';
 
-class SignUpUserButton extends StatelessWidget {
-  const SignUpUserButton({
+class LoginUserButton extends StatelessWidget {
+  const LoginUserButton({
     super.key,
     required this.screenSize,
   });
@@ -16,13 +16,11 @@ class SignUpUserButton extends StatelessWidget {
       width: screenSize.width,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const SignUpScreen()),
-          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()));
         },
         child: const Text(
-          'Sign Up',
+          'Login',
           style: TextStyle(color: Colors.white),
         ),
       ),
