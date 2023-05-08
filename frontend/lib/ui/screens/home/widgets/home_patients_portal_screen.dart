@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/widgets/confirm_user_button.dart';
-import 'package:frontend/ui/widgets/login_user_button.dart';
-import 'package:frontend/ui/widgets/logout_user_button.dart';
-import 'package:frontend/ui/widgets/profile_box.dart';
-import 'package:frontend/ui/widgets/sign_up_user_button.dart';
+import 'package:frontend/ui/screens/home/widgets/home_confirm_user_button.dart';
+import 'package:frontend/ui/screens/home/widgets/home_login_user_button.dart';
+import 'package:frontend/ui/screens/home/widgets/home_logout_user_button.dart';
+import 'package:frontend/ui/screens/home/widgets/home_profile_box.dart';
+import 'package:frontend/ui/screens/home/widgets/home_sign_up_user_button.dart';
 
 class PatientPortalScreen extends StatelessWidget {
   final UserService userService;
