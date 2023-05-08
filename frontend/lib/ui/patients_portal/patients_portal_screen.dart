@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
-import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
-import 'package:frontend/ui/home/widgets/home_logout_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
-import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
+import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 
 class PatientPortalScreen extends StatelessWidget {
   final UserService userService;
@@ -38,9 +35,6 @@ class PatientPortalScreen extends StatelessWidget {
             id: patient.userId,
             picture: patient.avatarImage,
           ),
-        if (!isLoggedIn) SignUpUserButton(screenSize: screenSize),
-        if (!isLoggedIn) ConfirmUserButton(screenSize: screenSize),
-        if (!isLoggedIn) LoginUserButton(screenSize: screenSize),
         if (isLoggedIn)
           LogoutUserButton(userService: userService, screenSize: screenSize),
       ],
