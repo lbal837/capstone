@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/screens/signup/signup_screen.dart';
+import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 
-class SignUpUserButton extends StatelessWidget {
-  const SignUpUserButton({
+class ConfirmUserButton extends StatelessWidget {
+  const ConfirmUserButton({
     super.key,
     required this.screenSize,
   });
@@ -18,11 +18,11 @@ class SignUpUserButton extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SignUpScreen()),
+            MaterialPageRoute(builder: (context) => const ConfirmationScreen()),
           );
         },
         child: const Text(
-          'Sign Up',
+          'Confirm Account',
           style: TextStyle(color: Colors.white),
         ),
       ),
