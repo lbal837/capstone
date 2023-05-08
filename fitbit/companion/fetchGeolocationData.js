@@ -1,6 +1,6 @@
 import {geolocation} from "geolocation";
 
-export async function getGeoLocationData() {
+export async function fetchGeoLocationData() {
     return new Promise((resolve, reject) => {
         geolocation.getCurrentPosition(
             (position) => {
