@@ -8,6 +8,7 @@ import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
 import {fetchUserProfile} from "./fetchUserProfile";
 import {sendDataToEndpoint} from "./sendDataToEndpoint";
+import {fetchGeolocationData} from "./fetchGeolocationData";
 import {geolocation} from "geolocation";
 import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
 
@@ -97,10 +98,9 @@ async function fetchPatientData(userId, accessToken) {
         responseData.FullName = userProfile.user.fullName;
         responseData.AvatarImage = userProfile.user.avatar640;
 
-        geolocation.getCurrentPosition(function (position) {
-            responseData.Latitude = floatToDecimalString(position.coords.latitude, 6);
-            responseData.Longitude = floatToDecimalString(position.coords.longitude, 6);
-        })
+        const geoData = await fetchGeolocationData();
+        responseData.Latitude = geoData.latitude;
+        responseData.Longitude = geoData.longitude;
 
         console.log(responseData);
 
