@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ConfirmUserSubmitButton extends StatelessWidget {
-  const ConfirmUserSubmitButton({Key? key, required this.onPressed})
+class ConfirmUserButton extends StatelessWidget {
+  const ConfirmUserButton({Key? key, required this.onPressed})
       : super(key: key);
 
   final VoidCallback onPressed;

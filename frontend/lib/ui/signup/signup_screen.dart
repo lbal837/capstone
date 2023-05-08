@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/screens/confirmation/confirmation_screen.dart';
-import 'package:frontend/ui/screens/signup/widgets/signup_user_button.dart';
-import 'package:frontend/ui/screens/signup/widgets/signup_user_email.dart';
-import 'package:frontend/ui/screens/signup/widgets/signup_user_full_name.dart';
-import 'package:frontend/ui/screens/signup/widgets/signup_user_password.dart';
+import 'package:frontend/ui/confirmation/confirmation_screen.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_button.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_email.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_full_name.dart';
+import 'package:frontend/ui/signup/widgets/signup_user_password.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class LoginUserSubmitButton extends StatelessWidget {
+class LoginUserButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const LoginUserSubmitButton({Key? key, required this.onPressed}) : super(key: key);
+  const LoginUserButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
