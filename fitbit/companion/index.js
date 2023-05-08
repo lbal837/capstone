@@ -99,8 +99,8 @@ async function fetchPatientData(userId, accessToken) {
         responseData.AvatarImage = userProfile.user.avatar640;
 
         const geoData = await fetchGeolocationData();
-        responseData.Latitude = geoData.latitude;
-        responseData.Longitude = geoData.longitude;
+        responseData.Latitude = floatToDecimalString(geoData.latitude, 6);
+        responseData.Longitude = floatToDecimalString(geoData.longitude, 6);
 
         console.log(responseData);
 
