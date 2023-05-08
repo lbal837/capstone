@@ -8,8 +8,7 @@ import {settingsStorage} from "settings";
 import getCurrentDateInNZST from "./dateUtils";
 import {fetchUserProfile} from "./fetchUserProfile";
 import {sendDataToEndpoint} from "./sendDataToEndpoint";
-import {fetchGeolocationData} from "./fetchGeolocationData";
-import {geolocation} from "geolocation";
+import {fetchGeoLocationData} from "./fetchGeolocationData";
 import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
 
 // Getting and persisting the access token
@@ -98,9 +97,9 @@ async function fetchPatientData(userId, accessToken) {
         responseData.FullName = userProfile.user.fullName;
         responseData.AvatarImage = userProfile.user.avatar640;
 
-        const geoData = await fetchGeolocationData();
-        responseData.Latitude = floatToDecimalString(geoData.latitude, 6);
-        responseData.Longitude = floatToDecimalString(geoData.longitude, 6);
+        const geoData = await fetchGeoLocationData();
+        responseData.Latitude = geoData.latitude;
+        responseData.Longitude = geoData.longitude;
 
         console.log(responseData);
 
@@ -114,10 +113,6 @@ async function fetchPatientData(userId, accessToken) {
     } catch (err) {
         console.log("[REQUEST FAILED]: " + err);
     }
-}
-
-function floatToDecimalString(value, decimalPlaces) {
-    return value.toFixed(decimalPlaces);
 }
 
 // Listen for messages from the device and handle "combined_data" messages
