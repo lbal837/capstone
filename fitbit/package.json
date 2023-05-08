@@ -22,7 +22,8 @@
       "access_heart_rate",
       "access_sleep",
       "access_activity",
-      "access_location"
+      "access_location",
+      "access_internet"
     ],
     "buildTargets": [
       "atlas",
