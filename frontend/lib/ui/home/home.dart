@@ -9,7 +9,6 @@ import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_logout_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
-import 'package:frontend/ui/home/add_patient_page.dart';
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
   List<Patient> patientList = [];
@@ -77,15 +76,16 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const addPatientScreen(),
+              builder: (context) => const AddPatientScreen(),
             ));
         },
         elevation: 5,
         hoverElevation: 25,
         splashColor: Colors.purple,
         backgroundColor: Colors.deepPurple,
-        child: const Icon(Icons.add),
         heroTag: 'uniqueTag',
+        child: const Icon(Icons.add),
+        
         
       ),
     );
