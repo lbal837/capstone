@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 
-class addPatientScreen extends StatelessWidget {
-  const addPatientScreen({Key? key}) : super(key: key);
+class AddPatientScreen extends StatelessWidget {
+  const AddPatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Hero(tag: 'uniqueTag', child: Icon(Icons.save)),
+      appBar: AppBar(
+        title: const Text('Add Patient'),
+      ),
+      body: ListTile(
+        title: TextField(
+          cursorColor: Colors.grey,
+          decoration: InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none),
+              hintText: 'Search',
+              hintStyle: TextStyle(color: Colors.grey, fontSize: 18)),
+        ),
       ),
     );
   }
