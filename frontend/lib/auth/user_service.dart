@@ -31,6 +31,7 @@ class UserService {
 
   /// Get existing user from session with his/her attributes
   Future<User?> getCurrentUser() async {
+    await init();
     if (_cognitoUser == null || _session == null) {
       return null;
     }
@@ -48,6 +49,7 @@ class UserService {
 
   /// Retrieve user credentials -- for use with other AWS services
   Future<CognitoCredentials?> getCredentials() async {
+    await init();
     if (_cognitoUser == null || _session == null) {
       return null;
     }
@@ -114,7 +116,7 @@ class UserService {
     return _session!.isValid();
   }
 
-  // Check if user is logged in
+  /// Check if user is logged in
   Future<bool> isLoggedIn() async {
     await init();
     return checkAuthenticated();
