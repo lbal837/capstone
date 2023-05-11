@@ -7,7 +7,7 @@ import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
 import {minuteHistory} from "user-activity";
-//import {settingsStorage} from "settings";
+import {settingsStorage} from "settings";
 
 function zeroPad(i) {
     if (i < 10) {
@@ -40,11 +40,10 @@ clock.ontick = (evt) => {
   }
 
 // gets PatientId
-/*
 function getPatientId() {
     const user_id = settingsStorage.getItem("user_id");
     patientLabel.text = `${user_id}`;
-}*/
+}
 
 // Initialize the count variable for number of info sent to db
 let count = 0;
@@ -115,3 +114,4 @@ if (HeartRateSensor && sleep) {
 
 // Listen for messages from the companion app
 messaging.peerSocket.onmessage = handleMessage;
+getPatientId()
