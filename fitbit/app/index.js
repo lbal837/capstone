@@ -7,7 +7,7 @@ import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
 import {minuteHistory} from "user-activity";
-//import {settingsStorage} from "settings";
+import { username } from "../companion/index";
 
 function zeroPad(i) {
     if (i < 10) {
@@ -40,8 +40,7 @@ clock.ontick = (evt) => {
   }
 
 // gets PatientId
-//const user_id = settingsStorage.getItem("user_id");
-//patientLabel.text = `${user_id}`;
+patientLabel.text = `${username}`;
 
 // Initialize the count variable for number of info sent to db
 let count = 0;
