@@ -12,8 +12,25 @@ clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
+const timeText = document.getElementById("timeText");
+const patientLabel = document.getElementById("patientLabel")
 
-// Initialize the count variable
+// Update the <text> element every tick with the current time
+clock.ontick = (evt) => {
+    let today = evt.date;
+    let hours = today.getHours();
+    if (preferences.clockDisplay === "12h") {
+      // 12h format
+      hours = hours % 12 || 12;
+    } else {
+      // 24h format
+      hours = zeroPad(hours);
+    }
+    let mins = zeroPad(today.getMinutes());
+    timeLabel.text = `${hours}:${mins}`;
+  }
+
+// Initialize the count variable for number of info sent to db
 let count = 0;
 
 /**
