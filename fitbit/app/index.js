@@ -1,6 +1,7 @@
 // Import necessary modules
 import clock from "clock";
 import * as document from "document";
+import { preferences } from "user-settings";
 import {HeartRateSensor} from "heart-rate";
 import {me as appbit} from "appbit";
 import * as messaging from "messaging";
@@ -21,7 +22,7 @@ clock.granularity = "minutes";
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
 const timeLabel = document.getElementById("timeLabel");
-//const patientLabel = document.getElementById("patientLabel")
+const patientLabel = document.getElementById("patientLabel")
 
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => {
