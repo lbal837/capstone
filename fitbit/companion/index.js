@@ -136,5 +136,3 @@ messaging.peerSocket.addEventListener("message", (event) => {
         }
     }
 });
-
-export const username = userId;

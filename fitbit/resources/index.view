@@ -1,5 +1,5 @@
 <svg class="background">
   <text id = "timeLabel" />
-  
+  <text id = "patientLabel" />
   <text id = "testText" />
 </svg>
