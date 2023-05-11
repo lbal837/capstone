@@ -7,7 +7,7 @@ import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
 import {minuteHistory} from "user-activity";
-import { username } from "../companion/index";
+import {username} from "../companion/index";
 
 function zeroPad(i) {
     if (i < 10) {
@@ -22,7 +22,7 @@ clock.granularity = "minutes";
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
 const timeLabel = document.getElementById("timeLabel");
-//const patientLabel = document.getElementById("patientLabel")
+const patientLabel = document.getElementById("patientLabel")
 
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => {
@@ -40,7 +40,10 @@ clock.ontick = (evt) => {
   }
 
 // gets PatientId
-patientLabel.text = `${username}`;
+function displayUsername() {
+    patientLabel.text = `${username}`;
+}
+
 
 // Initialize the count variable for number of info sent to db
 let count = 0;
@@ -111,3 +114,4 @@ if (HeartRateSensor && sleep) {
 
 // Listen for messages from the companion app
 messaging.peerSocket.onmessage = handleMessage;
+displayUsername()

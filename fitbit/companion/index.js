@@ -10,7 +10,6 @@ import {fetchUserProfile} from "./fetchUserProfile";
 import {sendDataToEndpoint} from "./sendDataToEndpoint";
 import {fetchGeoLocationData} from "./fetchGeolocationData";
 import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
-export const username = userId;
 
 // Getting and persisting the access token
 settingsStorage.onchange = function (evt) {
@@ -137,3 +136,5 @@ messaging.peerSocket.addEventListener("message", (event) => {
         }
     }
 });
+
+export const username = userId;
