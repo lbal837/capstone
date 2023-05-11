@@ -10,6 +10,7 @@ import {fetchUserProfile} from "./fetchUserProfile";
 import {sendDataToEndpoint} from "./sendDataToEndpoint";
 import {fetchGeoLocationData} from "./fetchGeolocationData";
 import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
+export const username = userId;
 
 // Getting and persisting the access token
 settingsStorage.onchange = function (evt) {
@@ -127,7 +128,7 @@ messaging.peerSocket.addEventListener("message", (event) => {
         // Get OAuth data from settingsStorage
         const access_token = settingsStorage.getItem("access_token");
         const user_id = settingsStorage.getItem("user_id");
-
+        
         // Fetch and send patient data if OAuth data is available
         if (access_token && user_id) {
             fetchPatientData(user_id, access_token);
