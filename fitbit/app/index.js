@@ -6,14 +6,22 @@ import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
 import {minuteHistory} from "user-activity";
+//import {settingsStorage} from "settings";
+
+function zeroPad(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
 
 // Set the granularity to update the clock every minute
 clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
-const timeText = document.getElementById("timeText");
-const patientLabel = document.getElementById("patientLabel")
+const timeLabel = document.getElementById("timeLabel");
+//const patientLabel = document.getElementById("patientLabel")
 
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => {
@@ -29,6 +37,13 @@ clock.ontick = (evt) => {
     let mins = zeroPad(today.getMinutes());
     timeLabel.text = `${hours}:${mins}`;
   }
+
+// gets PatientId
+/*
+function getPatientId() {
+    const user_id = settingsStorage.getItem("user_id");
+    patientLabel.text = `${user_id}`;
+}*/
 
 // Initialize the count variable for number of info sent to db
 let count = 0;
