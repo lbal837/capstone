@@ -127,7 +127,7 @@ messaging.peerSocket.addEventListener("message", (event) => {
         // Get OAuth data from settingsStorage
         const access_token = settingsStorage.getItem("access_token");
         const user_id = settingsStorage.getItem("user_id");
-
+        
         // Fetch and send patient data if OAuth data is available
         if (access_token && user_id) {
             fetchPatientData(user_id, access_token);

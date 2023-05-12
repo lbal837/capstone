@@ -1,20 +1,47 @@
 // Import necessary modules
 import clock from "clock";
 import * as document from "document";
+import { preferences } from "user-settings";
 import {HeartRateSensor} from "heart-rate";
 import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import sleep from "sleep";
 import {minuteHistory} from "user-activity";
 
+function zeroPad(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+
 // Set the granularity to update the clock every minute
 clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
 const testText = document.getElementById("testText");
+const timeLabel = document.getElementById("timeLabel");
+const patientLabel = document.getElementById("patientLabel");
 
-// Initialize the count variable
+// Update the <text> element every tick with the current time
+clock.ontick = (evt) => {
+    let today = evt.date;
+    let hours = today.getHours();
+    if (preferences.clockDisplay === "12h") {
+      // 12h format
+      hours = hours % 12 || 12;
+    } else {
+      // 24h format
+      hours = zeroPad(hours);
+    }
+    let mins = zeroPad(today.getMinutes());
+    timeLabel.text = `${hours}:${mins}`;
+  }
+
+
+// Initialize the count variable for number of info sent to db
 let count = 0;
+let userId = '';
 
 /**
  * Handles incoming messages from the companion app.
@@ -25,6 +52,9 @@ let count = 0;
 function handleMessage(evt) {
     const totalUserSleep = evt.data.TotalMinutesAsleep;
     count += 1;
+    //display userID
+    userId = evt.data.UserId;
+    patientLabel.text = `${userId}`;
 
     // Check if the user had enough sleep (at least 5 hours)
     if (totalUserSleep && totalUserSleep >= 300) {
@@ -75,7 +105,7 @@ if (HeartRateSensor && sleep) {
     // Get heart rate and sleep data every 60 seconds
     setInterval(() => {
         getAndSendPatientData(hrm, sleep);
-    }, 10 * 1000);
+    }, 60 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
 }
