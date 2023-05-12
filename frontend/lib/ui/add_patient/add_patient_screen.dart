@@ -19,7 +19,7 @@ class AddPatientScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none),
               hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 18)),
+              hintStyle: const TextStyle(color: Colors.grey, fontSize: 18)),
         ),
       ),
     );
