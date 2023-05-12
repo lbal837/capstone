@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 
@@ -37,6 +38,21 @@ class PatientPortalScreen extends StatelessWidget {
           ),
         if (isLoggedIn)
           LogoutUserButton(userService: userService, screenSize: screenSize),
+        FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddPatientScreen(),
+                ));
+          },
+          elevation: 5,
+          hoverElevation: 25,
+          splashColor: Colors.purple,
+          backgroundColor: Colors.deepPurple,
+          heroTag: 'uniqueTag',
+          child: const Icon(Icons.add),
+        ),
       ],
     );
   }
