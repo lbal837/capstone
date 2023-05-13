@@ -4,7 +4,6 @@ import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_sns_endpoint_creator.dart';
 
 class PatientPortalScreen extends StatelessWidget {
   final UserService userService;
