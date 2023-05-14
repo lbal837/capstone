@@ -121,7 +121,7 @@ messaging.peerSocket.addEventListener("message", (event) => {
     // Check if the message is of type "combined_data"
     if (event.data.type === "combined_data") {
         latestHeartRate = event.data.heartRate;
-        latestSleepStatus = event.data.sleep;
+        latestSleepStatus = event.data.sleepStatus;
         latestSteps = event.data.steps;
 
         // Get OAuth data from settingsStorage
