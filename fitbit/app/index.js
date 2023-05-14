@@ -106,16 +106,16 @@ function getAndSendPatientData(hrm, accel, bodyPresence) {
         return;
     }
 
+    processSensorData(hrm.heartRate, accel.x, accel.y, accel.z);
+
     const minuteRecords = minuteHistory.query({limit: 1});
+
     sendMessageToCompanion({
         type: "combined_data",
         heartRate: hrm.heartRate,
         steps: minuteRecords[0].steps || 0,
         sleepStatus: sleepStatus
     });
-
-    // Call processSensorData function with heart rate and accelerometer data
-    processSensorData(hrm.heartRate, accel.x, accel.y, accel.z);
 }
 
 // Start heart rate monitoring if the sensor is available and permission is granted
