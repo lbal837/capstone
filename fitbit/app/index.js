@@ -52,18 +52,11 @@ let sleepStatus = '';
  * @param {Object} evt - The event object containing the data sent from the companion app.
  */
 function handleMessage(evt) {
-    const totalUserSleep = evt.data.TotalMinutesAsleep;
     count += 1;
     //display userID
     userId = evt.data.UserId;
     patientLabel.text = `${userId}`;
-
-    // Check if the user had enough sleep (at least 5 hours)
-    if (totalUserSleep && totalUserSleep >= 300) {
-        testText.text = `Awake! ${totalUserSleep}`;
-    } else {
-        testText.text = `${count}`;
-    }
+    testText.text = `${count}`;
 }
 
 function processSensorData(heartRate, x, y, z) {
