@@ -20,7 +20,7 @@ function zeroPad(i) {
 clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
-const testText = document.getElementById("testText");
+const sendCount = document.getElementById("sendCount");
 const timeLabel = document.getElementById("timeLabel");
 const patientLabel = document.getElementById("patientLabel");
 
@@ -56,7 +56,7 @@ function handleMessage(evt) {
     //display userID
     userId = evt.data.UserId;
     patientLabel.text = `${userId}`;
-    testText.text = `${count}`;
+    sendCount.text = `${count}`;
 }
 
 function processSensorData(heartRate, x, y, z) {
