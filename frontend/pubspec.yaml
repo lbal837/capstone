@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_launcher_icons: ^0.13.1
   http: ^0.13.5
   mockito: ^5.4.0
   shared_preferences: ^2.1.0
