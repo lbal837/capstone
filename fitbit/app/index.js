@@ -1,25 +1,26 @@
 // Import necessary modules
 import clock from "clock";
 import * as document from "document";
-import { preferences } from "user-settings";
+import {preferences} from "user-settings";
 import {HeartRateSensor} from "heart-rate";
+import {Accelerometer} from "accelerometer";
 import {me as appbit} from "appbit";
 import * as messaging from "messaging";
-import sleep from "sleep";
 import {minuteHistory} from "user-activity";
+import {BodyPresenceSensor} from "body-presence";
 
 function zeroPad(i) {
     if (i < 10) {
-      i = "0" + i;
+        i = "0" + i;
     }
     return i;
-  }
+}
 
 // Set the granularity to update the clock every minute
 clock.granularity = "minutes";
 
 // Get a reference to the text element in the document
-const testText = document.getElementById("testText");
+const sendCount = document.getElementById("sendCount");
 const timeLabel = document.getElementById("timeLabel");
 const patientLabel = document.getElementById("patientLabel");
 
@@ -28,20 +29,21 @@ clock.ontick = (evt) => {
     let today = evt.date;
     let hours = today.getHours();
     if (preferences.clockDisplay === "12h") {
-      // 12h format
-      hours = hours % 12 || 12;
+        // 12h format
+        hours = hours % 12 || 12;
     } else {
-      // 24h format
-      hours = zeroPad(hours);
+        // 24h format
+        hours = zeroPad(hours);
     }
     let mins = zeroPad(today.getMinutes());
     timeLabel.text = `${hours}:${mins}`;
-  }
+}
 
 
 // Initialize the count variable for number of info sent to db
 let count = 0;
 let userId = '';
+let sleepStatus = '';
 
 /**
  * Handles incoming messages from the companion app.
@@ -50,19 +52,28 @@ let userId = '';
  * @param {Object} evt - The event object containing the data sent from the companion app.
  */
 function handleMessage(evt) {
-    const totalUserSleep = evt.data.TotalMinutesAsleep;
     count += 1;
     //display userID
     userId = evt.data.UserId;
     patientLabel.text = `${userId}`;
+    sendCount.text = `${count}`;
+}
 
-    // Check if the user had enough sleep (at least 5 hours)
-    if (totalUserSleep && totalUserSleep >= 300) {
-        testText.text = `Awake! ${totalUserSleep}`;
+function processSensorData(heartRate, x, y, z) {
+    const heartRateThreshold = 60; // Example threshold for heart rate
+    const accelerometerThreshold = 0.01; // Example threshold for accelerometer activity
+
+    const accelerometerMagnitude = Math.sqrt(x * x + y * y + z * z);
+
+    if (heartRate <= heartRateThreshold && accelerometerMagnitude <= accelerometerThreshold) {
+        // The user might be asleep
+        sleepStatus = "Asleep";
     } else {
-        testText.text = `${count}`;
+        // The user is probably awake
+        sleepStatus = "Awake";
     }
 }
+
 
 /**
  * Sends heart rate and sleep data to the companion app.
@@ -81,30 +92,45 @@ function sendMessageToCompanion(data) {
  * Retrieves heart rate and sleep data and sends it to the companion app.
  *
  * @param {HeartRateSensor} hrm - The HeartRateSensor instance.
- * @param {Object} sleep - The sleep object containing sleep data.
+ * @param {Object} accel - The accelerometer data object.
+ * @param {Object} bodyPresence - The body presence data object.
  */
-function getAndSendPatientData(hrm, sleep) {
-    if (appbit.permissions.granted("access_heart_rate") && appbit.permissions.granted("access_sleep") && appbit.permissions.granted("access_activity")) {
-        const minuteRecords = minuteHistory.query({limit: 1});
-        sendMessageToCompanion({
-            type: "combined_data",
-            heartRate: hrm.heartRate,
-            sleep: sleep.state,
-            steps: minuteRecords[0].steps || 0
-        });
-    } else {
-        console.log("No permission to access the heart rate API");
+function getAndSendPatientData(hrm, accel, bodyPresence) {
+    if (bodyPresence.present === false) {
+        console.log("The watch is not being worn.");
+        return;
     }
+
+    if (appbit.permissions.granted("access_heart_rate") === false && appbit.permissions.granted("access_activity") === false) {
+        console.log("No permission to access the heart rate API and activity API");
+        return;
+    }
+
+    processSensorData(hrm.heartRate, accel.x, accel.y, accel.z);
+
+    const minuteRecords = minuteHistory.query({limit: 1});
+
+    sendMessageToCompanion({
+        type: "combined_data",
+        heartRate: hrm.heartRate,
+        steps: minuteRecords[0].steps || 0,
+        sleepStatus: sleepStatus
+    });
 }
 
 // Start heart rate monitoring if the sensor is available and permission is granted
-if (HeartRateSensor && sleep) {
-    const hrm = new HeartRateSensor();
+if (HeartRateSensor) {
+    const hrm = new HeartRateSensor({frequency: 1});
+    const accel = new Accelerometer({frequency: 1});
+    const bodyPresence = new BodyPresenceSensor();
+
     hrm.start();
+    accel.start();
+    bodyPresence.start();
 
     // Get heart rate and sleep data every 60 seconds
     setInterval(() => {
-        getAndSendPatientData(hrm, sleep);
+        getAndSendPatientData(hrm, accel, bodyPresence);
     }, 60 * 1000);
 } else {
     console.log("No permission to access the heart rate API or heart rate sensor is not available");
