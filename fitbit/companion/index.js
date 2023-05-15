@@ -15,7 +15,6 @@ import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
 settingsStorage.onchange = function (evt) {
     if (evt.key === "excode") {
         getToken(evt.newValue).then(function (result) {
-            console.log('Result:\n' + JSON.stringify(result));
             if (result && result.access_token && result.user_id) {
                 settingsStorage.setItem("access_token", result.access_token);
                 settingsStorage.setItem("user_id", result.user_id);
@@ -121,7 +120,7 @@ messaging.peerSocket.addEventListener("message", (event) => {
     // Check if the message is of type "combined_data"
     if (event.data.type === "combined_data") {
         latestHeartRate = event.data.heartRate;
-        latestSleepStatus = event.data.sleep;
+        latestSleepStatus = event.data.sleepStatus;
         latestSteps = event.data.steps;
 
         // Get OAuth data from settingsStorage
