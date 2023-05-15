@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   late final CognitoUserPool _userPool;
@@ -51,6 +51,7 @@ class UserService {
   Future<CognitoCredentials?> getCredentials() async {
     await init();
     if (_cognitoUser == null || _session == null) {
+      debugPrint('User is not logged in or session is not valid.');
       return null;
     }
 
