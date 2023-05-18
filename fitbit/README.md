@@ -1,4 +1,4 @@
-Hello Follow this please :)
+# Installation Instructions
 
 https://dev.fitbit.com/getting-started/
 
@@ -14,7 +14,7 @@ https://github.com/nvm-sh/nvm#troubleshooting-on-macos
 
 then follow the instructions :)
 
-# You then need to become a Fitbit Dev
+You then need to become a Fitbit Dev
 ![image](https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/34bcbba4-6a4e-4ca2-9a55-935ecc385dd0)
 
 ## Pre-requisites
