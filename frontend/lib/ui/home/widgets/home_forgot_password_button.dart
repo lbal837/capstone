@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/forgot_password/forgot_password_screen.dart';
+import 'package:frontend/ui/initiate_forgot_password/initiate_forgot_password_screen.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
   const ForgotPasswordButton({
@@ -19,7 +19,7 @@ class ForgotPasswordButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const ForgotPasswordScreen()),
+                builder: (context) => const InitiateForgotPasswordScreen()),
           );
         },
         child: const Text(
