@@ -8,6 +8,8 @@ import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 
+import 'widgets/home_forgot_password_button.dart';
+
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
   final userRepository = UserDefaultRepository();
@@ -45,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     SignUpUserButton(screenSize: screenSize),
                     ConfirmUserButton(screenSize: screenSize),
                     LoginUserButton(screenSize: screenSize),
+                    ForgotPasswordButton(screenSize: screenSize),
                   ],
                 );
               }
