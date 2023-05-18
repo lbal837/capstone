@@ -34,10 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
               if (isLoggedIn) {
                 return PatientPortalScreen(
-                  userService: userService,
-                  patientList: patientList,
                   isLoggedIn: isLoggedIn,
                   isLoaded: isLoaded,
+                  userService: userService,
                 );
               } else {
                 return Column(
