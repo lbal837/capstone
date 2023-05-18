@@ -140,6 +140,7 @@ class UserService {
     return user;
   }
 
+  /// Sign logged in existing user
   Future<void> signOut() async {
     if (credentials != null) {
       await credentials!.resetAwsCredentials();
@@ -147,5 +148,20 @@ class UserService {
     if (_cognitoUser != null) {
       return _cognitoUser!.signOut();
     }
+  }
+
+  /// Initiate password reset
+  Future<void> resetPassword(String email) async {
+    final cognitoUser =
+        CognitoUser(email, _userPool, storage: _userPool.storage);
+    await cognitoUser.forgotPassword();
+  }
+
+  /// Confirm new password after reset
+  Future<bool> confirmNewPassword(
+      String email, String confirmationCode, String newPassword) async {
+    final cognitoUser =
+        CognitoUser(email, _userPool, storage: _userPool.storage);
+    return await cognitoUser.confirmPassword(confirmationCode, newPassword);
   }
 }
