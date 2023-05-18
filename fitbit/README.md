@@ -1,3 +1,22 @@
+# Installation Instructions
+
+https://dev.fitbit.com/getting-started/
+
+Follow these instructions:
+![image](https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/fdf0d207-2381-4295-992f-00de2c9cc1e6)
+
+
+If you have windows install nvm here:
+https://github.com/coreybutler/nvm-windows#readme
+
+otherwise for MacOS: 
+https://github.com/nvm-sh/nvm#troubleshooting-on-macos
+
+You then need to become a Fitbit Dev
+![image](https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/34bcbba4-6a4e-4ca2-9a55-935ecc385dd0)
+
+then follow the instructions :)
+
 ## Pre-requisites
 
 - Node.js
