@@ -1,3 +1,7 @@
+Hello Follow this please :)
+
+https://dev.fitbit.com/getting-started/
+
 ## Pre-requisites
 
 - Node.js
