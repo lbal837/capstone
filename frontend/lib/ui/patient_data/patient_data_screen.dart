@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/data/patient_repository.dart';
+import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/patient_data/widgets/heart_rate_profile_header.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_location.dart';
@@ -8,8 +8,6 @@ import 'package:frontend/ui/patient_data/widgets/patient_data_sleep.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_step_count.dart';
 
 class _PatientInfoPageState extends State<PatientPage> {
-  //late Future<Patient> futurePatient;
-  //late Future<List<Patient>> futurePatients;
   Patient? patient;
   bool isLoaded = false;
 
@@ -20,9 +18,8 @@ class _PatientInfoPageState extends State<PatientPage> {
   }
 
   Future<void> getData() async {
-    final PatientDefaultRepository patientRepository =
-        PatientDefaultRepository();
-    patient = await patientRepository.fetchPatient(widget.userid!);
+    final UserRepository userRepository = UserDefaultRepository();
+    patient = await userRepository.fetchPatient(widget.userid!);
     if (patient != null) {
       setState(() {
         isLoaded = true;
@@ -41,7 +38,8 @@ class _PatientInfoPageState extends State<PatientPage> {
             //final patient_name = patient.fullName,
             ListView(
           children: <Widget>[
-            ProfileHeader(name: patient?.fullName, picture: patient?.avatarImage),
+            ProfileHeader(
+                name: patient?.fullName, picture: patient?.avatarImage),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
                 latitude: patient?.latitude, longitude: patient?.longitude),
