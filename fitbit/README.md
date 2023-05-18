@@ -2,6 +2,14 @@ Hello Follow this please :)
 
 https://dev.fitbit.com/getting-started/
 
+If you have windows install nvm here:
+https://github.com/coreybutler/nvm-windows#readme
+
+otherwise for MacOS: 
+https://github.com/nvm-sh/nvm#troubleshooting-on-macos
+
+then follow the instructions :)
+
 ## Pre-requisites
 
 - Node.js
