@@ -38,7 +38,7 @@ class UserDefaultRepository extends UserRepository {
   @override
   Future<void> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
-      Uri.parse('$apiEndpoint/AddUserPatient'),
+      Uri.parse('$apiEndpoint/AddUserToPatientv2'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
       body: jsonEncode(<String, String>{
         'UserId': userId,
