@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/secrets.dart';
+import 'package:frontend/ui/confirm_forgot_password/confirm_forgot_password_screen.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+class InitiateForgotPasswordScreen extends StatefulWidget {
+  const InitiateForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
   ForgotPasswordScreenState createState() => ForgotPasswordScreenState();
 }
 
-class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class ForgotPasswordScreenState extends State<InitiateForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final userService = UserService(userPool);
 
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
-      // Call resetPassword function from your UserService
-      // userService.resetPassword(_emailController.text)
-      // Here, we'll just print the email
-      debugPrint('Reset password for ${_emailController.text}');
+      userService.resetPassword(_emailController.text).then((_) {
+        // After successful password reset initiation, navigate to ResetPasswordConfirmScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResetPasswordConfirmScreen(
+              email: _emailController.text,
+              userService: userService,
+            ),
+          ),
+        );
+      }).catchError((error) {
+        // Handle any errors
+      });
     }
   }
 
@@ -41,7 +52,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
                   }
-                  // Add more validation logic if needed
                   return null;
                 },
                 decoration: const InputDecoration(
