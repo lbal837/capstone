@@ -5,6 +5,8 @@ import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
+import '../../nav/bottom_nav.dart';
+import 'package:frontend/nav/tab_item.dart';
 
 class PatientPortalScreen extends StatefulWidget {
   final UserRepository userRepository = UserDefaultRepository();
