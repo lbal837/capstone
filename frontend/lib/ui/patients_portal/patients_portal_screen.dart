@@ -27,9 +27,8 @@ class PatientPortalScreen extends StatelessWidget {
       return const CircularProgressIndicator();
     }
 
-    return Scaffold(
-      body: ListView(
-        children: <Widget>[
+    return Column(
+      children: <Widget>[
         for (Patient patient in patientList)
           ProfileBox(
             name: patient.fullName,
@@ -38,7 +37,7 @@ class PatientPortalScreen extends StatelessWidget {
           ),
         if (isLoggedIn)
           LogoutUserButton(userService: userService, screenSize: screenSize),
-          FloatingActionButton(
+        FloatingActionButton(
           onPressed: () {
             Navigator.push(
                 context,
@@ -53,9 +52,7 @@ class PatientPortalScreen extends StatelessWidget {
           heroTag: 'uniqueTag',
           child: const Icon(Icons.add),
         ),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      ],
     );
   }
 }
