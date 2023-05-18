@@ -23,6 +23,14 @@ class AddPatientScreenState extends State<AddPatientScreen> {
     await userRepository.subscribeToPatient(caregiverEmail!, patientId);
   }
 
+  Future<void> _addPatientToUser() async {
+    final caregiver = await _userService.getCurrentUser();
+    final patientId = _patientIdController.text;
+
+    final caregiverEmail = caregiver?.email;
+    await userRepository.addPatientToUser(caregiverEmail!, patientId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +56,10 @@ class AddPatientScreenState extends State<AddPatientScreen> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: _subscribeToPatient,
+              onPressed: () async {
+                await _subscribeToPatient();
+                await _addPatientToUser();
+              },
               child: const Text('Subscribe to Patient'),
             ),
           ],
