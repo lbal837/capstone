@@ -15,21 +15,6 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isLoaded = false;
 
   @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  Future<void> getData() async {
-    patientList = await userRepository.fetchUsersPatients();
-    if (patientList.isNotEmpty) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
