@@ -9,6 +9,8 @@ abstract class UserRepository {
   Future<List<Patient>> fetchUsersPatients();
 
   Future<void> addUserPatient(String userId, String patientId);
+
+  Future<void> subscribeToPatient(String caregiverEmail, String patientId);
 }
 
 class UserDefaultRepository extends UserRepository {
@@ -50,6 +52,35 @@ class UserDefaultRepository extends UserRepository {
       debugPrint(
           'Error: status code ${response.statusCode}, response body: ${response.body}');
       throw Exception('Failed to add patient to user');
+    }
+  }
+
+  @override
+  Future<void> subscribeToPatient(
+      String caregiverEmail, String patientId) async {
+    const apiUrl = '$apiEndpoint/SubscribeCaregiverToPatient';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        body: jsonEncode({
+          'caregiver_email': caregiverEmail,
+          'patient_id': patientId,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        debugPrint('Subscribed to patient with ID: $patientId');
+      } else {
+        debugPrint(
+            'Failed to subscribe to patient. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('Failed to subscribe to patient: $e');
     }
   }
 }
