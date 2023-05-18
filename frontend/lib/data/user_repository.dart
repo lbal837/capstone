@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 abstract class UserRepository {
   Future<List<Patient>> fetchUsersPatients();
 
-  Future<void> addUserPatient(String userId, String patientId);
+  Future<void> addPatientToUser(String userId, String patientId);
 
   Future<void> subscribeToPatient(String caregiverEmail, String patientId);
 }
@@ -36,9 +36,9 @@ class UserDefaultRepository extends UserRepository {
   }
 
   @override
-  Future<void> addUserPatient(String userId, String patientId) async {
+  Future<void> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
-      Uri.parse('$apiEndpoint/AddPatientToUser'),
+      Uri.parse('$apiEndpoint/AddUserPatient'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
       body: jsonEncode(<String, String>{
         'UserId': userId,
