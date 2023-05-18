@@ -2,6 +2,10 @@ Hello Follow this please :)
 
 https://dev.fitbit.com/getting-started/
 
+Follow these instructions:
+![image](https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/fdf0d207-2381-4295-992f-00de2c9cc1e6)
+
+
 If you have windows install nvm here:
 https://github.com/coreybutler/nvm-windows#readme
 
