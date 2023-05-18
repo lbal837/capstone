@@ -17,7 +17,7 @@ class UserDefaultRepository extends UserRepository {
   @override
   Future<List<Patient>> fetchUsersPatients() async {
     final response =
-        await http.get(Uri.parse('$apiEndpoint/GetAllPatientData'), headers: {
+        await http.get(Uri.parse('$apiEndpoint/GetUsersPatients'), headers: {
       'x-api-key': apiKey,
     });
 
