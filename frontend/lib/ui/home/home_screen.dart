@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
-import 'package:frontend/data/patient_repository.dart';
+import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
@@ -10,6 +10,7 @@ import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
+  final userRepository = UserDefaultRepository();
   List<Patient> patientList = [];
   bool isLoaded = false;
 
@@ -20,9 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> getData() async {
-    final PatientDefaultRepository patientRepository =
-        PatientDefaultRepository();
-    patientList = await patientRepository.fetchAllPatients();
+    patientList = await userRepository.fetchUsersPatients();
     if (patientList.isNotEmpty) {
       setState(() {
         isLoaded = true;
