@@ -35,6 +35,7 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
+  // This returns a failure even when it succeeds -> fix later lol
   @override
   Future<void> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
@@ -55,6 +56,7 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
+  // This returns a failure even when it succeeds -> fix later lol
   @override
   Future<void> subscribeToPatient(
       String caregiverEmail, String patientId) async {
