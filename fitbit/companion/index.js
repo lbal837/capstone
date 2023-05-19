@@ -87,7 +87,7 @@ async function fetchPatientData(userId, accessToken) {
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
         SleepStatus: latestSleepStatus,
-        LatestBarometer: latestBarometer,
+        Barometer: latestBarometer,
         Latitude: null,
         Longitude: null,
         Steps: latestSteps
