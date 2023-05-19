@@ -31,10 +31,7 @@ class ScreenState extends State<NavApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PatientPortalScreen(
-          userService: userService,
-          patientList: [],
-          isLoggedIn: isLoggedIn,
-          isLoaded: true),
+          userService: userService, isLoggedIn: isLoggedIn, isLoaded: true),
       bottomNavigationBar: BottomNavigation(
         currentTab: _currentTab,
         onSelectTab: _selectTab,
