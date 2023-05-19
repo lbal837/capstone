@@ -1,6 +1,4 @@
-/*
-Corresponds to the "AddCaregiverToRDS lambda function"
-*/
+// Corresponds to the "AddCaregiverToRDS lambda function"
 
 import AWS from "aws-sdk";
 import pgp from "pg-promise";
@@ -28,13 +26,23 @@ export const handler = async (event) => {
     const username = event.userName;
     const email = event.request.userAttributes.email;
 
-    // Insert the new user into the RDS instance
-    const query = `
-    INSERT INTO users (username, email, patient_ids)
-    VALUES ($1, $2, $3);
+    // Check if user already exists in the RDS instance
+    const checkUserQuery = `
+    SELECT username FROM users WHERE username = $1;
   `;
 
-    await db.none(query, [username, email, []]);
+    const userExists = await db.oneOrNone(checkUserQuery, [username]);
+
+    // If the user doesn't exist, insert into the database
+    if (!userExists) {
+        const insertQuery = `
+      INSERT INTO users (username, email, patient_ids)
+      VALUES ($1, $2, $3);
+    `;
+        await db.none(insertQuery, [username, email, []]);
+    } else {
+        console.log(`User with username ${username} already exists.`);
+    }
 
     // Return the event object as required by the Post Confirmation trigger
     return event;
