@@ -6,7 +6,7 @@
     "configurations": [
         
         {
-            "name": "frontend",
+            "name": "LifeSavers",
             "request": "launch",
             "type": "dart"
         }
