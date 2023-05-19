@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/nav/nav_app.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
               debugPrint(isLoggedIn.toString());
 
               if (isLoggedIn) {
-                return PatientPortalScreen(
+                return NavApp(
                   isLoggedIn: isLoggedIn,
                   isLoaded: isLoaded,
                   userService: userService,

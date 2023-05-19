@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/nav/tab_item.dart';
 
+import '../auth/user_service.dart';
+import '../domain/patient.dart';
+
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation(
       {super.key, required this.currentTab, required this.onSelectTab});
