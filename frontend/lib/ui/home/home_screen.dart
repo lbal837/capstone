@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               } else {
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SignUpUserButton(screenSize: screenSize),
                     ConfirmUserButton(screenSize: screenSize),

@@ -14,7 +14,6 @@ class LoginGoBackButton extends StatelessWidget {
         onPressed: onPressed,
         child: const Text(
           'Go Back',
-          style: TextStyle(color: Colors.blue),
         ),
       ),
     );
