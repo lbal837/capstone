@@ -27,30 +27,44 @@ class PatientPortalScreen extends StatelessWidget {
       return const CircularProgressIndicator();
     }
 
-    return Column(
-      children: <Widget>[
-        for (Patient patient in patientList)
-          ProfileBox(
-            name: patient.fullName,
-            id: patient.userId,
-            picture: patient.avatarImage,
+    return Stack(
+      children: [
+        SizedBox(
+          height: screenSize.height,
+          width: screenSize.width,
+          child: Column(
+            children: <Widget>[
+              for (Patient patient in patientList)
+                ProfileBox(
+                  name: patient.fullName,
+                  id: patient.userId,
+                  picture: patient.avatarImage,
+                ),
+              if (isLoggedIn)
+                LogoutUserButton(
+                    userService: userService, screenSize: screenSize)
+            ],
           ),
-        if (isLoggedIn)
-          LogoutUserButton(userService: userService, screenSize: screenSize),
-        FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
+        ),
+        Positioned(
+          bottom: MediaQuery.of(context).size.height / 7,
+          right: MediaQuery.of(context).size.width / 25,
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const AddPatientScreen(),
-                ));
-          },
-          elevation: 5,
-          hoverElevation: 25,
-          splashColor: Colors.purple,
-          backgroundColor: Colors.deepPurple,
-          heroTag: 'uniqueTag',
-          child: const Icon(Icons.add),
+                ),
+              );
+            },
+            elevation: 5,
+            hoverElevation: 25,
+            splashColor: Colors.purple,
+            backgroundColor: Colors.deepPurple,
+            heroTag: 'null',
+            child: const Icon(Icons.add),
+          ),
         ),
       ],
     );
