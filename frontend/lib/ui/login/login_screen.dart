@@ -109,7 +109,6 @@ class LoginScreenState extends State<LoginScreen> {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Login'),
-                automaticallyImplyLeading: false,
               ),
               body: Builder(
                 builder: (BuildContext context) {
