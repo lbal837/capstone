@@ -57,11 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               } else {
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    const SizedBox(height: 450,),
+                    LoginUserButton(screenSize: screenSize),
+                    const SizedBox(height: 50,),
+                    const SizedBox(height: 40, child: Text('New User? Sign up below'),),
                     SignUpUserButton(screenSize: screenSize),
                     ConfirmUserButton(screenSize: screenSize),
-                    LoginUserButton(screenSize: screenSize),
                   ],
                 );
               }
