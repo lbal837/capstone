@@ -14,7 +14,7 @@ class LogoutUserButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
       width: screenSize.width,
-      child: ElevatedButton(
+      child: OutlinedButton(
         onPressed: () {
           userService.signOut();
           Navigator.pushAndRemoveUntil(
@@ -26,7 +26,6 @@ class LogoutUserButton extends StatelessWidget {
         },
         child: const Text(
           'Logout',
-          style: TextStyle(color: Colors.white),
         ),
       ),
     );

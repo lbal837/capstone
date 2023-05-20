@@ -60,8 +60,6 @@ class PatientPortalScreen extends StatelessWidget {
             },
             elevation: 5,
             hoverElevation: 25,
-            splashColor: Colors.purple,
-            backgroundColor: Colors.deepPurple,
             heroTag: 'null',
             child: const Icon(Icons.add),
           ),
