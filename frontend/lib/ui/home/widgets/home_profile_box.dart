@@ -27,12 +27,12 @@ class ProfileBox extends StatelessWidget {
         }
       },
       child: Card(
+        
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(30.0),
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: CircleAvatar(
