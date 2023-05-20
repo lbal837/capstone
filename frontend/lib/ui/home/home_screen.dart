@@ -14,8 +14,6 @@ import 'widgets/home_forgot_password_button.dart';
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
   final userRepository = UserDefaultRepository();
-  List<Patient> patientList = [];
-  bool isLoaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
               debugPrint(isLoggedIn.toString());
 
               if (isLoggedIn) {
+                debugPrint("I'm logged in!");
                 return NavApp(
                   isLoggedIn: isLoggedIn,
-                  isLoaded: isLoaded,
                   userService: userService,
                 );
               } else {

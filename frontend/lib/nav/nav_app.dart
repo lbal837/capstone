@@ -8,12 +8,10 @@ import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 class NavApp extends StatefulWidget {
   final UserService userService;
   final bool isLoggedIn;
-  final bool isLoaded;
   const NavApp({
     Key? key,
     required this.userService,
     required this.isLoggedIn,
-    required this.isLoaded,
   }) : super(key: key);
 
   @override
@@ -30,10 +28,11 @@ class ScreenState extends State<NavApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PatientPortalScreen(
-          userService: widget.userService,
-          isLoggedIn: widget.isLoggedIn,
-          isLoaded: widget.isLoaded),
+      body: const Text("I'm hit!"),
+      // body: PatientPortalScreen(
+      //   userService: widget.userService,
+      //   isLoggedIn: widget.isLoggedIn,
+      // ),
       bottomNavigationBar: BottomNavigation(
         currentTab: _currentTab,
         onSelectTab: _selectTab,
