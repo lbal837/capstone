@@ -46,7 +46,6 @@ class AddPatientScreenState extends State<AddPatientScreen> {
         child: Column(
           children: [
             AddPatientId(controller: _patientIdController),
-            const SizedBox(height: 16.0),
             AddPatientButton(
               subscribeToPatient: _subscribeToPatient,
               addPatientToUser: _addPatientToUser,
