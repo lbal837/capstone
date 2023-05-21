@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
@@ -28,7 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
             future: userService.isLoggedIn(),
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(
+                  child: SpinKitDoubleBounce(
+                    color: Colors.purple,
+                  ),
+                );
               }
               final bool isLoggedIn = snapshot.data ?? false;
               debugPrint(isLoggedIn.toString());
