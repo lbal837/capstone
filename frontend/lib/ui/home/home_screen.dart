@@ -50,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     const SizedBox(height: 40, child: Text('New User? Sign up below'),),
                     SignUpUserButton(screenSize: screenSize),
                     ConfirmUserButton(screenSize: screenSize),
-                    LoginUserButton(screenSize: screenSize),
                     ForgotPasswordButton(screenSize: screenSize),
                   ],
                 );
