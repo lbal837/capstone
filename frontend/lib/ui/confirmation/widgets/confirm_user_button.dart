@@ -15,11 +15,10 @@ class ConfirmUserButton extends StatelessWidget {
       margin: const EdgeInsets.only(
         top: 10.0,
       ),
-      child: ElevatedButton(
+      child: FilledButton(
         onPressed: onPressed,
         child: const Text(
           'Submit',
-          style: TextStyle(color: Colors.white),
         ),
       ),
     );

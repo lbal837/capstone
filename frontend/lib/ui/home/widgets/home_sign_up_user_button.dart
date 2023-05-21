@@ -14,7 +14,7 @@ class SignUpUserButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
       width: screenSize.width,
-      child: ElevatedButton(
+      child: FilledButton(
         onPressed: () {
           Navigator.push(
             context,
@@ -23,7 +23,6 @@ class SignUpUserButton extends StatelessWidget {
         },
         child: const Text(
           'Sign Up',
-          style: TextStyle(color: Colors.white),
         ),
       ),
     );

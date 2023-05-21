@@ -14,11 +14,10 @@ class LoginUserButton extends StatelessWidget {
       margin: const EdgeInsets.only(
         top: 10.0,
       ),
-      child: ElevatedButton(
+      child: FilledButton(
         onPressed: onPressed,
         child: const Text(
           'Login',
-          style: TextStyle(color: Colors.white),
         ),
       ),
     );
