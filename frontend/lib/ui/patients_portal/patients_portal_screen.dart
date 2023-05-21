@@ -64,9 +64,9 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
                   id: patient.userId,
                   picture: patient.avatarImage,
                 ),
-              if (isLoggedIn)
+              if (widget.isLoggedIn)
                 LogoutUserButton(
-                    userService: userService, screenSize: screenSize)
+                    userService: widget.userService, screenSize: screenSize)
             ],
           ),
         ),
@@ -87,24 +87,6 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
             heroTag: 'null',
             child: const Icon(Icons.add),
           ),
-        if (widget.isLoggedIn)
-          LogoutUserButton(
-              userService: widget.userService, screenSize: screenSize),
-        FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddPatientScreen(),
-              ),
-            );
-          },
-          elevation: 5,
-          hoverElevation: 25,
-          splashColor: Colors.purple,
-          backgroundColor: Colors.deepPurple,
-          heroTag: 'uniqueTag',
-          child: const Icon(Icons.add),
         ),
       ],
     );
