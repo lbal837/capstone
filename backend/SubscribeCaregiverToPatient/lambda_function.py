@@ -11,6 +11,13 @@ def get_patient_topic_arn(patient_id):
     response = table.get_item(Key={"PatientId": patient_id})
     return response["Item"]["TopicArn"]
 
+def is_subscribed(caregiver_email, topic_arn):
+    subscriptions = sns.list_subscriptions_by_topic(TopicArn=topic_arn)['Subscriptions']
+    for subscription in subscriptions:
+        if subscription['Protocol'] == 'email' and subscription['Endpoint'] == caregiver_email:
+            return True
+    return False
+
 def lambda_handler(event, context):
     print(context)
     print("*******")
@@ -23,7 +30,15 @@ def lambda_handler(event, context):
 
     try:
         topic_arn = get_patient_topic_arn(patient_id)
-        response = sns.subscribe(TopicArn=topic_arn, Protocol="email", Endpoint=caregiver_email)
+
+        if is_subscribed(caregiver_email, topic_arn):
+            return {
+                "statusCode": 400,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"message": "Caregiver is already subscribed to the patient."})
+            }
+
+        sns.subscribe(TopicArn=topic_arn, Protocol="email", Endpoint=caregiver_email)
         return {
             "statusCode": 200,
             "headers": {"Content-Type": "application/json"},
