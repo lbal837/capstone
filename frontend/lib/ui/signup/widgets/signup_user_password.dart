@@ -15,7 +15,7 @@ class SignupUserPassword extends StatelessWidget {
       leading: const Icon(Icons.lock),
       title: TextFormField(
         decoration: const InputDecoration(
-          hintText: 'Password!',
+          hintText: 'Password',
         ),
         obscureText: true,
         onSaved: (n) => _user.password = n,

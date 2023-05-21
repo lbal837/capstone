@@ -79,7 +79,8 @@ class ResetPasswordConfirmScreenState
                 ),
                 obscureText: true,
               ),
-              ElevatedButton(
+              const SizedBox(height: 20),
+              FilledButton(
                 onPressed: _submit,
                 child: const Text('Submit'),
               ),
