@@ -39,8 +39,8 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LifeSavers',
-      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      theme: ThemeData(fontFamily: 'Urbanist', useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(fontFamily: 'Urbanist', useMaterial3: true, colorScheme: darkColorScheme),
       home: const MyHomePage(title: 'LifeSavers'),
     );
   }
