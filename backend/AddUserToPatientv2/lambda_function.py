@@ -29,7 +29,7 @@ def add_patient_to_user(user_id, patient_id):
                 if patient_ids is None:
                     patient_ids = []
             else:
-                return {"error": "Patient not found"}
+                return {"error": "User not found"}
 
             # Guard clause to see if patient_id already exists
             if patient_id in patient_ids:
@@ -63,11 +63,18 @@ def lambda_handler(event, context):
         result = add_patient_to_user(user_id, patient_id)
         print(result)
         if "error" in result:
-            return {
-                "statusCode": 404,
-                "headers": {"Content-Type": "application/json"},
-                "body": json.dumps({"status": "error", "message": result["error"]})
-            }
+            if result["error"] == "User is already subscribed to this Patient":
+                return {
+                    "statusCode": 400,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps({"status": "error", "message": result["error"]})
+                }
+            else:
+                return {
+                    "statusCode": 404,
+                    "headers": {"Content-Type": "application/json"},
+                    "body": json.dumps({"status": "error", "message": result["error"]})
+                }
         return {
             "statusCode": 200,
             "headers": {"Content-Type": "application/json"},
