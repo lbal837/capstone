@@ -4,6 +4,7 @@ import * as document from "document";
 import {preferences} from "user-settings";
 import {HeartRateSensor} from "heart-rate";
 import {Accelerometer} from "accelerometer";
+import {Barometer} from "barometer";
 import {me as appbit} from "appbit";
 import * as messaging from "messaging";
 import {minuteHistory} from "user-activity";
@@ -89,13 +90,14 @@ function sendMessageToCompanion(data) {
 }
 
 /**
- * Retrieves heart rate and sleep data and sends it to the companion app.
+ * Retrieves heart rate, sleep data, and barometer data and sends it to the companion app.
  *
  * @param {HeartRateSensor} hrm - The HeartRateSensor instance.
  * @param {Object} accel - The accelerometer data object.
  * @param {Object} bodyPresence - The body presence data object.
+ * @param {Object} baro - The barometer data object.
  */
-function getAndSendPatientData(hrm, accel, bodyPresence) {
+function getAndSendPatientData(hrm, accel, bodyPresence, baro) {
     if (bodyPresence.present === false) {
         console.log("The watch is not being worn.");
         return;
@@ -114,26 +116,29 @@ function getAndSendPatientData(hrm, accel, bodyPresence) {
         type: "combined_data",
         heartRate: hrm.heartRate,
         steps: minuteRecords[0].steps || 0,
-        sleepStatus: sleepStatus
+        sleepStatus: sleepStatus,
+        pressure: baro.pressure
     });
 }
 
-// Start heart rate monitoring if the sensor is available and permission is granted
-if (HeartRateSensor) {
+// Start heart rate, accelerometer, and barometer monitoring if the sensor is available and permission is granted
+if (HeartRateSensor && Accelerometer && Barometer) {
     const hrm = new HeartRateSensor({frequency: 1});
     const accel = new Accelerometer({frequency: 1});
     const bodyPresence = new BodyPresenceSensor();
+    const baro = new Barometer({frequency: 1});
 
     hrm.start();
     accel.start();
     bodyPresence.start();
+    baro.start();
 
-    // Get heart rate and sleep data every 60 seconds
+    // Get heart rate, sleep data, and barometer data every 60 seconds
     setInterval(() => {
-        getAndSendPatientData(hrm, accel, bodyPresence);
+        getAndSendPatientData(hrm, accel, bodyPresence, baro);
     }, 60 * 1000);
 } else {
-    console.log("No permission to access the heart rate API or heart rate sensor is not available");
+    console.log("No permission to access the heart rate API, accelerometer API, or barometer API or the sensors are not available");
 }
 
 // Listen for messages from the companion app

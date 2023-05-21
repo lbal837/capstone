@@ -68,6 +68,7 @@ async function getToken(exchangeCode) {
 let latestHeartRate = null;
 let latestSleepStatus = null;
 let latestSteps = null;
+let latestBarometer = null;
 
 /**
  * Fetches patient data and sends it to the device and endpoint.
@@ -86,6 +87,7 @@ async function fetchPatientData(userId, accessToken) {
         DateTime: currentDateInNZST,
         HeartRate: latestHeartRate,
         SleepStatus: latestSleepStatus,
+        Barometer: latestBarometer,
         Latitude: null,
         Longitude: null,
         Steps: latestSteps
@@ -120,13 +122,14 @@ messaging.peerSocket.addEventListener("message", (event) => {
     // Check if the message is of type "combined_data"
     if (event.data.type === "combined_data") {
         latestHeartRate = event.data.heartRate;
+        latestBarometer = event.data.pressure;
         latestSleepStatus = event.data.sleepStatus;
         latestSteps = event.data.steps;
 
         // Get OAuth data from settingsStorage
         const access_token = settingsStorage.getItem("access_token");
         const user_id = settingsStorage.getItem("user_id");
-        
+
         // Fetch and send patient data if OAuth data is available
         if (access_token && user_id) {
             fetchPatientData(user_id, access_token);
