@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
@@ -56,9 +58,20 @@ class AddPatientScreenState extends State<AddPatientScreen> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () async {
-                await _subscribeToPatient();
-                await _addPatientToUser();
+              onPressed: () {
+                final completer = Completer<void>();
+                try {
+                  _subscribeToPatient().then((_) => _addPatientToUser())
+                      .then((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Patient successfully added and subscribed!')));
+                    completer.complete();
+                  });
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Failed to add or subscribe patient!')));
+                  completer.completeError(e);
+                }
               },
               child: const Text('Subscribe to Patient'),
             ),
