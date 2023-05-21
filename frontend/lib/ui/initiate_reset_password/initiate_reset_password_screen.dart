@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirm_forgot_password/confirm_forgot_password_screen.dart';
+import 'package:frontend/ui/confirm_reset_password/confirm_reset_password_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/widgets/initiate_reset_password_button.dart';
 import 'package:frontend/ui/initiate_reset_password/widgets/initiate_reset_password_email.dart';
 
@@ -24,7 +24,7 @@ class ForgotPasswordScreenState extends State<InitiateResetPasswordScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ResetPasswordConfirmScreen(
+            builder: (context) => ConfirmResetPasswordScreen(
               email: _emailController.text,
               userService: userService,
             ),
