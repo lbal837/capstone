@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
+import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_confirmation_code.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
-class ResetPasswordConfirmScreen extends StatefulWidget {
+class ConfirmResetPasswordScreen extends StatefulWidget {
   final String email;
   final UserService userService;
 
-  const ResetPasswordConfirmScreen(
+  const ConfirmResetPasswordScreen(
       {Key? key, required this.email, required this.userService})
       : super(key: key);
 
@@ -16,7 +17,7 @@ class ResetPasswordConfirmScreen extends StatefulWidget {
 }
 
 class ResetPasswordConfirmScreenState
-    extends State<ResetPasswordConfirmScreen> {
+    extends State<ConfirmResetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _codeController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -54,18 +55,7 @@ class ResetPasswordConfirmScreenState
           key: _formKey,
           child: Column(
             children: <Widget>[
-              TextFormField(
-                controller: _codeController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the confirmation code';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Confirmation Code',
-                ),
-              ),
+              ConfirmResetPasswordCode(controller: _codeController),
               TextFormField(
                 controller: _passwordController,
                 validator: (value) {
