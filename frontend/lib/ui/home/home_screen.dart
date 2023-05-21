@@ -27,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                  child: SpinKitDoubleBounce(
+                  child: SpinKitPumpingHeart(
                     color: Colors.purple,
                   ),
                 );

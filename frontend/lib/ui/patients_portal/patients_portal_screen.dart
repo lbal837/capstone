@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
@@ -48,7 +49,9 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
     final screenSize = MediaQuery.of(context).size;
 
     if (!isLoaded) {
-      return const CircularProgressIndicator();
+      return const SpinKitPumpingHeart(
+        color: Colors.purple,
+      );
     }
 
     return Stack(
