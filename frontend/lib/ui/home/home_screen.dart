@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(height: 450,),
+                    const SizedBox(height: 400,),
                     LoginUserButton(screenSize: screenSize),
                     const SizedBox(height: 50,),
                     const SizedBox(height: 40, child: Text('New User? Sign up below'),),
