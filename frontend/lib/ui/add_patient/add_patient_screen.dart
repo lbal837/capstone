@@ -17,7 +17,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
 
   Future<void> _subscribeToPatient() async {
     final caregiver = await _userService.getCurrentUser();
-    final patientId = _patientIdController.text;
+    final patientId = _patientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
     await userRepository.subscribeToPatient(caregiverEmail!, patientId);
@@ -25,7 +25,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
 
   Future<void> _addPatientToUser() async {
     final caregiver = await _userService.getCurrentUser();
-    final patientId = _patientIdController.text;
+    final patientId = _patientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
     await userRepository.addPatientToUser(caregiverEmail!, patientId);
