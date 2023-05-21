@@ -14,7 +14,7 @@ class ForgotPasswordButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
       width: screenSize.width,
-      child: ElevatedButton(
+      child: FilledButton(
         onPressed: () {
           Navigator.push(
             context,
