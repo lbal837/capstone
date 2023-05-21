@@ -46,10 +46,38 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               } else {
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(
-                      height: 400,
+                      height: 50,
+                    ),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(80.0),
+                          child: Image.asset(
+                            'assets/images/icon.png',
+                            width: 160,
+                            height: 160,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'LifeSavers',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Urbanist',
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 80,
                     ),
                     LoginUserButton(screenSize: screenSize),
                     const SizedBox(
