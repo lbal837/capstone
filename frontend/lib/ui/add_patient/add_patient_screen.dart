@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/secrets.dart';
+import 'package:frontend/ui/add_patient/widget/add_patient_id.dart';
 
 class AddPatientScreen extends StatefulWidget {
   const AddPatientScreen({Key? key}) : super(key: key);
@@ -43,28 +44,18 @@ class AddPatientScreenState extends State<AddPatientScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _patientIdController,
-              cursorColor: Colors.grey,
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none),
-                hintText: 'Enter Patient ID',
-                hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
-              ),
-            ),
+            AddPatientId(controller: _patientIdController),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 final completer = Completer<void>();
                 try {
-                  _subscribeToPatient().then((_) => _addPatientToUser())
+                  _subscribeToPatient()
+                      .then((_) => _addPatientToUser())
                       .then((_) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Patient successfully added and subscribed!')));
+                        content: Text(
+                            'Patient successfully added and subscribed!')));
                     completer.complete();
                   });
                 } catch (e) {
@@ -73,7 +64,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
                   completer.completeError(e);
                 }
               },
-              child: const Text('Subscribe to Patient'),
+              child: const Text('Add Patient'),
             ),
           ],
         ),
