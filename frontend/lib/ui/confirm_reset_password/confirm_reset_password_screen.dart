@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
+import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_button.dart';
 import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_confirmation_code.dart';
 import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_new_password.dart';
 import 'package:frontend/ui/login/login_screen.dart';
@@ -39,7 +40,7 @@ class ResetPasswordConfirmScreenState
           ),
         );
       }).catchError((error) {
-        // Handle any errors
+        debugPrint(error);
       });
     }
   }
@@ -58,11 +59,7 @@ class ResetPasswordConfirmScreenState
             children: <Widget>[
               ConfirmResetPasswordCode(controller: _codeController),
               ConfirmResetPasswordNewPassword(controller: _passwordController),
-              const SizedBox(height: 20),
-              FilledButton(
-                onPressed: _submit,
-                child: const Text('Submit'),
-              ),
+              ConfirmResetPasswordButton(onPressed: _submit),
             ],
           ),
         ),
