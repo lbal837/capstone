@@ -71,12 +71,11 @@ class UserDefaultRepository extends UserRepository {
       }),
     );
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
+    if (response.statusCode == 200) {
       debugPrint('Patient added to user');
     } else {
       debugPrint(
           'Error: status code ${response.statusCode}, response body: ${response.body}');
-      throw Exception('Failed to add patient to user');
     }
   }
 
