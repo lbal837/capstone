@@ -36,9 +36,11 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
   Future<void> getData() async {
     final user = await widget.userService.getCurrentUser();
     patientList = await widget.userRepository.fetchUserPatients(user!.email!);
-    setState(() {
-      isLoaded = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
   }
 
   @override
