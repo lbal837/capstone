@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ResetPasswordButton extends StatelessWidget {
+class InitiateResetPasswordButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const ResetPasswordButton({Key? key, required this.onPressed})
+  const InitiateResetPasswordButton({Key? key, required this.onPressed})
       : super(key: key);
 
   @override

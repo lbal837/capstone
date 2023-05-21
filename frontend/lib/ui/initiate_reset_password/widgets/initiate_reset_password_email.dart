@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ForgotPasswordEmail extends StatelessWidget {
-  const ForgotPasswordEmail({
+class InitiateResetPasswordEmail extends StatelessWidget {
+  const InitiateResetPasswordEmail({
     super.key,
     required TextEditingController emailController,
   }) : _emailController = emailController;
