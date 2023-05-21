@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirm_forgot_password/confirm_forgot_password_screen.dart';
+import 'package:frontend/ui/initiate_forgot_password/widgets/forgot_password_email.dart';
+import 'package:frontend/ui/initiate_forgot_password/widgets/forgot_password_reset_password_button.dart';
 
 class InitiateForgotPasswordScreen extends StatefulWidget {
   const InitiateForgotPasswordScreen({Key? key}) : super(key: key);
@@ -46,25 +48,8 @@ class ForgotPasswordScreenState extends State<InitiateForgotPasswordScreen> {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              TextFormField(
-                controller: _emailController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              FilledButton(
-                onPressed: _submit,
-                child: const Text('Reset Password'),
-              ),
+              ForgotPasswordEmail(emailController: _emailController),
+              ResetPasswordButton(onPressed: _submit),
             ],
           ),
         ),
