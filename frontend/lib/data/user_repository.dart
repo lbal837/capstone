@@ -60,7 +60,6 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
-  // This returns a failure even when it succeeds -> fix later lol
   @override
   Future<void> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
@@ -72,7 +71,7 @@ class UserDefaultRepository extends UserRepository {
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       debugPrint('Patient added to user');
     } else {
       debugPrint(
@@ -81,7 +80,6 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
-  // This returns a failure even when it succeeds -> fix later lol
   @override
   Future<void> subscribeToPatient(
       String caregiverEmail, String patientId) async {
