@@ -49,14 +49,41 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
       return const CircularProgressIndicator();
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        for (Patient patient in patientList)
-          ProfileBox(
-            name: patient.fullName,
-            id: patient.userId,
-            picture: patient.avatarImage,
+    return Stack(
+      children: [
+        SizedBox(
+          height: screenSize.height,
+          width: screenSize.width,
+          child: Column(
+            children: <Widget>[
+              for (Patient patient in patientList)
+                ProfileBox(
+                  name: patient.fullName,
+                  id: patient.userId,
+                  picture: patient.avatarImage,
+                ),
+              if (isLoggedIn)
+                LogoutUserButton(
+                    userService: userService, screenSize: screenSize)
+            ],
+          ),
+        ),
+        Positioned(
+          bottom: MediaQuery.of(context).size.height / 7,
+          right: MediaQuery.of(context).size.width / 25,
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddPatientScreen(),
+                ),
+              );
+            },
+            elevation: 5,
+            hoverElevation: 25,
+            heroTag: 'null',
+            child: const Icon(Icons.add),
           ),
         if (widget.isLoggedIn)
           LogoutUserButton(

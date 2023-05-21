@@ -28,15 +28,15 @@ class ProfileBox extends StatelessWidget {
       },
       child: Card(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: CircleAvatar(
-                  radius: 45, // Image radius
+                  radius: 35, // Image radius
                   backgroundImage: NetworkImage(
                     picture!,
                   )),
@@ -44,11 +44,18 @@ class ProfileBox extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
-              child: Text(name!),
+              child: Text(
+                name!,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Spacer(
+              flex: 2, // <-- SEE HERE
             ),
             Container(
-              padding: const EdgeInsets.all(10.0),
-              alignment: Alignment.center,
+              padding: const EdgeInsets.all(20.0),
+              alignment: Alignment.centerRight,
               child: const Text('Status'),
             ),
           ],

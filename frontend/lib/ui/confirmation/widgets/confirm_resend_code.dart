@@ -11,9 +11,9 @@ class ConfirmResendCode extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: onTap,
-        child: const Text(
-          'Resend Confirmation Code',
-          style: TextStyle(color: Colors.blueAccent),
+        child: TextButton(
+          onPressed: onTap,
+          child: const Text('Resend Confirmation Code'),
         ),
       ),
     );
