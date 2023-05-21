@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_confirmation_code.dart';
+import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_new_password.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
 class ConfirmResetPasswordScreen extends StatefulWidget {
@@ -56,19 +57,7 @@ class ResetPasswordConfirmScreenState
           child: Column(
             children: <Widget>[
               ConfirmResetPasswordCode(controller: _codeController),
-              TextFormField(
-                controller: _passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your new password';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'New Password',
-                ),
-                obscureText: true,
-              ),
+              ConfirmResetPasswordNewPassword(controller: _passwordController),
               const SizedBox(height: 20),
               FilledButton(
                 onPressed: _submit,
