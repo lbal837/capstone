@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/ui/initiate_forgot_password/initiate_forgot_password_screen.dart';
 
-class ForgotPasswordButton extends StatelessWidget {
-  const ForgotPasswordButton({
+class LoginForgotPasswordButton extends StatelessWidget {
+  const LoginForgotPasswordButton({
     super.key,
     required this.screenSize,
   });

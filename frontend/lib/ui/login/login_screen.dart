@@ -5,6 +5,7 @@ import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home_screen.dart';
+import 'package:frontend/ui/login/widgets/login_forgot_password_button.dart';
 import 'package:frontend/ui/login/widgets/login_go_back_button.dart';
 import 'package:frontend/ui/login/widgets/login_user_button.dart';
 import 'package:frontend/ui/login/widgets/login_user_email.dart';
@@ -99,6 +100,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return FutureBuilder(
         future: _getValues(),
         builder: (context, AsyncSnapshot<UserService> snapshot) {
@@ -119,6 +121,7 @@ class LoginScreenState extends State<LoginScreen> {
                         LoginUserEmail(widget: widget, user: _user),
                         LoginUserPassword(user: _user),
                         LoginUserButton(onPressed: () => submit(context)),
+                        LoginForgotPasswordButton(screenSize: screenSize),
                         LoginGoBackButton(
                           onPressed: () {
                             Navigator.pop(context);
