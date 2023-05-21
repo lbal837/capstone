@@ -4,11 +4,10 @@ import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
+import 'package:frontend/ui/home/widgets/home_forgot_password_button.dart';
 import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
-
-import 'widgets/home_forgot_password_button.dart';
 
 class _MyHomePageState extends State<MyHomePage> {
   final userService = UserService(userPool);
@@ -44,10 +43,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(height: 400,),
+                    const SizedBox(
+                      height: 400,
+                    ),
                     LoginUserButton(screenSize: screenSize),
-                    const SizedBox(height: 50,),
-                    const SizedBox(height: 40, child: Text('New User? Sign up below'),),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                      child: Text('New User? Sign up below'),
+                    ),
                     SignUpUserButton(screenSize: screenSize),
                     ConfirmUserButton(screenSize: screenSize),
                     ForgotPasswordButton(screenSize: screenSize),
