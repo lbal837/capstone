@@ -58,9 +58,12 @@ class ForgotPasswordScreenState extends State<InitiateForgotPasswordScreen> {
                   labelText: 'Email',
                 ),
               ),
-              ElevatedButton(
+              const SizedBox(
+                height: 20,
+              ),
+              FilledButton(
                 onPressed: _submit,
-                child: const Text('Submit'),
+                child: const Text('Reset Password'),
               ),
             ],
           ),
