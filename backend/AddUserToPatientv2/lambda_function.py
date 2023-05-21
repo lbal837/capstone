@@ -24,7 +24,9 @@ def add_patient_to_user(user_id, patient_id):
             cur.execute("SELECT patient_ids FROM users WHERE email = %s", (user_id,))
             result = cur.fetchone()
             if result:
-                patient_ids = result[0] or []
+                patient_ids = result[0]
+                if patient_ids is None:
+                    patient_ids = []
             else:
                 return {"error": "User not found"}
 
@@ -39,6 +41,8 @@ def add_patient_to_user(user_id, patient_id):
                 )
 
     conn.close()
+    print(result)
+    return result
 
 # Lambda function
 def lambda_handler(event, context):
@@ -51,11 +55,24 @@ def lambda_handler(event, context):
     body = json.loads(event["body"])
     user_id = body["UserId"]
     patient_id = body["PatientId"]
-    
+
     try:
         result = add_patient_to_user(user_id, patient_id)
+        print(result)
         if "error" in result:
-            return {"status": "error", "message": result["error"]}
-        return {"status": "success"}
+            return {
+                "statusCode": 404,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"status": "error", "message": result["error"]})
+            }
+        return {
+            "statusCode": 200,
+            "headers": {"Content-Type": "application/json"},
+            "body": json.dumps({"status": "success"})
+        }
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        return {
+            "statusCode": 500,
+            "headers": {"Content-Type": "application/json"},
+            "body": json.dumps({"status": "error", "message": str(e)})
+        }
