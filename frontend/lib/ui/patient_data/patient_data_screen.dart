@@ -61,9 +61,8 @@ class PatientDataScreenState extends State<PatientDataScreen> {
 }
 
 class PatientDataScreen extends StatefulWidget {
-  const PatientDataScreen({super.key, required this.title, required this.userId});
+  const PatientDataScreen({super.key, required this.userId});
 
-  final String title;
   final String userId;
 
   @override

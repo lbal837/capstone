@@ -30,11 +30,9 @@ final Map<String, WidgetBuilder> routes = {
   '/patientData': (context) {
     final Map<String, dynamic> arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final String title = arguments['title'] as String;
     final String userId = arguments['userId'] as String;
 
     return PatientDataScreen(
-      title: title,
       userId: userId,
     );
   },
