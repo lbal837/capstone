@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirm_reset_password/confirm_reset_password_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/widgets/initiate_reset_password_button.dart';
 import 'package:frontend/ui/initiate_reset_password/widgets/initiate_reset_password_email.dart';
 
@@ -21,15 +20,10 @@ class ForgotPasswordScreenState extends State<InitiateResetPasswordScreen> {
     if (_formKey.currentState!.validate()) {
       userService.resetPassword(_emailController.text).then((_) {
         // After successful password reset initiation, navigate to ResetPasswordConfirmScreen
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ConfirmResetPasswordScreen(
-              email: _emailController.text,
-              userService: userService,
-            ),
-          ),
-        );
+        Navigator.pushNamed(context, '/confirmResetPassword', arguments: {
+          'email': _emailController.text,
+          'userService': userService,
+        });
       }).catchError((error) {
         // Handle any errors
       });

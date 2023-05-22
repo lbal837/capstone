@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/login/login_screen.dart';
 
 class LoginUserButton extends StatelessWidget {
   const LoginUserButton({
@@ -16,8 +15,7 @@ class LoginUserButton extends StatelessWidget {
       width: screenSize.width,
       child: FilledButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()));
+          Navigator.pushNamed(context, '/login');
         },
         child: const Text(
           'Login',

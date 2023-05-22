@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 
 class ConfirmUserButton extends StatelessWidget {
   const ConfirmUserButton({
@@ -16,9 +15,9 @@ class ConfirmUserButton extends StatelessWidget {
       width: screenSize.width,
       child: FilledButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushNamed(
             context,
-            MaterialPageRoute(builder: (context) => const ConfirmationScreen()),
+            '/confirmAccount',
           );
         },
         child: const Text(
