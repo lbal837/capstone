@@ -21,7 +21,7 @@ class PatientsPortalLogoutUserButton extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      const HomeScreen(title: 'Successfully logged out')),
+                      const HomeScreen()),
               (Route<dynamic> route) => false);
         },
         child: const Text(

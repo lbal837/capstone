@@ -77,9 +77,7 @@ class LoginScreenState extends State<LoginScreen> {
             } else {
               await Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const HomeScreen(title: 'Login Successful')),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                   (Route<dynamic> route) => false);
             }
           }
