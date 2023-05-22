@@ -19,20 +19,20 @@ class AddPatientScreenState extends State<AddPatientScreen> {
   final UserService _userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
-  Future<void> _subscribeToPatient() async {
+  Future<bool> _subscribeToPatient() async {
     final caregiver = await _userService.getCurrentUser();
     final patientId = _patientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
-    await userRepository.subscribeToPatient(caregiverEmail!, patientId);
+    return userRepository.subscribeToPatient(caregiverEmail!, patientId);
   }
 
-  Future<void> _addPatientToUser() async {
+  Future<bool> _addPatientToUser() async {
     final caregiver = await _userService.getCurrentUser();
     final patientId = _patientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
-    await userRepository.addPatientToUser(caregiverEmail!, patientId);
+    return userRepository.addPatientToUser(caregiverEmail!, patientId);
   }
 
   @override
