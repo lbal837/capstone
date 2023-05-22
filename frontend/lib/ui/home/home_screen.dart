@@ -5,6 +5,7 @@ import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
+import 'package:frontend/ui/home/widgets/home_icon.dart';
 import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
@@ -49,15 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Stack(
                       alignment: Alignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(80.0),
-                          child: Image.asset(
-                            'assets/images/icon.png',
-                            width: 160,
-                            height: 160,
-                          ),
-                        ),
+                      children: const [
+                        HomeIcon(imagePath: 'assets/images/icon.png'),
                       ],
                     ),
                     const SizedBox(
