@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class AddPatientButton extends StatelessWidget {
-  final Future<void> Function() subscribeToPatient;
-  final Future<void> Function() addPatientToUser;
+  final Future<bool> Function() subscribeToPatient;
+  final Future<bool> Function() addPatientToUser;
 
   const AddPatientButton({
     Key? key,
@@ -22,18 +20,22 @@ class AddPatientButton extends StatelessWidget {
         top: 10.0,
       ),
       child: ElevatedButton(
-        onPressed: () {
-          final completer = Completer<void>();
+        onPressed: () async {
           try {
-            subscribeToPatient().then((_) => addPatientToUser()).then((_) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            final bool subscribeSuccess = await subscribeToPatient();
+            final bool addUserSuccess = await addPatientToUser();
+
+            if (subscribeSuccess && addUserSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text('Patient successfully added and subscribed!')));
-              completer.complete();
-            });
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Failed to add or subscribe patient!')));
+            }
           } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text('Failed to add or subscribe patient!')));
-            completer.completeError(e);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content:
+                    Text('Failed to add or subscribe patient! Error: $e')));
           }
         },
         child: const Text('Add Patient'),
