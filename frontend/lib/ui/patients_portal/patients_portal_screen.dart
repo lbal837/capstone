@@ -5,6 +5,7 @@ import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
+import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 
 class PatientPortalScreen extends StatefulWidget {
@@ -68,7 +69,7 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
                   picture: patient.avatarImage,
                 ),
               if (widget.isLoggedIn)
-                LogoutUserButton(
+                PatientsPortalLogoutUserButton(
                     userService: widget.userService, screenSize: screenSize)
             ],
           ),
@@ -76,7 +77,7 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
         Positioned(
           bottom: MediaQuery.of(context).size.height / 7,
           right: MediaQuery.of(context).size.width / 25,
-          child: FloatingActionButton(
+          child: PatientsPortalAddUserButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -85,10 +86,6 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
                 ),
               );
             },
-            elevation: 5,
-            hoverElevation: 25,
-            heroTag: 'null',
-            child: const Icon(Icons.add),
           ),
         ),
       ],
