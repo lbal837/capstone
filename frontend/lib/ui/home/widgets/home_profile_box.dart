@@ -20,8 +20,7 @@ class ProfileBox extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    PatientDataScreen(title: 'LifeSavers', userId: id!)),
+                builder: (context) => PatientDataScreen(userId: id!)),
           );
         }
       },
