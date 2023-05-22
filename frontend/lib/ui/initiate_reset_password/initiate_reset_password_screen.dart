@@ -21,15 +21,10 @@ class ForgotPasswordScreenState extends State<InitiateResetPasswordScreen> {
     if (_formKey.currentState!.validate()) {
       userService.resetPassword(_emailController.text).then((_) {
         // After successful password reset initiation, navigate to ResetPasswordConfirmScreen
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ConfirmResetPasswordScreen(
-              email: _emailController.text,
-              userService: userService,
-            ),
-          ),
-        );
+        Navigator.pushNamed(context, '/confirmResetPassword', arguments: {
+          'email': _emailController.text,
+          'userService': userService,
+        });
       }).catchError((error) {
         // Handle any errors
       });
