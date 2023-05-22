@@ -162,6 +162,6 @@ class UserService {
       String email, String confirmationCode, String newPassword) async {
     final cognitoUser =
         CognitoUser(email, _userPool, storage: _userPool.storage);
-    return await cognitoUser.confirmPassword(confirmationCode, newPassword);
+    return cognitoUser.confirmPassword(confirmationCode, newPassword);
   }
 }

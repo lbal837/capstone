@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 
 class ConfirmUserButton extends StatelessWidget {
   const ConfirmUserButton({
