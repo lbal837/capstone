@@ -48,7 +48,7 @@ class MyAppState extends State<MyApp> {
           useMaterial3: true,
           colorScheme: darkColorScheme),
       routes: routes,
-      home: const HomeScreen(title: 'LifeSavers'),
+      home: const HomeScreen(),
     );
   }
 }
