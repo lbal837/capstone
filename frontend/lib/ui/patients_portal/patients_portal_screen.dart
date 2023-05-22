@@ -68,7 +68,7 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
                   picture: patient.avatarImage,
                 ),
               if (widget.isLoggedIn)
-                LogoutUserButton(
+                PatientsPortalLogoutUserButton(
                     userService: widget.userService, screenSize: screenSize)
             ],
           ),
