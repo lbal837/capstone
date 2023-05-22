@@ -17,11 +17,8 @@ class ProfileBox extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (id != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PatientDataScreen(userId: id!)),
-          );
+          Navigator.pushNamed(context, '/patientData',
+              arguments: {'userId': id});
         }
       },
       child: Card(
