@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/login/login_screen.dart';
 
 class LoginUserButton extends StatelessWidget {
   const LoginUserButton({

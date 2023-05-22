@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_screen.dart';
 
 class LoginResetPasswordButton extends StatelessWidget {
   const LoginResetPasswordButton({

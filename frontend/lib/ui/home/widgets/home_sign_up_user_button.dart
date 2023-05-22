@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/signup/signup_screen.dart';
 
 class SignUpUserButton extends StatelessWidget {
   const SignUpUserButton({
