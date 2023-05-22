@@ -8,9 +8,9 @@ import 'package:http/http.dart' as http;
 abstract class UserRepository {
   Future<List<Patient>> fetchUserPatients(String caregiverEmail);
 
-  Future<void> addPatientToUser(String userId, String patientId);
+  Future<bool> addPatientToUser(String userId, String patientId);
 
-  Future<void> subscribeToPatient(String caregiverEmail, String patientId);
+  Future<bool> subscribeToPatient(String caregiverEmail, String patientId);
 
   Future<Patient> fetchPatient(String id);
 }
@@ -61,7 +61,7 @@ class UserDefaultRepository extends UserRepository {
   }
 
   @override
-  Future<void> addPatientToUser(String userId, String patientId) async {
+  Future<bool> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/AddUserToPatientv2'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -73,14 +73,16 @@ class UserDefaultRepository extends UserRepository {
 
     if (response.statusCode == 200) {
       debugPrint('Patient added to user');
+      return true;
     } else {
       debugPrint(
           'Error: status code ${response.statusCode}, response body: ${response.body}');
+      return false;
     }
   }
 
   @override
-  Future<void> subscribeToPatient(
+  Future<bool> subscribeToPatient(
       String caregiverEmail, String patientId) async {
     const apiUrl = '$apiEndpoint/SubscribeCaregiverToPatient';
 
@@ -99,12 +101,15 @@ class UserDefaultRepository extends UserRepository {
 
       if (response.statusCode == 200) {
         debugPrint('Subscribed to patient with ID: $patientId');
+        return true;
       } else {
         debugPrint(
             'Failed to subscribe to patient. Status code: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
       debugPrint('Failed to subscribe to patient: $e');
+      return false;
     }
   }
 }
