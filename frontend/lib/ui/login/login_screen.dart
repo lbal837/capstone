@@ -24,11 +24,9 @@ class LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _userService = UserService(userPool);
   User _user = User();
-  bool _isAuthenticated = false;
 
   Future<UserService> _getValues() async {
     await _userService.init();
-    _isAuthenticated = await _userService.checkAuthenticated();
     return _userService;
   }
 
@@ -105,9 +103,6 @@ class LoginScreenState extends State<LoginScreen> {
         future: _getValues(),
         builder: (context, AsyncSnapshot<UserService> snapshot) {
           if (snapshot.hasData) {
-            if (_isAuthenticated) {
-              return const MyHomePage(title: 'You are authenticated');
-            }
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Login'),
