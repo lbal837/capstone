@@ -7,7 +7,6 @@ import 'package:frontend/ui/confirmation/widgets/confirm_resend_code.dart';
 import 'package:frontend/ui/confirmation/widgets/confirm_user_button.dart';
 import 'package:frontend/ui/confirmation/widgets/confirm_user_code.dart';
 import 'package:frontend/ui/confirmation/widgets/confirm_user_email.dart';
-import 'package:frontend/ui/login/login_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
   const ConfirmationScreen({Key? key, this.email}) : super(key: key);
@@ -57,10 +56,9 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
         onPressed: () {
           if (accountConfirmed) {
             Navigator.pop(context);
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                  builder: (context) => LoginScreen(email: _user.email)),
+              '/login',
             );
           }
         },

@@ -7,7 +7,7 @@ import 'package:frontend/ui/patient_data/widgets/patient_data_profile_header.dar
 import 'package:frontend/ui/patient_data/widgets/patient_data_sleep.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_step_count.dart';
 
-class _PatientInfoPageState extends State<PatientPage> {
+class PatientDataScreenState extends State<PatientDataScreen> {
   Patient? patient;
   bool isLoaded = false;
 
@@ -19,7 +19,7 @@ class _PatientInfoPageState extends State<PatientPage> {
 
   Future<void> getData() async {
     final UserRepository userRepository = UserDefaultRepository();
-    patient = await userRepository.fetchPatient(widget.userid!);
+    patient = await userRepository.fetchPatient(widget.userId);
     if (patient != null) {
       setState(() {
         isLoaded = true;
@@ -60,12 +60,11 @@ class _PatientInfoPageState extends State<PatientPage> {
   }
 }
 
-class PatientPage extends StatefulWidget {
-  const PatientPage({super.key, required this.title, this.userid});
+class PatientDataScreen extends StatefulWidget {
+  const PatientDataScreen({super.key, required this.userId});
 
-  final String title;
-  final String? userid;
+  final String userId;
 
   @override
-  State<PatientPage> createState() => _PatientInfoPageState();
+  State<PatientDataScreen> createState() => PatientDataScreenState();
 }

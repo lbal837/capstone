@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 
 class ProfileBox extends StatelessWidget {
   const ProfileBox({
@@ -15,20 +14,14 @@ class ProfileBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      //inkwell should make card clickable
       onTap: () {
         if (id != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    PatientPage(title: 'LifeSavers', userid: id!)),
-          );
+          Navigator.pushNamed(context, '/patientData',
+              arguments: {'userId': id});
         }
       },
       child: Card(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.all(20.0),
@@ -40,7 +33,7 @@ class ProfileBox extends StatelessWidget {
                   backgroundImage: NetworkImage(
                     picture!,
                   )),
-            ), //size: 70)),
+            ),
             Container(
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
@@ -51,7 +44,7 @@ class ProfileBox extends StatelessWidget {
               ),
             ),
             const Spacer(
-              flex: 2, // <-- SEE HERE
+              flex: 2,
             ),
             Container(
               padding: const EdgeInsets.all(20.0),

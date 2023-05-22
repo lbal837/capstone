@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/signup/signup_screen.dart';
 
 class SignUpUserButton extends StatelessWidget {
   const SignUpUserButton({
@@ -16,9 +15,9 @@ class SignUpUserButton extends StatelessWidget {
       width: screenSize.width,
       child: FilledButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushNamed(
             context,
-            MaterialPageRoute(builder: (context) => const SignUpScreen()),
+            '/signup',
           );
         },
         child: const Text(

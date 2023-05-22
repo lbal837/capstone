@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_button.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_email.dart';
 import 'package:frontend/ui/signup/widgets/signup_user_full_name.dart';
@@ -56,11 +55,9 @@ class SignUpScreenState extends State<SignUpScreen> {
           if (signUpSuccess) {
             Navigator.pop(context);
             if (!_user.confirmed) {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ConfirmationScreen(email: _user.email!)),
+                '/confirmAccount',
               );
             }
           }
