@@ -15,7 +15,6 @@ class ProfileBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      //inkwell should make card clickable
       onTap: () {
         if (id != null) {
           Navigator.push(
@@ -39,7 +38,7 @@ class ProfileBox extends StatelessWidget {
                   backgroundImage: NetworkImage(
                     picture!,
                   )),
-            ), //size: 70)),
+            ),
             Container(
               padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
@@ -50,7 +49,7 @@ class ProfileBox extends StatelessWidget {
               ),
             ),
             const Spacer(
-              flex: 2, // <-- SEE HERE
+              flex: 2,
             ),
             Container(
               padding: const EdgeInsets.all(20.0),
