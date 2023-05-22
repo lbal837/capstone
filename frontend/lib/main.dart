@@ -41,7 +41,7 @@ class MyAppState extends State<MyApp> {
       title: 'LifeSavers',
       theme: ThemeData(fontFamily: 'Urbanist', useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(fontFamily: 'Urbanist', useMaterial3: true, colorScheme: darkColorScheme),
-      home: const MyHomePage(title: 'LifeSavers'),
+      home: const HomeScreen(title: 'LifeSavers'),
     );
   }
 }

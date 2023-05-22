@@ -10,7 +10,7 @@ import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 
-class _MyHomePageState extends State<MyHomePage> {
+class HomeScreenState extends State<HomeScreen> {
   final userService = UserService(userPool);
   final userRepository = UserDefaultRepository();
   List<Patient> patientList = [];
@@ -90,11 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => HomeScreenState();
 }

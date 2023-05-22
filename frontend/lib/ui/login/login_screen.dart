@@ -79,7 +79,7 @@ class LoginScreenState extends State<LoginScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const MyHomePage(title: 'Login Successful')),
+                          const HomeScreen(title: 'Login Successful')),
                   (Route<dynamic> route) => false);
             }
           }
