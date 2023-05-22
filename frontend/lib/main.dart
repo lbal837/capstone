@@ -5,6 +5,8 @@ import 'package:frontend/ui/home/home_screen.dart';
 import 'color_schemes.g.dart';
 import 'firebase_options.dart';
 
+import 'routes.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -32,17 +34,21 @@ class MyAppState extends State<MyApp> {
     debugPrint('FCM Token: $fcmToken');
   }
 
-  
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LifeSavers',
-      theme: ThemeData(fontFamily: 'Urbanist', useMaterial3: true, colorScheme: lightColorScheme),
-      darkTheme: ThemeData(fontFamily: 'Urbanist', useMaterial3: true, colorScheme: darkColorScheme),
+      theme: ThemeData(
+          fontFamily: 'Urbanist',
+          useMaterial3: true,
+          colorScheme: lightColorScheme),
+      darkTheme: ThemeData(
+          fontFamily: 'Urbanist',
+          useMaterial3: true,
+          colorScheme: darkColorScheme),
+      routes: routes,
       home: const HomeScreen(title: 'LifeSavers'),
     );
   }
 }
-
