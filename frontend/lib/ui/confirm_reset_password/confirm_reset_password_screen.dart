@@ -33,11 +33,9 @@ class ResetPasswordConfirmScreenState
         _passwordController.text,
       )
           .then((_) {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ),
+          '/login',
         );
       }).catchError((error) {
         debugPrint(error);

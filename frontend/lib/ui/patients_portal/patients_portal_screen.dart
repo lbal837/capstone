@@ -79,11 +79,9 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
           right: MediaQuery.of(context).size.width / 25,
           child: PatientsPortalAddUserButton(
             onPressed: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const AddPatientScreen(),
-                ),
+                '/addPatient',
               );
             },
           ),

@@ -16,11 +16,7 @@ class LoginResetPasswordButton extends StatelessWidget {
       width: screenSize.width,
       child: FilledButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const InitiateResetPasswordScreen()),
-          );
+          Navigator.pushNamed(context, '/initiateResetPassword');
         },
         child: const Text(
           'Forgot Password',
