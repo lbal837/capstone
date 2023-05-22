@@ -22,13 +22,12 @@ class ProfileBox extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    PatientPage(title: 'LifeSavers', userid: id!)),
+                    PatientDataScreen(title: 'LifeSavers', userid: id!)),
           );
         }
       },
       child: Card(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.all(20.0),
