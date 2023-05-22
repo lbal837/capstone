@@ -17,12 +17,8 @@ class PatientsPortalLogoutUserButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {
           userService.signOut();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const HomeScreen()),
-              (Route<dynamic> route) => false);
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/home', (Route<dynamic> route) => false);
         },
         child: const Text(
           'Logout',

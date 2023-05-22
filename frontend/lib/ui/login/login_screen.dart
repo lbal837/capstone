@@ -75,10 +75,8 @@ class LoginScreenState extends State<LoginScreen> {
                           email: _user.email ?? 'no email found')),
                   (Route<dynamic> route) => false);
             } else {
-              await Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  (Route<dynamic> route) => false);
+              await Navigator.pushNamedAndRemoveUntil(
+                  context, '/home', (Route<dynamic> route) => false);
             }
           }
         },
