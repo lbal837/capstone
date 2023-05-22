@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
+import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_button.dart';
+import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_confirmation_code.dart';
+import 'package:frontend/ui/confirm_reset_password/widgets/confirm_reset_password_new_password.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 
-class ResetPasswordConfirmScreen extends StatefulWidget {
+class ConfirmResetPasswordScreen extends StatefulWidget {
   final String email;
   final UserService userService;
 
-  const ResetPasswordConfirmScreen(
+  const ConfirmResetPasswordScreen(
       {Key? key, required this.email, required this.userService})
       : super(key: key);
 
@@ -16,7 +19,7 @@ class ResetPasswordConfirmScreen extends StatefulWidget {
 }
 
 class ResetPasswordConfirmScreenState
-    extends State<ResetPasswordConfirmScreen> {
+    extends State<ConfirmResetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _codeController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -37,7 +40,7 @@ class ResetPasswordConfirmScreenState
           ),
         );
       }).catchError((error) {
-        // Handle any errors
+        debugPrint(error);
       });
     }
   }
@@ -54,36 +57,9 @@ class ResetPasswordConfirmScreenState
           key: _formKey,
           child: Column(
             children: <Widget>[
-              TextFormField(
-                controller: _codeController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the confirmation code';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Confirmation Code',
-                ),
-              ),
-              TextFormField(
-                controller: _passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your new password';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'New Password',
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 20),
-              FilledButton(
-                onPressed: _submit,
-                child: const Text('Submit'),
-              ),
+              ConfirmResetPasswordCode(controller: _codeController),
+              ConfirmResetPasswordNewPassword(controller: _passwordController),
+              ConfirmResetPasswordButton(onPressed: _submit),
             ],
           ),
         ),
