@@ -18,7 +18,7 @@ class ConfirmUserButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         child: const Text(
-          'Send Confirmation Code',
+          'Confirm email address',
         ),
       ),
     );

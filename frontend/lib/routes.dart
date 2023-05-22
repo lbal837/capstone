@@ -7,6 +7,7 @@ import 'package:frontend/ui/home/home_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_screen.dart';
 import 'package:frontend/ui/login/login_screen.dart';
 import 'package:frontend/ui/patient_data/patient_data_screen.dart';
+import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 import 'package:frontend/ui/signup/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -34,6 +35,17 @@ final Map<String, WidgetBuilder> routes = {
 
     return PatientDataScreen(
       userId: userId,
+    );
+  },
+  '/patientsPortal': (context) {
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final UserService userService = arguments['userService'] as UserService;
+    final bool isLoggedIn = arguments['isLoggedIn'] as bool;
+    final bool isLoaded = arguments['isLoaded'] as bool;
+
+    return PatientPortalScreen(
+      userService: userService, isLoggedIn: isLoggedIn, isLoaded: isLoaded,
     );
   },
 };
