@@ -16,8 +16,7 @@ class LoginUserButton extends StatelessWidget {
       width: screenSize.width,
       child: FilledButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()));
+          Navigator.pushNamed(context, '/login');
         },
         child: const Text(
           'Login',

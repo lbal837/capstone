@@ -4,6 +4,7 @@ import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_screen.dart';
 import 'package:frontend/ui/login/login_screen.dart';
+import 'package:frontend/ui/signup/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   '/addPatient': (context) => const AddPatientScreen(),
@@ -14,5 +15,6 @@ final Map<String, WidgetBuilder> routes = {
   '/login':(context) => const LoginScreen(),
   // '/patientData':(context) => const PatientDataScreen(),
   // '/patientsPortal': (context) => PatientPortalScreen(),
+  '/signup':(context) => const SignUpScreen(),
 };
 

@@ -16,9 +16,9 @@ class ConfirmUserButton extends StatelessWidget {
       width: screenSize.width,
       child: FilledButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushNamed(
             context,
-            MaterialPageRoute(builder: (context) => const ConfirmationScreen()),
+            '/confirmAccount',
           );
         },
         child: const Text(
