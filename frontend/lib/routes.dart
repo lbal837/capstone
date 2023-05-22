@@ -10,13 +10,20 @@ import 'package:frontend/ui/signup/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   '/addPatient': (context) => const AddPatientScreen(),
-  // '/confirmResetPassword':(context) => const ConfirmResetPasswordScreen(),
+  '/confirmResetPassword': (context) {
+    final Map<String, dynamic> arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final String email = arguments['email'] as String;
+    final UserService userService = arguments['userService'] as UserService;
+
+    return ConfirmResetPasswordScreen(
+      email: email,
+      userService: userService,
+    );
+  },
   '/confirmAccount': (context) => const ConfirmationScreen(),
   '/home':(context) => const HomeScreen(),
   '/initiateResetPassword':(context) => const InitiateResetPasswordScreen(),
   '/login':(context) => const LoginScreen(),
-  // '/patientData':(context) => const PatientDataScreen(),
-  // '/patientsPortal': (context) => PatientPortalScreen(),
   '/signup':(context) => const SignUpScreen(),
 };
 
