@@ -6,12 +6,14 @@ import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_screen.dart';
 import 'package:frontend/ui/login/login_screen.dart';
+import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 import 'package:frontend/ui/signup/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   '/addPatient': (context) => const AddPatientScreen(),
   '/confirmResetPassword': (context) {
-    final Map<String, dynamic> arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final String email = arguments['email'] as String;
     final UserService userService = arguments['userService'] as UserService;
 
@@ -21,10 +23,21 @@ final Map<String, WidgetBuilder> routes = {
     );
   },
   '/confirmAccount': (context) => const ConfirmationScreen(),
-  '/home':(context) => const HomeScreen(),
-  '/initiateResetPassword':(context) => const InitiateResetPasswordScreen(),
-  '/login':(context) => const LoginScreen(),
-  '/signup':(context) => const SignUpScreen(),
+  '/home': (context) => const HomeScreen(),
+  '/initiateResetPassword': (context) => const InitiateResetPasswordScreen(),
+  '/login': (context) => const LoginScreen(),
+  '/signup': (context) => const SignUpScreen(),
+  '/patientData': (context) {
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final String title = arguments['title'] as String;
+    final String userId = arguments['userId'] as String;
+
+    return PatientDataScreen(
+      title: title,
+      userId: userId,
+    );
+  },
 };
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
@@ -33,20 +46,7 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
 
   if (builder != null) {
     return MaterialPageRoute<dynamic>(
-      builder: (context) {
-        if (name == '/confirmResetPassword') {
-          final Map<String, dynamic> arguments = settings.arguments as Map<String, dynamic>;
-          final String email = arguments['email'] as String;
-          final UserService userService = arguments['userService'] as UserService;
-
-          return ConfirmResetPasswordScreen(
-            email: email,
-            userService: userService,
-          );
-        }
-
-        return builder(context);
-      },
+      builder: builder,
       settings: settings,
     );
   }

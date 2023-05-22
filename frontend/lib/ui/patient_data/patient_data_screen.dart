@@ -19,7 +19,7 @@ class PatientDataScreenState extends State<PatientDataScreen> {
 
   Future<void> getData() async {
     final UserRepository userRepository = UserDefaultRepository();
-    patient = await userRepository.fetchPatient(widget.userid);
+    patient = await userRepository.fetchPatient(widget.userId);
     if (patient != null) {
       setState(() {
         isLoaded = true;
@@ -61,10 +61,10 @@ class PatientDataScreenState extends State<PatientDataScreen> {
 }
 
 class PatientDataScreen extends StatefulWidget {
-  const PatientDataScreen({super.key, required this.title, required this.userid});
+  const PatientDataScreen({super.key, required this.title, required this.userId});
 
   final String title;
-  final String userid;
+  final String userId;
 
   @override
   State<PatientDataScreen> createState() => PatientDataScreenState();
