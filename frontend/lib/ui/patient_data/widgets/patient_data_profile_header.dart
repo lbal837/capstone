@@ -35,8 +35,13 @@ class ProfileHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10.0),
           alignment: Alignment.center,
-          child:
-              const Text('[insert status]'), //i dont think we have status atm
+          child: Text(
+            isConnected ? 'Connected' : 'Disconnected',
+            style: TextStyle(
+              color: isConnected ? Colors.green : Colors.red,
+              fontWeight: FontWeight.bold,
+            ),
+          ), //i dont think we have status atm
         ),
       ],
     );
