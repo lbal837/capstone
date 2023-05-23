@@ -45,6 +45,12 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
     }
   }
 
+  bool isWithinOneMinute(String dateTimeString) {
+    final dateTime = DateTime.parse(dateTimeString);
+    final difference = DateTime.now().difference(dateTime);
+    return difference.inMinutes.abs() <= 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -67,6 +73,7 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
                   name: patient.fullName,
                   id: patient.userId,
                   picture: patient.avatarImage,
+                  isConnected: isWithinOneMinute(patient.dateTime),
                 ),
               if (widget.isLoggedIn)
                 PatientsPortalLogoutUserButton(
