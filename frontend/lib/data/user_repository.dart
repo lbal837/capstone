@@ -10,7 +10,7 @@ abstract class UserRepository {
 
   Future<bool> addPatientToUser(String userId, String patientId);
 
-  Future<bool> removePatientFromUser(String caregiverEmail, String patientId);
+  Future<bool> removePatientFromUser(String userId, String patientId);
 
   Future<bool> subscribeToPatient(String caregiverEmail, String patientId);
 
@@ -119,32 +119,23 @@ class UserDefaultRepository extends UserRepository {
 
   @override
   Future<bool> removePatientFromUser(
-      String caregiverEmail, String patientId) async {
-    const apiUrl = '$apiEndpoint/RemovePatientFromUser';
+      String userId, String patientId) async {
 
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        body: jsonEncode({
-          'caregiver_email': caregiverEmail,
-          'patient_id': patientId,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-        },
-      );
+    final response = await http.post(
+      Uri.parse('$apiEndpoint/RemovePatientFromCaregiver'),
+      headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
+      body: jsonEncode(<String, String>{
+        'UserId': userId,
+        'PatientId': patientId,
+      }),
+    );
 
-      if (response.statusCode == 200) {
-        debugPrint('Removed patient with ID: $patientId');
-        return true;
-      } else {
-        debugPrint(
-            'Failed to remove patient. Status code: ${response.statusCode}');
-        return false;
-      }
-    } catch (e) {
-      debugPrint('Failed to remove patient: $e');
+    if (response.statusCode == 200) {
+      debugPrint('Patient removed from user');
+      return true;
+    } else {
+      debugPrint(
+          'Error: status code ${response.statusCode}, response body: ${response.body}');
       return false;
     }
   }
