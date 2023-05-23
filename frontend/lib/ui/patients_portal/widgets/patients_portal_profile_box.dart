@@ -51,7 +51,13 @@ class ProfileBox extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20.0),
               alignment: Alignment.centerRight,
-              child: const Text('Status'),
+              child: Text(
+                isConnected ? 'Connected' : 'Disconnected',
+                style: TextStyle(
+                  color: isConnected ? Colors.green : Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
