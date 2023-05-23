@@ -6,10 +6,12 @@ class ProfileBox extends StatelessWidget {
     required this.name,
     required this.id,
     required this.picture,
+    required this.isConnected,
   }) : super(key: key);
   final String? name;
   final String? id;
   final String? picture;
+  final bool isConnected;
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
 import 'color_schemes.g.dart';
 import 'firebase_options.dart';
-
 import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Pacific/Auckland'));
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
