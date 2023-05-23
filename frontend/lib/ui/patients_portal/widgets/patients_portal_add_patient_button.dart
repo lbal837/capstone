@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PatientsPortalAddUserButton extends StatelessWidget {
+class PatientsPortalAddPatientButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const PatientsPortalAddUserButton({
+  const PatientsPortalAddPatientButton({
     Key? key,
     required this.onPressed,
   }) : super(key: key);

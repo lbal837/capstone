@@ -76,7 +76,7 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
         Positioned(
           bottom: MediaQuery.of(context).size.height / 7,
           right: MediaQuery.of(context).size.width / 25,
-          child: PatientsPortalAddUserButton(
+          child: PatientsPortalAddPatientButton(
             onPressed: () {
               Navigator.pushNamed(
                 context,
