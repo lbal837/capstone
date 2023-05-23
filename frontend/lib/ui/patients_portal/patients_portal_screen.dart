@@ -6,6 +6,7 @@ import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/home/widgets/home_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
+import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
 
 class PatientPortalScreen extends StatefulWidget {
   final UserRepository userRepository = UserDefaultRepository();
@@ -81,6 +82,18 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
               Navigator.pushNamed(
                 context,
                 '/addPatient',
+              );
+            },
+          ),
+        ),
+        Positioned(
+          bottom: MediaQuery.of(context).size.height / 2,
+          right: MediaQuery.of(context).size.width / 12,
+          child: PatientsPortalRemovePatientButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/removePatient',
               );
             },
           ),
