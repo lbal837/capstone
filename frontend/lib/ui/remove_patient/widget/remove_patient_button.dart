@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AddPatientButton extends StatelessWidget {
-  final Future<bool> Function() subscribeToPatient;
-  final Future<bool> Function() addPatientToUser;
+class RemovePatientButton extends StatelessWidget {
+  final Future<bool> Function() unsubscribeFromPatient;
+  final Future<bool> Function() removePatientFromUser;
 
-  const AddPatientButton({
+  const RemovePatientButton({
     Key? key,
-    required this.subscribeToPatient,
-    required this.addPatientToUser,
+    required this.unsubscribeFromPatient,
+    required this.removePatientFromUser,
   }) : super(key: key);
 
   @override
@@ -23,26 +23,26 @@ class AddPatientButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () async {
           try {
-            final bool subscribeSuccess = await subscribeToPatient();
-            final bool addUserSuccess = await addPatientToUser();
+            final bool subscribeSuccess = await unsubscribeFromPatient();
+            final bool addUserSuccess = await removePatientFromUser();
 
             if (subscribeSuccess && addUserSuccess) {
               scaffoldMessenger.showSnackBar(const SnackBar(
                   duration: Duration(milliseconds: 1000),
-                  content: Text('Patient successfully added and subscribed!')));
+                  content: Text('Patient successfully removed and unsubscribed!')));
             } else {
               scaffoldMessenger.showSnackBar(const SnackBar(
                   duration: Duration(milliseconds: 1000),
-                  content: Text('Failed to add or subscribe patient!')));
+                  content: Text('Failed to remove or unsubscribe patient!')));
             }
           } catch (e) {
             scaffoldMessenger.showSnackBar(SnackBar(
                 duration: const Duration(milliseconds: 1000),
                 content:
-                    Text('Failed to add or subscribe patient! Error: $e')));
+                Text('Failed to remove or unsubscribe patient! Error: $e')));
           }
         },
-        child: const Text('Add Patient'),
+        child: const Text('Remove Patient'),
       ),
     );
   }
