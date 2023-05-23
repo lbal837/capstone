@@ -13,6 +13,8 @@ abstract class UserRepository {
   Future<bool> subscribeToPatient(String caregiverEmail, String patientId);
 
   Future<Patient> fetchPatient(String id);
+
+  Future<bool> removePatient(String caregiverEmail, String patientId);
 }
 
 class UserDefaultRepository extends UserRepository {
@@ -109,6 +111,37 @@ class UserDefaultRepository extends UserRepository {
       }
     } catch (e) {
       debugPrint('Failed to subscribe to patient: $e');
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> removePatient(String caregiverEmail, String patientId) async {
+    const apiUrl = '$apiEndpoint/RemovePatientFromUser';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        body: jsonEncode({
+          'caregiver_email': caregiverEmail,
+          'patient_id': patientId,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        debugPrint('Removed patient with ID: $patientId');
+        return true;
+      } else {
+        debugPrint(
+            'Failed to remove patient. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      debugPrint('Failed to remove patient: $e');
       return false;
     }
   }
