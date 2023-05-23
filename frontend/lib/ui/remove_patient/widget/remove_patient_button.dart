@@ -28,16 +28,16 @@ class RemovePatientButton extends StatelessWidget {
 
             if (subscribeSuccess && addUserSuccess) {
               scaffoldMessenger.showSnackBar(const SnackBar(
-                  duration: Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 1000),
                   content: Text('Patient successfully removed and unsubscribed!')));
             } else {
               scaffoldMessenger.showSnackBar(const SnackBar(
-                  duration: Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 1000),
                   content: Text('Failed to remove or unsubscribe patient!')));
             }
           } catch (e) {
             scaffoldMessenger.showSnackBar(SnackBar(
-                duration: const Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 1000),
                 content:
                 Text('Failed to remove or unsubscribe patient! Error: $e')));
           }
