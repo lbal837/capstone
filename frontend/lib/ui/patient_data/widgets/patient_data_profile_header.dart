@@ -41,7 +41,7 @@ class ProfileHeader extends StatelessWidget {
               color: isConnected ? Colors.green : Colors.red,
               fontWeight: FontWeight.bold,
             ),
-          ), //i dont think we have status atm
+          ),
         ),
       ],
     );
