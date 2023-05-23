@@ -30,7 +30,13 @@ class ProfileHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(5.0),
           alignment: Alignment.center,
-          child: Text(name!),
+          child: Text(
+            name!,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            ),
+          ),
         ),
         Container(
           padding: const EdgeInsets.all(10.0),
