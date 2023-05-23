@@ -27,6 +27,12 @@ class PatientDataScreenState extends State<PatientDataScreen> {
     }
   }
 
+  bool isWithinOneMinute(String dateTimeString) {
+    final dateTime = DateTime.parse(dateTimeString);
+    final difference = DateTime.now().difference(dateTime);
+    return difference.inMinutes.abs() <= 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (isLoaded) {
@@ -39,7 +45,10 @@ class PatientDataScreenState extends State<PatientDataScreen> {
             ListView(
           children: <Widget>[
             ProfileHeader(
-                name: patient?.fullName, picture: patient?.avatarImage),
+              name: patient?.fullName,
+              picture: patient?.avatarImage,
+              isConnected: isWithinOneMinute(patient!.dateTime),
+            ),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
                 latitude: patient?.latitude, longitude: patient?.longitude),

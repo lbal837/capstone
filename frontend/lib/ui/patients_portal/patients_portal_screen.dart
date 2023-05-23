@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/home/widgets/home_profile_box.dart';
+import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
