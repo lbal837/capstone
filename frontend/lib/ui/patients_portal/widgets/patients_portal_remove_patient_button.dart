@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PatientsPortalAddPatientButton extends StatelessWidget {
+class PatientsPortalRemovePatientButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const PatientsPortalAddPatientButton({
+  const PatientsPortalRemovePatientButton({
     Key? key,
     required this.onPressed,
   }) : super(key: key);
@@ -11,11 +11,11 @@ class PatientsPortalAddPatientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      heroTag: 'addPatient',
+      heroTag: 'removePatient',
       onPressed: onPressed,
       elevation: 5,
       hoverElevation: 25,
-      child: const Icon(Icons.add),
+      child: const Icon(Icons.remove),
     );
   }
 }

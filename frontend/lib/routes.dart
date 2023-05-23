@@ -8,10 +8,12 @@ import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_scre
 import 'package:frontend/ui/login/login_screen.dart';
 import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
+import 'package:frontend/ui/remove_patient/remove_patient_screen.dart';
 import 'package:frontend/ui/signup/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   '/addPatient': (context) => const AddPatientScreen(),
+  '/removePatient': (context) => const RemovePatientScreen(),
   '/confirmResetPassword': (context) {
     final Map<String, dynamic> arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
@@ -45,7 +47,9 @@ final Map<String, WidgetBuilder> routes = {
     final bool isLoaded = arguments['isLoaded'] as bool;
 
     return PatientPortalScreen(
-      userService: userService, isLoggedIn: isLoggedIn, isLoaded: isLoaded,
+      userService: userService,
+      isLoggedIn: isLoggedIn,
+      isLoaded: isLoaded,
     );
   },
 };
