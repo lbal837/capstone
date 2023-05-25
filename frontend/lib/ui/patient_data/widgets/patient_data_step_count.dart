@@ -18,11 +18,18 @@ class StepCountWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   gradient: const RadialGradient(
                       radius: 4, colors: [Colors.transparent, Colors.white])),
-              child: const Icon(Icons.directions_walk, size: 60, color: Colors.green,)),
+              child: const Icon(
+                Icons.directions_walk,
+                size: 60,
+                color: Colors.green,
+              )),
           Container(
             padding: const EdgeInsets.all(5.0),
             alignment: Alignment.center,
-            child: const Text('Todays step count:'),
+            child: const Text(
+              'Todays step count:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(10.0),

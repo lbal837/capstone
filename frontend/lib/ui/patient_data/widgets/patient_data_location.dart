@@ -20,16 +20,21 @@ class GPSWidget extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                   gradient:
-                    const RadialGradient(
-                      radius: 4,
-                      colors: [Colors.transparent, Colors.white])),
-              child: const Icon(Icons.location_on, size: 60, color: Colors.cyan,)),
+                  gradient: const RadialGradient(
+                      radius: 4, colors: [Colors.transparent, Colors.white])),
+              child: const Icon(
+                Icons.location_on,
+                size: 60,
+                color: Colors.cyan,
+              )),
           const Spacer(),
           Container(
             padding: const EdgeInsets.all(5.0),
             alignment: Alignment.center,
-            child: const Text('Location:'),
+            child: const Text(
+              'Location:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             padding: const EdgeInsets.only(
