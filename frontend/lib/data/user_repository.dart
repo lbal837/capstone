@@ -11,11 +11,12 @@ abstract class UserRepository {
 
   Future<bool> addPatientToUser(String userId, String patientId);
 
-  Future<bool> removePatientFromUser(String userId, String patientId);
+  Future<Response> removePatientFromUser(String userId, String patientId);
 
   Future<Response> subscribeToPatient(String caregiverEmail, String patientId);
 
-  Future<Response> unsubscribeFromPatient(String caregiverEmail, String patientId);
+  Future<Response> unsubscribeFromPatient(
+      String caregiverEmail, String patientId);
 
   Future<Patient> fetchPatient(String id);
 }
@@ -126,9 +127,9 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
-  // Need to map
   @override
-  Future<bool> removePatientFromUser(String userId, String patientId) async {
+  Future<Response> removePatientFromUser(
+      String userId, String patientId) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/RemovePatientFromCaregiver'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -138,14 +139,14 @@ class UserDefaultRepository extends UserRepository {
       }),
     );
 
-    if (response.statusCode == 200) {
-      debugPrint('Patient removed from user');
-      return true;
-    } else {
-      debugPrint(
-          'Error: status code ${response.statusCode}, response body: ${response.body}');
-      return false;
-    }
+    final responseJson = jsonDecode(response.body);
+
+    debugPrint(responseJson['message']);
+
+    return Response(
+      isSuccess: response.statusCode == 200,
+      message: responseJson['message'],
+    );
   }
 
   @override
