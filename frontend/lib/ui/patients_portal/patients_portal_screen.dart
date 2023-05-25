@@ -3,9 +3,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
+import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
 import 'package:intl/intl.dart';
 
@@ -59,8 +59,9 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
     final screenSize = MediaQuery.of(context).size;
 
     if (!isLoaded) {
-      return const SpinKitPumpingHeart(
-        color: Colors.purple,
+      return const Center(
+        child: SpinKitPumpingHeart(
+        color: Colors.purple),
       );
     }
 
@@ -69,24 +70,40 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
         SizedBox(
           height: screenSize.height,
           width: screenSize.width,
-          child: Column(
-            children: <Widget>[
-              for (Patient patient in patientList)
-                ProfileBox(
-                  name: patient.fullName,
-                  id: patient.userId,
-                  picture: patient.avatarImage,
-                  isConnected: isWithinOneMinute(patient.dateTime),
-                ),
-              if (widget.isLoggedIn)
-                PatientsPortalLogoutUserButton(
-                    userService: widget.userService, screenSize: screenSize)
-            ],
-          ),
+          child: ListView(
+            children: 
+            <Widget>[
+                for (Patient patient in patientList)
+                  ProfileBox(
+                    name: patient.fullName,
+                    id: patient.userId,
+                    picture: patient.avatarImage,
+                    isConnected: isWithinOneMinute(patient.dateTime),
+                  ),
+                if (widget.isLoggedIn)
+                  PatientsPortalLogoutUserButton(
+                      userService: widget.userService, screenSize: screenSize)
+              ],
+          
+        
+              // <Widget>[
+              //   for (Patient patient in patientList)
+              //     ProfileBox(
+              //       name: patient.fullName,
+              //       id: patient.userId,
+              //       picture: patient.avatarImage,
+              //       isConnected: isWithinOneMinute(patient.dateTime),
+              //     ),
+              //   if (widget.isLoggedIn)
+              //     PatientsPortalLogoutUserButton(
+              //         userService: widget.userService, screenSize: screenSize)
+              // ],
+              ),
         ),
+
         Positioned(
-          bottom: MediaQuery.of(context).size.height / 7,
-          right: MediaQuery.of(context).size.width / 25,
+          bottom: MediaQuery.of(context).size.height / 8,
+          right: MediaQuery.of(context).size.width / 20,
           child: PatientsPortalAddPatientButton(
             onPressed: () {
               Navigator.pushNamed(
@@ -97,8 +114,8 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
           ),
         ),
         Positioned(
-          bottom: MediaQuery.of(context).size.height / 2,
-          right: MediaQuery.of(context).size.width / 12,
+          bottom: MediaQuery.of(context).size.height / 25,
+          right: MediaQuery.of(context).size.width / 20,
           child: PatientsPortalRemovePatientButton(
             onPressed: () {
               Navigator.pushNamed(
