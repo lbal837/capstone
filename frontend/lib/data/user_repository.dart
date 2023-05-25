@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 abstract class UserRepository {
   Future<List<Patient>> fetchUserPatients(String caregiverEmail);
 
-  Future<bool> addPatientToUser(String userId, String patientId);
+  Future<Response> addPatientToUser(String userId, String patientId);
 
   Future<Response> removePatientFromUser(String userId, String patientId);
 
@@ -22,7 +22,6 @@ abstract class UserRepository {
 }
 
 class UserDefaultRepository extends UserRepository {
-  // Need to map
   @override
   Future<Patient> fetchPatient(String id) async {
     final response = await http
@@ -41,7 +40,6 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
-  // Need to map
   @override
   Future<List<Patient>> fetchUserPatients(String caregiverEmail) async {
     final response = await http.get(
@@ -68,9 +66,8 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
-  // Need to map
   @override
-  Future<bool> addPatientToUser(String userId, String patientId) async {
+  Future<Response> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/AddUserToPatientv2'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -80,17 +77,14 @@ class UserDefaultRepository extends UserRepository {
       }),
     );
 
-    if (response.statusCode == 200) {
-      debugPrint('Patient added to user');
-      return true;
-    } else if (response.statusCode == 400) {
-      debugPrint('Patient already added to user');
-      return true;
-    } else {
-      debugPrint(
-          'Error: status code ${response.statusCode}, response body: ${response.body}');
-      return false;
-    }
+    final responseJson = jsonDecode(response.body);
+
+    debugPrint(responseJson['message']);
+
+    return Response(
+      isSuccess: response.statusCode == 200,
+      message: responseJson['message'],
+    );
   }
 
   @override
