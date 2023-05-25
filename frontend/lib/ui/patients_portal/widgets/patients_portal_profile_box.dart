@@ -6,10 +6,12 @@ class ProfileBox extends StatelessWidget {
     required this.name,
     required this.id,
     required this.picture,
+    required this.isConnected,
   }) : super(key: key);
   final String? name;
   final String? id;
   final String? picture;
+  final bool isConnected;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,13 @@ class ProfileBox extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20.0),
               alignment: Alignment.centerRight,
-              child: const Text('Status'),
+              child: Text(
+                isConnected ? 'Connected' : 'Disconnected',
+                style: TextStyle(
+                  color: isConnected ? Colors.green : Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

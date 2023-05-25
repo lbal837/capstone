@@ -6,6 +6,7 @@ import 'package:frontend/ui/patient_data/widgets/patient_data_location.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_profile_header.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_sleep.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_step_count.dart';
+import 'package:intl/intl.dart';
 
 class PatientDataScreenState extends State<PatientDataScreen> {
   Patient? patient;
@@ -27,6 +28,14 @@ class PatientDataScreenState extends State<PatientDataScreen> {
     }
   }
 
+  bool isWithinOneMinute(String dateTimeString) {
+    final format = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    final dateTime = format.parseUtc(dateTimeString);
+    final now = DateTime.now().toUtc().add(const Duration(hours: 12));
+    final difference = now.difference(dateTime);
+    return difference.inSeconds.abs() < 60;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (isLoaded) {
@@ -34,12 +43,13 @@ class PatientDataScreenState extends State<PatientDataScreen> {
         appBar: AppBar(
           title: const Text('Data Page'),
         ),
-        body:
-            //final patient_name = patient.fullName,
-            ListView(
+        body: ListView(
           children: <Widget>[
             ProfileHeader(
-                name: patient?.fullName, picture: patient?.avatarImage),
+              name: patient?.fullName,
+              picture: patient?.avatarImage,
+              isConnected: isWithinOneMinute(patient!.dateTime),
+            ),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
                 latitude: patient?.latitude, longitude: patient?.longitude),
