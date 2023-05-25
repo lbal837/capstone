@@ -25,10 +25,14 @@ class HomeScreenState extends State<HomeScreen> {
           future: userService.isLoggedIn(),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: SpinKitPumpingHeart(
-                  color: Colors.purple,
-                ),
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: SpinKitPumpingHeart(
+                  color: Colors.purple)
+                  )
+                  ,],
               );
             }
             final bool isLoggedIn = snapshot.data ?? false;
