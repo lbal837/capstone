@@ -7,6 +7,7 @@ import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
+import 'package:intl/intl.dart';
 
 class PatientPortalScreen extends StatefulWidget {
   final UserRepository userRepository = UserDefaultRepository();
@@ -46,9 +47,11 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
   }
 
   bool isWithinOneMinute(String dateTimeString) {
-    final dateTime = DateTime.parse(dateTimeString);
-    final difference = DateTime.now().difference(dateTime);
-    return difference.inMinutes.abs() <= 1;
+    final format = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    final dateTime = format.parseUtc(dateTimeString);
+    final now = DateTime.now().toUtc().add(const Duration(hours: 12));
+    final difference = now.difference(dateTime);
+    return difference.inSeconds.abs() < 60;
   }
 
   @override
