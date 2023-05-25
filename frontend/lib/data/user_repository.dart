@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/domain/response.dart';
 import 'package:frontend/secrets.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,7 +13,7 @@ abstract class UserRepository {
 
   Future<bool> removePatientFromUser(String userId, String patientId);
 
-  Future<bool> subscribeToPatient(String caregiverEmail, String patientId);
+  Future<Response> subscribeToPatient(String caregiverEmail, String patientId);
 
   Future<bool> unsubscribeFromPatient(String caregiverEmail, String patientId);
 
@@ -20,6 +21,7 @@ abstract class UserRepository {
 }
 
 class UserDefaultRepository extends UserRepository {
+  // Need to map
   @override
   Future<Patient> fetchPatient(String id) async {
     final response = await http
@@ -38,6 +40,7 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
+  // Need to map
   @override
   Future<List<Patient>> fetchUserPatients(String caregiverEmail) async {
     final response = await http.get(
@@ -64,6 +67,7 @@ class UserDefaultRepository extends UserRepository {
     }
   }
 
+  // Need to map
   @override
   Future<bool> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
@@ -89,7 +93,7 @@ class UserDefaultRepository extends UserRepository {
   }
 
   @override
-  Future<bool> subscribeToPatient(
+  Future<Response> subscribeToPatient(
       String caregiverEmail, String patientId) async {
     const apiUrl = '$apiEndpoint/SubscribeCaregiverToPatient';
 
@@ -106,20 +110,23 @@ class UserDefaultRepository extends UserRepository {
         },
       );
 
+      final responseJson = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        debugPrint('Subscribed to patient with ID: $patientId');
-        return true;
+        debugPrint(responseJson['message']);
+        return Response(isSuccess: true, message: responseJson['message']);
       } else {
         debugPrint(
-            'Failed to subscribe to patient. Status code: ${response.statusCode}');
-        return false;
+            'Failed to subscribe to patient. Status code: ${response.statusCode}. Message: ${responseJson['message']}');
+        return Response(isSuccess: false, message: responseJson['message']);
       }
     } catch (e) {
       debugPrint('Failed to subscribe to patient: $e');
-      return false;
+      return Response(
+          isSuccess: false, message: 'Failed to subscribe to patient: $e');
     }
   }
 
+  // Need to map
   @override
   Future<bool> removePatientFromUser(String userId, String patientId) async {
     final response = await http.post(
