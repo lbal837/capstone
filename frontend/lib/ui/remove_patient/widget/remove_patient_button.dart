@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/domain/response.dart';
 
 class RemovePatientButton extends StatelessWidget {
-  final Future<bool> Function() unsubscribeFromPatient;
-  final Future<bool> Function() removePatientFromUser;
+  final Future<Response> Function() unsubscribeFromPatient;
+  final Future<Response> Function() removePatientFromUser;
 
   const RemovePatientButton({
     Key? key,
@@ -23,23 +24,32 @@ class RemovePatientButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () async {
           try {
-            final bool subscribeSuccess = await unsubscribeFromPatient();
-            final bool addUserSuccess = await removePatientFromUser();
+            final Response unsubscribeResponse = await unsubscribeFromPatient();
+            final Response removeUserResponse = await removePatientFromUser();
 
-            if (subscribeSuccess && addUserSuccess) {
+            if (unsubscribeResponse.isSuccess && removeUserResponse.isSuccess) {
               scaffoldMessenger.showSnackBar(const SnackBar(
                   duration: Duration(milliseconds: 1000),
-                  content: Text('Patient successfully removed and unsubscribed!')));
+                  content:
+                      Text('Patient successfully removed and unsubscribed!')));
             } else {
-              scaffoldMessenger.showSnackBar(const SnackBar(
-                  duration: Duration(milliseconds: 1000),
-                  content: Text('Failed to remove or unsubscribe patient!')));
+              String errorMsg = 'Failed to remove or unsubscribe patient!\n';
+              if (!unsubscribeResponse.isSuccess) {
+                errorMsg += '${unsubscribeResponse.message}\n';
+              }
+              if (!removeUserResponse.isSuccess) {
+                errorMsg += '${removeUserResponse.message}\n';
+              }
+
+              scaffoldMessenger.showSnackBar(SnackBar(
+                  duration: const Duration(milliseconds: 5000),
+                  content: Text(errorMsg)));
             }
           } catch (e) {
             scaffoldMessenger.showSnackBar(SnackBar(
-                duration: const Duration(milliseconds: 1000),
-                content:
-                Text('Failed to remove or unsubscribe patient! Error: $e')));
+                duration: const Duration(milliseconds: 5000),
+                content: Text(
+                    'Failed to remove or unsubscribe patient! Error: $e')));
           }
         },
         child: const Text('Remove Patient'),

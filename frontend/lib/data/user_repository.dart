@@ -2,19 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/domain/response.dart';
 import 'package:frontend/secrets.dart';
 import 'package:http/http.dart' as http;
 
 abstract class UserRepository {
   Future<List<Patient>> fetchUserPatients(String caregiverEmail);
 
-  Future<bool> addPatientToUser(String userId, String patientId);
+  Future<Response> addPatientToUser(String userId, String patientId);
 
-  Future<bool> removePatientFromUser(String userId, String patientId);
+  Future<Response> removePatientFromUser(String userId, String patientId);
 
-  Future<bool> subscribeToPatient(String caregiverEmail, String patientId);
+  Future<Response> subscribeToPatient(String caregiverEmail, String patientId);
 
-  Future<bool> unsubscribeFromPatient(String caregiverEmail, String patientId);
+  Future<Response> unsubscribeFromPatient(
+      String caregiverEmail, String patientId);
 
   Future<Patient> fetchPatient(String id);
 }
@@ -65,7 +67,7 @@ class UserDefaultRepository extends UserRepository {
   }
 
   @override
-  Future<bool> addPatientToUser(String userId, String patientId) async {
+  Future<Response> addPatientToUser(String userId, String patientId) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/AddUserToPatientv2'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -75,18 +77,18 @@ class UserDefaultRepository extends UserRepository {
       }),
     );
 
-    if (response.statusCode == 200) {
-      debugPrint('Patient added to user');
-      return true;
-    } else {
-      debugPrint(
-          'Error: status code ${response.statusCode}, response body: ${response.body}');
-      return false;
-    }
+    final responseJson = jsonDecode(response.body);
+
+    debugPrint(responseJson['message']);
+
+    return Response(
+      isSuccess: response.statusCode == 200,
+      message: responseJson['message'],
+    );
   }
 
   @override
-  Future<bool> subscribeToPatient(
+  Future<Response> subscribeToPatient(
       String caregiverEmail, String patientId) async {
     const apiUrl = '$apiEndpoint/SubscribeCaregiverToPatient';
 
@@ -103,24 +105,25 @@ class UserDefaultRepository extends UserRepository {
         },
       );
 
+      final responseJson = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        debugPrint('Subscribed to patient with ID: $patientId');
-        return true;
+        debugPrint(responseJson['message']);
+        return Response(isSuccess: true, message: responseJson['message']);
       } else {
         debugPrint(
-            'Failed to subscribe to patient. Status code: ${response.statusCode}');
-        return false;
+            'Failed to subscribe to patient. Status code: ${response.statusCode}. Message: ${responseJson['message']}');
+        return Response(isSuccess: false, message: responseJson['message']);
       }
     } catch (e) {
       debugPrint('Failed to subscribe to patient: $e');
-      return false;
+      return Response(
+          isSuccess: false, message: 'Failed to subscribe to patient: $e');
     }
   }
 
   @override
-  Future<bool> removePatientFromUser(
+  Future<Response> removePatientFromUser(
       String userId, String patientId) async {
-
     final response = await http.post(
       Uri.parse('$apiEndpoint/RemovePatientFromCaregiver'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -130,18 +133,18 @@ class UserDefaultRepository extends UserRepository {
       }),
     );
 
-    if (response.statusCode == 200) {
-      debugPrint('Patient removed from user');
-      return true;
-    } else {
-      debugPrint(
-          'Error: status code ${response.statusCode}, response body: ${response.body}');
-      return false;
-    }
+    final responseJson = jsonDecode(response.body);
+
+    debugPrint(responseJson['message']);
+
+    return Response(
+      isSuccess: response.statusCode == 200,
+      message: responseJson['message'],
+    );
   }
 
   @override
-  Future<bool> unsubscribeFromPatient(
+  Future<Response> unsubscribeFromPatient(
       String caregiverEmail, String patientId) async {
     const apiUrl = '$apiEndpoint/UnsubscribeCaregiverFromPatient';
 
@@ -158,17 +161,18 @@ class UserDefaultRepository extends UserRepository {
         },
       );
 
-      if (response.statusCode == 200) {
-        debugPrint('Unsubscribed from patient with ID: $patientId');
-        return true;
-      } else {
-        debugPrint(
-            'Failed to unsubscribe from patient. Status code: ${response.statusCode}');
-        return false;
-      }
+      final responseJson = jsonDecode(response.body);
+      debugPrint(responseJson['message']);
+      return Response(
+        isSuccess: response.statusCode == 200,
+        message: responseJson['message'],
+      );
     } catch (e) {
       debugPrint('Failed to unsubscribe from patient: $e');
-      return false;
+      return Response(
+        isSuccess: false,
+        message: 'Failed to unsubscribe from patient: $e',
+      );
     }
   }
 }

@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
+import 'package:frontend/domain/response.dart';
 import 'package:frontend/secrets.dart';
 import 'package:frontend/ui/add_patient/widget/add_patient_button.dart';
 import 'package:frontend/ui/add_patient/widget/add_patient_id.dart';
@@ -19,7 +19,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
   final UserService _userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
-  Future<bool> _subscribeToPatient() async {
+  Future<Response> _subscribeToPatient() async {
     final caregiver = await _userService.getCurrentUser();
     final patientId = _patientIdController.text.toUpperCase();
 
@@ -27,7 +27,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
     return userRepository.subscribeToPatient(caregiverEmail!, patientId);
   }
 
-  Future<bool> _addPatientToUser() async {
+  Future<Response> _addPatientToUser() async {
     final caregiver = await _userService.getCurrentUser();
     final patientId = _patientIdController.text.toUpperCase();
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/domain/response.dart';
 
 class AddPatientButton extends StatelessWidget {
-  final Future<bool> Function() subscribeToPatient;
-  final Future<bool> Function() addPatientToUser;
+  final Future<Response> Function() subscribeToPatient;
+  final Future<Response> Function() addPatientToUser;
 
   const AddPatientButton({
     Key? key,
@@ -23,21 +24,29 @@ class AddPatientButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () async {
           try {
-            final bool subscribeSuccess = await subscribeToPatient();
-            final bool addUserSuccess = await addPatientToUser();
+            final Response subscribeResponse = await subscribeToPatient();
+            final Response addUserResponse = await addPatientToUser();
 
-            if (subscribeSuccess && addUserSuccess) {
+            if (subscribeResponse.isSuccess && addUserResponse.isSuccess) {
               scaffoldMessenger.showSnackBar(const SnackBar(
                   duration: Duration(milliseconds: 1000),
                   content: Text('Patient successfully added and subscribed!')));
             } else {
-              scaffoldMessenger.showSnackBar(const SnackBar(
-                  duration: Duration(milliseconds: 1000),
-                  content: Text('Failed to add or subscribe patient!')));
+              String errorMsg = 'Failed to add or subscribe patient!\n';
+              if (!subscribeResponse.isSuccess) {
+                errorMsg += '${subscribeResponse.message}\n';
+              }
+              if (!addUserResponse.isSuccess) {
+                errorMsg += '${addUserResponse.message}\n';
+              }
+
+              scaffoldMessenger.showSnackBar(SnackBar(
+                  duration: const Duration(milliseconds: 5000),
+                  content: Text(errorMsg)));
             }
           } catch (e) {
             scaffoldMessenger.showSnackBar(SnackBar(
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 5000),
                 content:
                     Text('Failed to add or subscribe patient! Error: $e')));
           }
