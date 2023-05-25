@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
+import 'package:frontend/domain/response.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/remove_patient/widget/remove_patient_button.dart'; // update this
-import 'package:frontend/ui/remove_patient/widget/remove_patient_id.dart'; // update this
+import 'package:frontend/ui/remove_patient/widget/remove_patient_button.dart';
+import 'package:frontend/ui/remove_patient/widget/remove_patient_id.dart';
 
 class RemovePatientScreen extends StatefulWidget {
   const RemovePatientScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class RemovePatientScreenState extends State<RemovePatientScreen> {
   final UserService _userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
-  Future<bool> _unsubscribeFromPatient() async {
+  Future<Response> _unsubscribeFromPatient() async {
     final caregiver = await _userService.getCurrentUser();
     final patientId = _patientIdController.text.toUpperCase();
 
@@ -27,7 +28,7 @@ class RemovePatientScreenState extends State<RemovePatientScreen> {
     return userRepository.unsubscribeFromPatient(caregiverEmail!, patientId);
   }
 
-  Future<bool> _removePatientFromUser() async {
+  Future<Response> _removePatientFromUser() async {
     final caregiver = await _userService.getCurrentUser();
     final patientId = _patientIdController.text.toUpperCase();
 
