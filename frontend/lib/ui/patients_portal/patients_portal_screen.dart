@@ -99,8 +99,8 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
               ),
         ),
         Positioned(
-          bottom: MediaQuery.of(context).size.height / 7,
-          right: MediaQuery.of(context).size.width / 25,
+          bottom: MediaQuery.of(context).size.height / 6,
+          right: MediaQuery.of(context).size.width / 20,
           child: PatientsPortalAddPatientButton(
             onPressed: () {
               Navigator.pushNamed(
@@ -111,8 +111,8 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
           ),
         ),
         Positioned(
-          bottom: MediaQuery.of(context).size.height / 2,
-          right: MediaQuery.of(context).size.width / 12,
+          bottom: MediaQuery.of(context).size.height / 12,
+          right: MediaQuery.of(context).size.width / 20,
           child: PatientsPortalRemovePatientButton(
             onPressed: () {
               Navigator.pushNamed(
