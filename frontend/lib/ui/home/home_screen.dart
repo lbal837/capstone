@@ -20,65 +20,63 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        child: FutureBuilder<bool>(
-          future: userService.isLoggedIn(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: SpinKitPumpingHeart(
-                  color: Colors.purple)
-                  )
-                  ,],
-              );
-            }
-            final bool isLoggedIn = snapshot.data ?? false;
-            debugPrint(isLoggedIn.toString());
+      body: FutureBuilder<bool>(
+        future: userService.isLoggedIn(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Center(
+                  child: SpinKitPumpingHeart(
+                color: Colors.purple)
+                )
+                ,],
+            );
+          }
+          final bool isLoggedIn = snapshot.data ?? false;
+          debugPrint(isLoggedIn.toString());
 
-            if (isLoggedIn) {
-              return PatientPortalScreen(
-                isLoggedIn: isLoggedIn,
-                isLoaded: isLoaded,
-                userService: userService,
-              );
-            } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Spacer(flex: 2),
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    alignment: Alignment.center,
-                    child: 
-                      HomeIcon(imagePath: 'assets/images/icon.png'),
+          if (isLoggedIn) {
+            return PatientPortalScreen(
+              isLoggedIn: isLoggedIn,
+              isLoaded: isLoaded,
+              userService: userService,
+            );
+          } else {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(flex: 2),
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  alignment: Alignment.center,
+                  child:
+                    const HomeIcon(imagePath: 'assets/images/icon.png'),
+                ),
+                const Text(
+                  'LifeSavers',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Urbanist',
                   ),
-                  const Text(
-                    'LifeSavers',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Urbanist',
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const Spacer(flex: 5),
-                  LoginUserButton(screenSize: screenSize),
-                  const Spacer(flex: 3),
-                  const SizedBox(
-                    height: 40,
-                    child: Text('New User? Sign up below'),
-                  ),
-                  SignUpUserButton(screenSize: screenSize),
-                  ConfirmUserButton(screenSize: screenSize),
-                 
-                ],
-              );
-            }
-          },
-        ),
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(flex: 5),
+                LoginUserButton(screenSize: screenSize),
+                const Spacer(flex: 3),
+                const SizedBox(
+                  height: 40,
+                  child: Text('New User? Sign up below'),
+                ),
+                SignUpUserButton(screenSize: screenSize),
+                ConfirmUserButton(screenSize: screenSize),
+
+              ],
+            );
+          }
+        },
       ),
     );
   }
