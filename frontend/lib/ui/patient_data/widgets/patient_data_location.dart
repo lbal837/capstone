@@ -14,17 +14,27 @@ class GPSWidget extends StatelessWidget {
     return Card(
       child: Row(
         children: [
+          const Spacer(),
           Container(
+              margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 0, 57, 243),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const Icon(Icons.location_on, size: 70)),
+                  borderRadius: BorderRadius.circular(100),
+                  gradient: const RadialGradient(
+                      radius: 4, colors: [Colors.transparent, Colors.white])),
+              child: const Icon(
+                Icons.location_on,
+                size: 60,
+                color: Colors.cyan,
+              )),
+          const Spacer(),
           Container(
             padding: const EdgeInsets.all(5.0),
             alignment: Alignment.center,
-            child: const Text('Location:'),
+            child: const Text(
+              'Location:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             padding: const EdgeInsets.only(
@@ -44,6 +54,7 @@ class GPSWidget extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(longitude!),
           ),
+          const Spacer(flex: 3),
         ],
       ),
     );
