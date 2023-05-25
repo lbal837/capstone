@@ -15,7 +15,7 @@ abstract class UserRepository {
 
   Future<Response> subscribeToPatient(String caregiverEmail, String patientId);
 
-  Future<bool> unsubscribeFromPatient(String caregiverEmail, String patientId);
+  Future<Response> unsubscribeFromPatient(String caregiverEmail, String patientId);
 
   Future<Patient> fetchPatient(String id);
 }
@@ -149,7 +149,7 @@ class UserDefaultRepository extends UserRepository {
   }
 
   @override
-  Future<bool> unsubscribeFromPatient(
+  Future<Response> unsubscribeFromPatient(
       String caregiverEmail, String patientId) async {
     const apiUrl = '$apiEndpoint/UnsubscribeCaregiverFromPatient';
 
@@ -166,17 +166,18 @@ class UserDefaultRepository extends UserRepository {
         },
       );
 
-      if (response.statusCode == 200) {
-        debugPrint('Unsubscribed from patient with ID: $patientId');
-        return true;
-      } else {
-        debugPrint(
-            'Failed to unsubscribe from patient. Status code: ${response.statusCode}');
-        return false;
-      }
+      final responseJson = jsonDecode(response.body);
+      debugPrint(responseJson['message']);
+      return Response(
+        isSuccess: response.statusCode == 200,
+        message: responseJson['message'],
+      );
     } catch (e) {
       debugPrint('Failed to unsubscribe from patient: $e');
-      return false;
+      return Response(
+        isSuccess: false,
+        message: 'Failed to unsubscribe from patient: $e',
+      );
     }
   }
 }
