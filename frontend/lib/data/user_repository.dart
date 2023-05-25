@@ -78,6 +78,9 @@ class UserDefaultRepository extends UserRepository {
     if (response.statusCode == 200) {
       debugPrint('Patient added to user');
       return true;
+    } else if (response.statusCode == 400) {
+      debugPrint('Patient already added to user');
+      return true;
     } else {
       debugPrint(
           'Error: status code ${response.statusCode}, response body: ${response.body}');
@@ -118,9 +121,7 @@ class UserDefaultRepository extends UserRepository {
   }
 
   @override
-  Future<bool> removePatientFromUser(
-      String userId, String patientId) async {
-
+  Future<bool> removePatientFromUser(String userId, String patientId) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/RemovePatientFromCaregiver'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
