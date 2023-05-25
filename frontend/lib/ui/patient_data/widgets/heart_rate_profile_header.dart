@@ -12,27 +12,32 @@ class HeartRateWidget extends StatelessWidget {
         children: [
           const Spacer(),
           Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 166, 0, 243),
-                  borderRadius: BorderRadius.circular(100),
-                  gradient: const RadialGradient(
-                      radius: 4, colors: [Colors.transparent, Colors.white])),
-              child: const SpinKitPumpingHeart(
-        color: Colors.red,),),
+            margin: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 166, 0, 243),
+                borderRadius: BorderRadius.circular(100),
+                gradient: const RadialGradient(
+                    radius: 4, colors: [Colors.transparent, Colors.white])),
+            child: const SpinKitPumpingHeart(
+              color: Colors.red,
+            ),
+          ),
           const Spacer(),
           Container(
             padding: const EdgeInsets.all(5.0),
             alignment: Alignment.center,
-            child: const Text('HeartRate:'),
+            child: const Text(
+              'HeartRate:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(10.0),
             alignment: Alignment.center,
             child: Text(heartRate!),
           ),
-          const Spacer(flex:8)
+          const Spacer(flex: 8)
         ],
       ),
     );
