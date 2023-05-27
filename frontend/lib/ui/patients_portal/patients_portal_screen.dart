@@ -60,8 +60,7 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
 
     if (!isLoaded) {
       return const Center(
-        child: SpinKitPumpingHeart(
-        color: Colors.purple),
+        child: SpinKitPumpingHeart(color: Colors.purple),
       );
     }
 
@@ -71,36 +70,20 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
           height: screenSize.height,
           width: screenSize.width,
           child: ListView(
-            children: 
-            <Widget>[
-                for (Patient patient in patientList)
-                  ProfileBox(
-                    name: patient.fullName,
-                    id: patient.userId,
-                    picture: patient.avatarImage,
-                    isConnected: isWithinOneMinute(patient.dateTime),
-                  ),
-                if (widget.isLoggedIn)
-                  PatientsPortalLogoutUserButton(
-                      userService: widget.userService, screenSize: screenSize)
-              ],
-          
-        
-              // <Widget>[
-              //   for (Patient patient in patientList)
-              //     ProfileBox(
-              //       name: patient.fullName,
-              //       id: patient.userId,
-              //       picture: patient.avatarImage,
-              //       isConnected: isWithinOneMinute(patient.dateTime),
-              //     ),
-              //   if (widget.isLoggedIn)
-              //     PatientsPortalLogoutUserButton(
-              //         userService: widget.userService, screenSize: screenSize)
-              // ],
-              ),
+            children: <Widget>[
+              for (Patient patient in patientList)
+                ProfileBox(
+                  name: patient.fullName,
+                  id: patient.userId,
+                  picture: patient.avatarImage,
+                  isConnected: isWithinOneMinute(patient.dateTime),
+                ),
+              if (widget.isLoggedIn)
+                PatientsPortalLogoutUserButton(
+                    userService: widget.userService, screenSize: screenSize)
+            ],
+          ),
         ),
-
         Positioned(
           bottom: MediaQuery.of(context).size.height / 8,
           right: MediaQuery.of(context).size.width / 20,
