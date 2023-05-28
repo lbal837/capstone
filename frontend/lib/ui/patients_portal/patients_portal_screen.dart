@@ -3,19 +3,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
 import 'package:intl/intl.dart';
 
-class PatientPortalScreen extends StatefulWidget {
+class PatientsPortalScreen extends StatefulWidget {
   final UserRepository userRepository = UserDefaultRepository();
   final UserService userService;
   final bool isLoggedIn;
   final bool isLoaded;
 
-  PatientPortalScreen({
+  PatientsPortalScreen({
     Key? key,
     required this.userService,
     required this.isLoggedIn,
@@ -26,7 +23,7 @@ class PatientPortalScreen extends StatefulWidget {
   PatientPortalScreenState createState() => PatientPortalScreenState();
 }
 
-class PatientPortalScreenState extends State<PatientPortalScreen> {
+class PatientPortalScreenState extends State<PatientsPortalScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
 
@@ -64,51 +61,26 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
       );
     }
 
-    return Stack(
-      children: [
-        SizedBox(
-          height: screenSize.height,
-          width: screenSize.width,
-          child: ListView(
-            children: <Widget>[
-              for (Patient patient in patientList)
-                ProfileBox(
-                  name: patient.fullName,
-                  id: patient.userId,
-                  picture: patient.avatarImage,
-                  isConnected: isWithinOneMinute(patient.dateTime),
-                ),
-              if (widget.isLoggedIn)
-                PatientsPortalLogoutUserButton(
-                    userService: widget.userService, screenSize: screenSize)
-            ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          SizedBox(
+            height: screenSize.height,
+            width: screenSize.width,
+            child: ListView(
+              children: <Widget>[
+                for (Patient patient in patientList)
+                  ProfileBox(
+                    name: patient.fullName,
+                    id: patient.userId,
+                    picture: patient.avatarImage,
+                    isConnected: isWithinOneMinute(patient.dateTime),
+                  ),
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height / 8,
-          right: MediaQuery.of(context).size.width / 20,
-          child: PatientsPortalAddPatientButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/addPatient',
-              );
-            },
-          ),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height / 25,
-          right: MediaQuery.of(context).size.width / 20,
-          child: PatientsPortalRemovePatientButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/removePatient',
-              );
-            },
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
