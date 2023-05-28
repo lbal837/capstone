@@ -40,11 +40,13 @@ class MainScreenState extends State<MainScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex.value = index;
+      debugPrint(_selectedIndex.value.toString());
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(_widgetOptions.elementAt(_selectedIndex.value).toString());
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex.value),

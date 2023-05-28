@@ -16,12 +16,20 @@ class HomeScreenState extends State<HomeScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
 
+  late Future<bool> isLoggedInFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    isLoggedInFuture = userService.isLoggedIn();
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: FutureBuilder<bool>(
-        future: userService.isLoggedIn(),
+        future: isLoggedInFuture,
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Column(
