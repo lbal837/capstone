@@ -16,7 +16,8 @@ class RemovePatientScreen extends StatefulWidget {
 }
 
 class RemovePatientScreenState extends State<RemovePatientScreen> {
-  final TextEditingController _removePatientIdController = TextEditingController();
+  final TextEditingController _removePatientIdController =
+      TextEditingController();
   final UserService _userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
@@ -34,6 +35,12 @@ class RemovePatientScreenState extends State<RemovePatientScreen> {
 
     final caregiverEmail = caregiver?.email;
     return userRepository.removePatientFromUser(caregiverEmail!, patientId);
+  }
+
+  @override
+  void dispose() {
+    _removePatientIdController.dispose();
+    super.dispose();
   }
 
   @override

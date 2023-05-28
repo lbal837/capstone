@@ -36,6 +36,12 @@ class AddPatientScreenState extends State<AddPatientScreen> {
   }
 
   @override
+  void dispose() {
+    _addPatientIdController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
