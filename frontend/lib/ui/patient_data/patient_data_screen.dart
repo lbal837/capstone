@@ -36,6 +36,13 @@ class PatientDataScreenState extends State<PatientDataScreen> {
     return difference.inSeconds.abs() < 60;
   }
 
+  void navigateToMapScreen(double latitude, double longitude) {
+    Navigator.pushNamed(context, '/patientLocation', arguments: {
+      'latitude': latitude,
+      'longitude': longitude,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (isLoaded) {
@@ -52,7 +59,9 @@ class PatientDataScreenState extends State<PatientDataScreen> {
             ),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
-                latitude: patient?.latitude, longitude: patient?.longitude),
+              latitude: patient?.latitude,
+              longitude: patient?.longitude,
+            ),
             StepCountWidget(stepCount: patient?.steps),
             Sleep(sleepStatus: patient?.sleepStatus),
           ],
@@ -60,12 +69,13 @@ class PatientDataScreenState extends State<PatientDataScreen> {
       );
     } else {
       return Scaffold(
-          appBar: AppBar(
-            title: const Text('Data Page'),
-          ),
-          body: const Center(
-            child: CircularProgressIndicator(),
-          ));
+        appBar: AppBar(
+          title: const Text('Data Page'),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
   }
 }
