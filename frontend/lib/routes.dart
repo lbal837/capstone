@@ -6,6 +6,7 @@ import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_screen.dart';
 import 'package:frontend/ui/login/login_screen.dart';
+import 'package:frontend/ui/map/map_screen.dart';
 import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 import 'package:frontend/ui/remove_patient/remove_patient_screen.dart';
@@ -23,6 +24,17 @@ final Map<String, WidgetBuilder> routes = {
     return ConfirmResetPasswordScreen(
       email: email,
       userService: userService,
+    );
+  },
+  '/patientLocation': (context) {
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final double longitude = arguments['longitude'] as double;
+    final double latitude = arguments['latitude'] as double;
+
+    return MapScreen(
+      longitude: longitude,
+      latitude: latitude,
     );
   },
   '/confirmAccount': (context) => const ConfirmationScreen(),

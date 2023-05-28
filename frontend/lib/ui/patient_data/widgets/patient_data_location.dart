@@ -17,15 +17,10 @@ class GPSWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MapScreen(
-              latitude: parsedLatitude,
-              longitude: parsedLongitude,
-            ),
-          ),
-        );
+        Navigator.pushNamed(context, '/patientLocation', arguments: {
+          'latitude': parsedLatitude,
+          'longitude': parsedLongitude,
+        });
       },
       child: Card(
         child: Row(

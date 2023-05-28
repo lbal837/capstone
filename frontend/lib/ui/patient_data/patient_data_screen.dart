@@ -38,15 +38,10 @@ class PatientDataScreenState extends State<PatientDataScreen> {
   }
 
   void navigateToMapScreen(double latitude, double longitude) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MapScreen(
-          latitude: latitude,
-          longitude: longitude,
-        ),
-      ),
-    );
+    Navigator.pushNamed(context, '/patientLocation', arguments: {
+      'latitude': latitude,
+      'longitude': longitude,
+    });
   }
 
   @override
