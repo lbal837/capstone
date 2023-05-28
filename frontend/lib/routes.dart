@@ -59,7 +59,7 @@ final Map<String, WidgetBuilder> routes = {
     final bool isLoggedIn = arguments['isLoggedIn'] as bool;
     final bool isLoaded = arguments['isLoaded'] as bool;
 
-    return PatientPortalScreen(
+    return PatientsPortalScreen(
       userService: userService,
       isLoggedIn: isLoggedIn,
       isLoaded: isLoaded,
