@@ -10,6 +10,7 @@ import 'package:frontend/ui/map/map_screen.dart';
 import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
 import 'package:frontend/ui/remove_patient/remove_patient_screen.dart';
+import 'package:frontend/ui/settings/settings_screen.dart';
 import 'package:frontend/ui/signup/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -64,6 +65,15 @@ final Map<String, WidgetBuilder> routes = {
       isLoaded: isLoaded,
     );
   },
+  '/settings': (context) {
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final UserService userService = arguments['userService'] as UserService;
+
+    return SettingsScreen(
+      userService: userService,
+    );
+  },
 };
 
 Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
@@ -77,5 +87,14 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
     );
   }
 
+  if (settings.name == '/settings') {
+    final Map<String, dynamic> arguments =
+        settings.arguments as Map<String, dynamic>;
+    final UserService userService = arguments['userService'] as UserService;
+
+    return MaterialPageRoute(
+      builder: (_) => SettingsScreen(userService: userService),
+    );
+  }
   return null;
 }

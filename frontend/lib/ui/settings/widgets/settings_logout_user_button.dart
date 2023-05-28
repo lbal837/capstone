@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 
-class PatientsPortalLogoutUserButton extends StatelessWidget {
+class SettingsLogoutUserButton extends StatelessWidget {
   final UserService userService;
   final Size screenSize;
 
-  const PatientsPortalLogoutUserButton(
+  const SettingsLogoutUserButton(
       {super.key, required this.userService, required this.screenSize});
 
   @override
