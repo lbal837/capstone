@@ -15,13 +15,13 @@ class AddPatientScreen extends StatefulWidget {
 }
 
 class AddPatientScreenState extends State<AddPatientScreen> {
-  final TextEditingController _patientIdController = TextEditingController();
+  final TextEditingController _addPatientIdController = TextEditingController();
   final UserService _userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
   Future<Response> _subscribeToPatient() async {
     final caregiver = await _userService.getCurrentUser();
-    final patientId = _patientIdController.text.toUpperCase();
+    final patientId = _addPatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
     return userRepository.subscribeToPatient(caregiverEmail!, patientId);
@@ -29,7 +29,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
 
   Future<Response> _addPatientToUser() async {
     final caregiver = await _userService.getCurrentUser();
-    final patientId = _patientIdController.text.toUpperCase();
+    final patientId = _addPatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
     return userRepository.addPatientToUser(caregiverEmail!, patientId);
@@ -45,7 +45,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            AddPatientId(controller: _patientIdController),
+            AddPatientId(controller: _addPatientIdController),
             AddPatientButton(
               subscribeToPatient: _subscribeToPatient,
               addPatientToUser: _addPatientToUser,

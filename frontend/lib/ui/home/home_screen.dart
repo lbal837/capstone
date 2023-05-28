@@ -32,7 +32,6 @@ class HomeScreenState extends State<HomeScreen> {
             );
           }
           final bool isLoggedIn = snapshot.data ?? false;
-          debugPrint(isLoggedIn.toString());
 
           if (isLoggedIn) {
             return MainScreen(

@@ -4,7 +4,6 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
 import 'package:intl/intl.dart';
 
 class PatientsPortalScreen extends StatefulWidget {
@@ -78,18 +77,6 @@ class PatientPortalScreenState extends State<PatientsPortalScreen> {
                     isConnected: isWithinOneMinute(patient.dateTime),
                   ),
               ],
-            ),
-          ),
-          Positioned(
-            bottom: MediaQuery.of(context).size.height / 25,
-            right: MediaQuery.of(context).size.width / 20,
-            child: PatientsPortalRemovePatientButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/removePatient',
-                );
-              },
             ),
           ),
         ],

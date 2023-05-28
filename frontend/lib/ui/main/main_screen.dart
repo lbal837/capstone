@@ -3,6 +3,7 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
+import 'package:frontend/ui/remove_patient/remove_patient_screen.dart';
 import 'package:frontend/ui/settings/settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   List<Widget> get _widgetOptions {
     return <Widget>[
@@ -31,13 +32,14 @@ class MainScreenState extends State<MainScreen> {
           isLoggedIn: widget.isLoggedIn,
           isLoaded: widget.isLoaded),
       const AddPatientScreen(),
+      const RemovePatientScreen(),
       SettingsScreen(userService: widget.userService)
     ];
   }
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _selectedIndex.value = index;
     });
   }
 
@@ -45,10 +47,10 @@ class MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _widgetOptions.elementAt(_selectedIndex.value),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndex,
+        selectedIndex: _selectedIndex.value,
         onItemSelected: _onItemTapped,
       ),
     );

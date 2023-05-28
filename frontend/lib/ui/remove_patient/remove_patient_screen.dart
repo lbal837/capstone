@@ -16,13 +16,13 @@ class RemovePatientScreen extends StatefulWidget {
 }
 
 class RemovePatientScreenState extends State<RemovePatientScreen> {
-  final TextEditingController _patientIdController = TextEditingController();
+  final TextEditingController _removePatientIdController = TextEditingController();
   final UserService _userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
   Future<Response> _unsubscribeFromPatient() async {
     final caregiver = await _userService.getCurrentUser();
-    final patientId = _patientIdController.text.toUpperCase();
+    final patientId = _removePatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
     return userRepository.unsubscribeFromPatient(caregiverEmail!, patientId);
@@ -30,7 +30,7 @@ class RemovePatientScreenState extends State<RemovePatientScreen> {
 
   Future<Response> _removePatientFromUser() async {
     final caregiver = await _userService.getCurrentUser();
-    final patientId = _patientIdController.text.toUpperCase();
+    final patientId = _removePatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
     return userRepository.removePatientFromUser(caregiverEmail!, patientId);
@@ -46,7 +46,7 @@ class RemovePatientScreenState extends State<RemovePatientScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            RemovePatientId(controller: _patientIdController),
+            RemovePatientId(controller: _removePatientIdController),
             RemovePatientButton(
               unsubscribeFromPatient: _unsubscribeFromPatient,
               removePatientFromUser: _removePatientFromUser,
