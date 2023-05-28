@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
 import 'package:intl/intl.dart';
@@ -28,34 +27,6 @@ class PatientsPortalScreen extends StatefulWidget {
 class PatientPortalScreenState extends State<PatientsPortalScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/patientsPortal', arguments: {
-          'userService': widget.userService,
-          'isLoggedIn': widget.isLoggedIn,
-          'isLoaded': widget.isLoaded,
-        });
-        break;
-      case 1:
-        Navigator.pushNamed(
-          context,
-          '/addPatient',
-        );
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/settings', arguments: {
-          'userService': widget.userService,
-        });
-        break;
-    }
-
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   void initState() {
