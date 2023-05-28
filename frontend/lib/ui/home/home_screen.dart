@@ -8,7 +8,7 @@ import 'package:frontend/ui/home/widgets/home_confirm_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_icon.dart';
 import 'package:frontend/ui/home/widgets/home_login_user_button.dart';
 import 'package:frontend/ui/home/widgets/home_sign_up_user_button.dart';
-import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
+import 'package:frontend/ui/main/main_screen.dart';
 
 class HomeScreenState extends State<HomeScreen> {
   final userService = UserService(userPool);
@@ -16,29 +16,33 @@ class HomeScreenState extends State<HomeScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
 
+  late Future<bool> isLoggedInFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    isLoggedInFuture = userService.isLoggedIn();
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: FutureBuilder<bool>(
-        future: userService.isLoggedIn(),
+        future: isLoggedInFuture,
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Center(
-                  child: SpinKitPumpingHeart(
-                color: Colors.purple)
-                )
-                ,],
+                Center(child: SpinKitPumpingHeart(color: Colors.purple)),
+              ],
             );
           }
           final bool isLoggedIn = snapshot.data ?? false;
-          debugPrint(isLoggedIn.toString());
 
           if (isLoggedIn) {
-            return PatientPortalScreen(
+            return MainScreen(
               isLoggedIn: isLoggedIn,
               isLoaded: isLoaded,
               userService: userService,
@@ -51,8 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
                 Container(
                   padding: const EdgeInsets.all(15),
                   alignment: Alignment.center,
-                  child:
-                    const HomeIcon(imagePath: 'assets/images/icon.png'),
+                  child: const HomeIcon(imagePath: 'assets/images/icon.png'),
                 ),
                 const Text(
                   'LifeSavers',
@@ -72,7 +75,6 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
                 SignUpUserButton(screenSize: screenSize),
                 ConfirmUserButton(screenSize: screenSize),
-
               ],
             );
           }
