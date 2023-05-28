@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
-import 'package:frontend/ui/map/map_screen.dart';
 import 'package:frontend/ui/patient_data/widgets/heart_rate_profile_header.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_location.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_profile_header.dart';

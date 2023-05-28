@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ui/map/map_screen.dart';
 
 class GPSWidget extends StatelessWidget {
   const GPSWidget({
