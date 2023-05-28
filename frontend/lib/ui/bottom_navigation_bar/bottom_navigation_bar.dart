@@ -29,7 +29,7 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
       ],
       currentIndex: widget.selectedIndex,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: Colors.purpleAccent,
       unselectedItemColor: Colors.grey,
       onTap: widget.onItemSelected,
     );
