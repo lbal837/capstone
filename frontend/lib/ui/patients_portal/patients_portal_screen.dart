@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
+import 'package:frontend/ui/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
@@ -29,6 +30,13 @@ class PatientPortalScreen extends StatefulWidget {
 class PatientPortalScreenState extends State<PatientPortalScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -64,51 +72,57 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
       );
     }
 
-    return Stack(
-      children: [
-        SizedBox(
-          height: screenSize.height,
-          width: screenSize.width,
-          child: ListView(
-            children: <Widget>[
-              for (Patient patient in patientList)
-                ProfileBox(
-                  name: patient.fullName,
-                  id: patient.userId,
-                  picture: patient.avatarImage,
-                  isConnected: isWithinOneMinute(patient.dateTime),
-                ),
-              if (widget.isLoggedIn)
-                PatientsPortalLogoutUserButton(
-                    userService: widget.userService, screenSize: screenSize)
-            ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          SizedBox(
+            height: screenSize.height,
+            width: screenSize.width,
+            child: ListView(
+              children: <Widget>[
+                for (Patient patient in patientList)
+                  ProfileBox(
+                    name: patient.fullName,
+                    id: patient.userId,
+                    picture: patient.avatarImage,
+                    isConnected: isWithinOneMinute(patient.dateTime),
+                  ),
+                if (widget.isLoggedIn)
+                  PatientsPortalLogoutUserButton(
+                      userService: widget.userService, screenSize: screenSize)
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height / 8,
-          right: MediaQuery.of(context).size.width / 20,
-          child: PatientsPortalAddPatientButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/addPatient',
-              );
-            },
+          Positioned(
+            bottom: MediaQuery.of(context).size.height / 8,
+            right: MediaQuery.of(context).size.width / 20,
+            child: PatientsPortalAddPatientButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/addPatient',
+                );
+              },
+            ),
           ),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height / 25,
-          right: MediaQuery.of(context).size.width / 20,
-          child: PatientsPortalRemovePatientButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/removePatient',
-              );
-            },
+          Positioned(
+            bottom: MediaQuery.of(context).size.height / 25,
+            right: MediaQuery.of(context).size.width / 20,
+            child: PatientsPortalRemovePatientButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/removePatient',
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemSelected: _onItemTapped,
+      ),
     );
   }
 }
