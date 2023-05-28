@@ -4,7 +4,6 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/ui/bottom_navigation_bar/bottom_navigation_bar.dart';
-import 'package:frontend/ui/patients_portal/widgets/patients_portal_add_patient_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_logout_user_button.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.dart';
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
@@ -33,6 +32,25 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/patientsPortal', arguments: {
+          'userService': widget.userService,
+          'isLoggedIn': widget.isLoggedIn,
+          'isLoaded': widget.isLoaded,
+        });
+        break;
+      case 1:
+        Navigator.pushNamed(
+          context,
+          '/addPatient',
+        );
+        break;
+      case 2:
+        // Handle Settings selection
+        break;
+    }
+
     setState(() {
       _selectedIndex = index;
     });
@@ -91,18 +109,6 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
                   PatientsPortalLogoutUserButton(
                       userService: widget.userService, screenSize: screenSize)
               ],
-            ),
-          ),
-          Positioned(
-            bottom: MediaQuery.of(context).size.height / 8,
-            right: MediaQuery.of(context).size.width / 20,
-            child: PatientsPortalAddPatientButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/addPatient',
-                );
-              },
             ),
           ),
           Positioned(
