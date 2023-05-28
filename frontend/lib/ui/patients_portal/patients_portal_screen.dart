@@ -8,13 +8,13 @@ import 'package:frontend/ui/patients_portal/widgets/patients_portal_profile_box.
 import 'package:frontend/ui/patients_portal/widgets/patients_portal_remove_patient_button.dart';
 import 'package:intl/intl.dart';
 
-class PatientPortalScreen extends StatefulWidget {
+class PatientsPortalScreen extends StatefulWidget {
   final UserRepository userRepository = UserDefaultRepository();
   final UserService userService;
   final bool isLoggedIn;
   final bool isLoaded;
 
-  PatientPortalScreen({
+  PatientsPortalScreen({
     Key? key,
     required this.userService,
     required this.isLoggedIn,
@@ -25,7 +25,7 @@ class PatientPortalScreen extends StatefulWidget {
   PatientPortalScreenState createState() => PatientPortalScreenState();
 }
 
-class PatientPortalScreenState extends State<PatientPortalScreen> {
+class PatientPortalScreenState extends State<PatientsPortalScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
   int _selectedIndex = 0;
@@ -122,10 +122,6 @@ class PatientPortalScreenState extends State<PatientPortalScreen> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemSelected: _onItemTapped,
       ),
     );
   }
