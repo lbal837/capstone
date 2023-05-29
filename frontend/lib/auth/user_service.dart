@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/auth/storage.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/secrets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   late final CognitoUserPool _userPool;
@@ -16,9 +18,8 @@ class UserService {
 
   /// Initiate user session from local storage if present
   Future<bool> init() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // final storage = Storage(prefs);
-    final storage = CognitoMemoryStorage();
+    final prefs = await SharedPreferences.getInstance();
+    final storage = Storage(prefs);
     _userPool.storage = storage;
 
     _cognitoUser = await _userPool.getCurrentUser();
