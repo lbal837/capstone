@@ -37,7 +37,7 @@ class HeartRateWidget extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(heartRate!),
           ),
-          const Spacer(flex: 8)
+          const Spacer(flex: 25)
         ],
       ),
     );
