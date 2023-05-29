@@ -5,7 +5,7 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/response.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/remove_patient/widget/remove_patient_button.dart';
+import 'package:frontend/ui/patient_data/widgets/patient_data_remove_patient_button.dart';
 import 'package:frontend/ui/remove_patient/widget/remove_patient_id.dart';
 
 class RemovePatientScreen extends StatefulWidget {
