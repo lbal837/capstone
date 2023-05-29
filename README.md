@@ -9,14 +9,20 @@ This is an overview of our project aimed at creating an app that monitors the we
 Our Final Report is [Here](https://docs.google.com/document/d/1YlUvtqlReOlDLZJfMkR7j_rECE_j8aPcOfNGaDZMD2M/edit?usp=sharing)
 
 ## Technologies Used to build the project:
-* AWS
-* JavaScript - Node.js - Ver. 14
-* Flutter
-* Python
-* Fitbit
-* Mapbox
+AWS:
+- Python
+- Javascript - Node 14
 
-Technologies that are used to build the project (include the languages used, the libraries and their versions).
+Mobile application:
+- Flutter
+
+Fitbit application:
+- Javascript - Node 14
+
+External APIs:
+- Mapbox API
+- Fitbit API
+
 
 ## Instructions on how to install and setup the project (specify all dependencies).
 Installing Fitbit App (Backend) [Here](https://github.com/uoa-compsci399-s1-2023/project-team-4/tree/main/fitbit#readme)
