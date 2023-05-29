@@ -4,12 +4,12 @@ import 'package:frontend/data/user_repository.dart';
 import 'package:frontend/domain/patient.dart';
 import 'package:frontend/domain/response.dart';
 import 'package:frontend/secrets.dart';
-import 'package:frontend/ui/patient_data/widgets/heart_rate_profile_header.dart';
+import 'package:frontend/ui/patient_data/widgets/patient_data_heart_rate_profile_header.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_location.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_profile_header.dart';
+import 'package:frontend/ui/patient_data/widgets/patient_data_remove_patient_button.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_sleep.dart';
 import 'package:frontend/ui/patient_data/widgets/patient_data_step_count.dart';
-import 'package:frontend/ui/patient_data/widgets/patient_data_remove_patient_button.dart';
 import 'package:intl/intl.dart';
 
 class PatientDataScreenState extends State<PatientDataScreen> {
