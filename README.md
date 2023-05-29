@@ -15,6 +15,7 @@ Our Final Report is [Here](https://docs.google.com/document/d/1YlUvtqlReOlDLZJfM
 * Python
 * Fitbit
 * Mapbox
+
 Technologies that are used to build the project (include the languages used, the libraries and their versions).
 
 ## Instructions on how to install and setup the project (specify all dependencies).
