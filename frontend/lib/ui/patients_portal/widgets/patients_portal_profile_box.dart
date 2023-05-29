@@ -59,6 +59,16 @@ class ProfileBox extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              padding: const EdgeInsets.only(
+                left: 5.0,
+                top: 10.0,
+                right: 10.0,
+                bottom: 10.0,
+              ),
+              alignment: Alignment.centerRight,
+              child: const Icon(Icons.arrow_forward_ios_sharp),
+            ),
           ],
         ),
       ),
