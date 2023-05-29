@@ -32,7 +32,6 @@ class MainScreenState extends State<MainScreen> {
           isLoggedIn: widget.isLoggedIn,
           isLoaded: widget.isLoaded),
       const AddPatientScreen(),
-      const RemovePatientScreen(),
       SettingsScreen(userService: widget.userService)
     ];
   }
