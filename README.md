@@ -26,8 +26,8 @@ Intalling Andriod App (Frontend) [Here](https://github.com/uoa-compsci399-s1-202
 Add screenshots here
 
 ## Future Plan
-*Add push notification or SMS notifications.
-*Add medical suggestions and analysis from data collected.
+* Add push notification or SMS notifications.
+* Add medical suggestions and analysis from data collected.
 
 ## Acknowledgements (if any) - You can list tutorials used, projects referred to, people consulted etc.
 Flutter Dev Documentation [Here](https://docs.flutter.dev/)
