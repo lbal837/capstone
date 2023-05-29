@@ -3,7 +3,6 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
-import 'package:frontend/ui/remove_patient/remove_patient_screen.dart';
 import 'package:frontend/ui/settings/settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
