@@ -37,7 +37,7 @@ class StepCountWidget extends StatelessWidget {
             child:
                 Text(stepCount.toString()), //kinda want to make it an int first
           ),
-          const Spacer(flex: 6),
+          const Spacer(flex: 25),
         ],
       ),
     );

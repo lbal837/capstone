@@ -35,7 +35,7 @@ class Sleep extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(sleepStatus!),
           ),
-          const Spacer(flex: 8),
+          const Spacer(flex: 25),
         ],
       ),
     );
