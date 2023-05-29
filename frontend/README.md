@@ -1,16 +1,12 @@
-# frontend
+# Frontend
 
-A new Flutter project.
+To get started:
+Install Flutter [Here](https://docs.flutter.dev/get-started/install)
+If you are using Visual Studio Code then install the extention [Here](https://docs.flutter.dev/tools/vs-code)
+Connect your Andriod mobile device or an emulator.
+Change your directory in the repo to the frontend. **cd frontend**
+then run the command **flutter run**
+This will install the app onto your phone or the emulator.
 
-## Getting Started
+If you need any help please read here for documentation [Here](https://docs.flutter.dev/)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
