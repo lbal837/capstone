@@ -26,8 +26,6 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           icon: Icon(Icons.add),
           label: 'Add Patient',
         ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.remove), label: 'Remove Patient'),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
       ],
       currentIndex: widget.selectedIndex,
