@@ -27,7 +27,7 @@ class StepCountWidget extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             alignment: Alignment.center,
             child: const Text(
-              'Step count within the past minute:',
+              'Past minute step count:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
