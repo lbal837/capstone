@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfirmResendCode extends StatelessWidget {
-  const ConfirmResendCode({Key? key, required this.onTap})
-      : super(key: key);
+  const ConfirmResendCode({Key? key, required this.onTap}) : super(key: key);
 
   final VoidCallback onTap;
 

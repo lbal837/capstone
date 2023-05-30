@@ -8,9 +8,11 @@ class ConfirmResetPasswordScreen extends StatefulWidget {
   final String email;
   final UserService userService;
 
-  const ConfirmResetPasswordScreen(
-      {Key? key, required this.email, required this.userService,})
-      : super(key: key);
+  const ConfirmResetPasswordScreen({
+    Key? key,
+    required this.email,
+    required this.userService,
+  }) : super(key: key);
 
   @override
   ResetPasswordConfirmScreenState createState() =>
