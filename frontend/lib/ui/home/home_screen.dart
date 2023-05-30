@@ -43,7 +43,6 @@ class HomeScreenState extends State<HomeScreen> {
 
           if (isLoggedIn) {
             return MainScreen(
-              isLoggedIn: isLoggedIn,
               isLoaded: isLoaded,
               userService: userService,
             );
