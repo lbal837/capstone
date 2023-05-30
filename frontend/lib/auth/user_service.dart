@@ -33,7 +33,6 @@ class UserService {
 
   /// Get existing user from session with his/her attributes
   Future<User?> getCurrentUser() async {
-    await init();
     if (_cognitoUser == null || _session == null) {
       return null;
     }
@@ -167,7 +166,10 @@ class UserService {
 
   /// Confirm new password after reset
   Future<bool> confirmNewPassword(
-      String email, String confirmationCode, String newPassword,) async {
+    String email,
+    String confirmationCode,
+    String newPassword,
+  ) async {
     final cognitoUser =
         CognitoUser(email, _userPool, storage: _userPool.storage);
 
