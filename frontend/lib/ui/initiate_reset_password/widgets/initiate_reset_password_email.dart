@@ -22,7 +22,9 @@ class InitiateResetPasswordEmail extends StatelessWidget {
           return null;
         },
         decoration: const InputDecoration(
-            hintText: 'example@inspire.my', labelText: 'Email',),
+          hintText: 'example@inspire.my',
+          labelText: 'Email',
+        ),
         keyboardType: TextInputType.emailAddress,
       ),
     );

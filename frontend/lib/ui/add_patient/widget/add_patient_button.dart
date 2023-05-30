@@ -30,8 +30,9 @@ class AddPatientButton extends StatelessWidget {
 
             if (subscribeResponse.isSuccess && addUserResponse.isSuccess) {
               scaffoldMessenger.showSnackBar(const SnackBar(
-                  duration: Duration(milliseconds: 1000),
-                  content: Text('Patient successfully added and subscribed!'),));
+                duration: Duration(milliseconds: 1000),
+                content: Text('Patient successfully added and subscribed!'),
+              ));
             } else {
               String errorMsg = 'Failed to add or subscribe patient!\n';
               if (!subscribeResponse.isSuccess) {

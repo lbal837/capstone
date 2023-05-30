@@ -137,7 +137,9 @@ class UserDefaultRepository extends UserRepository {
 
   @override
   Future<Response> removePatientFromUser(
-      String userId, String patientId,) async {
+    String userId,
+    String patientId,
+  ) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/RemovePatientFromCaregiver'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -159,7 +161,9 @@ class UserDefaultRepository extends UserRepository {
 
   @override
   Future<Response> unsubscribeFromPatient(
-      String caregiverEmail, String patientId,) async {
+    String caregiverEmail,
+    String patientId,
+  ) async {
     const apiUrl = '$apiEndpoint/UnsubscribeCaregiverFromPatient';
 
     try {
