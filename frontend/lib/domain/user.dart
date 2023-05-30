@@ -23,6 +23,7 @@ class User {
         }
       }
     }
+
     return user;
   }
 }

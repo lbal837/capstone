@@ -24,6 +24,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
     final patientId = _addPatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
+
     return userRepository.subscribeToPatient(caregiverEmail!, patientId);
   }
 
@@ -32,6 +33,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
     final patientId = _addPatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
+
     return userRepository.addPatientToUser(caregiverEmail!, patientId);
   }
 

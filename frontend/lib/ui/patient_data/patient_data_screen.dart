@@ -40,18 +40,22 @@ class PatientDataScreenState extends State<PatientDataScreen> {
 
   Future<Response> _unsubscribeFromPatient() async {
     final caregiver = await userService.getCurrentUser();
-
     final caregiverEmail = caregiver?.email;
+
     return userRepository.unsubscribeFromPatient(
-        caregiverEmail!, patient!.userId);
+      caregiverEmail!,
+      patient!.userId,
+    );
   }
 
   Future<Response> _removePatientFromUser() async {
     final caregiver = await userService.getCurrentUser();
-
     final caregiverEmail = caregiver?.email;
+
     return userRepository.removePatientFromUser(
-        caregiverEmail!, patient!.userId);
+      caregiverEmail!,
+      patient!.userId,
+    );
   }
 
   bool isWithinOneMinute(String dateTimeString) {
@@ -59,6 +63,7 @@ class PatientDataScreenState extends State<PatientDataScreen> {
     final dateTime = format.parseUtc(dateTimeString);
     final now = DateTime.now().toUtc().add(const Duration(hours: 12));
     final difference = now.difference(dateTime);
+
     return difference.inSeconds.abs() < 60;
   }
 

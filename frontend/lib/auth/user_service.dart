@@ -27,6 +27,7 @@ class UserService {
       return false;
     }
     _session = await _cognitoUser!.getSession();
+
     return _session?.isValid() ?? false;
   }
 
@@ -45,6 +46,7 @@ class UserService {
     }
     final user = User.fromUserAttributes(attributes);
     user.hasAccess = true;
+
     return user;
   }
 
@@ -53,11 +55,13 @@ class UserService {
     await init();
     if (_cognitoUser == null || _session == null) {
       debugPrint('User is not logged in or session is not valid.');
+
       return null;
     }
 
     credentials = CognitoCredentials(cognitoIdentityPoolId, userPool);
     await credentials!.getAwsCredentials(_session?.getIdToken().getJwtToken());
+
     return credentials!;
   }
 
@@ -91,6 +95,7 @@ class UserService {
       final user = User.fromUserAttributes(attributes);
       user.confirmed = isConfirmed;
       user.hasAccess = true;
+
       return user;
     } else {
       return null;
@@ -115,12 +120,14 @@ class UserService {
     if (_cognitoUser == null || _session == null) {
       return false;
     }
+
     return _session!.isValid();
   }
 
   /// Check if user is logged in
   Future<bool> isLoggedIn() async {
     await init();
+
     return checkAuthenticated();
   }
 
@@ -160,9 +167,10 @@ class UserService {
 
   /// Confirm new password after reset
   Future<bool> confirmNewPassword(
-      String email, String confirmationCode, String newPassword) async {
+      String email, String confirmationCode, String newPassword,) async {
     final cognitoUser =
         CognitoUser(email, _userPool, storage: _userPool.storage);
+
     return cognitoUser.confirmPassword(confirmationCode, newPassword);
   }
 }

@@ -47,6 +47,7 @@ class PatientPortalScreenState extends State<PatientsPortalScreen> {
     final dateTime = format.parseUtc(dateTimeString);
     final now = DateTime.now().toUtc().add(const Duration(hours: 12));
     final difference = now.difference(dateTime);
+
     return difference.inSeconds.abs() < 60;
   }
 

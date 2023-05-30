@@ -18,10 +18,11 @@ class InitiateResetPasswordEmail extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return 'Please enter your email';
           }
+
           return null;
         },
         decoration: const InputDecoration(
-            hintText: 'example@inspire.my', labelText: 'Email'),
+            hintText: 'example@inspire.my', labelText: 'Email',),
         keyboardType: TextInputType.emailAddress,
       ),
     );

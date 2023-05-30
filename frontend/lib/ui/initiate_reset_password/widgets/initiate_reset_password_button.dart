@@ -9,6 +9,7 @@ class InitiateResetPasswordButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return Container(
       padding: const EdgeInsets.all(20.0),
       width: screenSize.width,

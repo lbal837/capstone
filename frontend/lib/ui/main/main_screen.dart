@@ -25,9 +25,11 @@ class MainScreenState extends State<MainScreen> {
   List<Widget> get _widgetOptions {
     return <Widget>[
       PatientsPortalScreen(
-          userService: widget.userService, isLoaded: widget.isLoaded),
+        userService: widget.userService,
+        isLoaded: widget.isLoaded,
+      ),
       const AddPatientScreen(),
-      SettingsScreen(userService: widget.userService)
+      SettingsScreen(userService: widget.userService),
     ];
   }
 
