@@ -28,7 +28,10 @@ class SignUpScreenState extends State<SignUpScreen> {
     if (_user.email != null && _user.password != null && _user.name != null) {
       try {
         _user = await userService.signUp(
-            _user.email!, _user.password!, _user.name!);
+          _user.email!,
+          _user.password!,
+          _user.name!,
+        );
         signUpSuccess = true;
         message = 'User sign up successful!';
       } on CognitoClientException catch (e) {

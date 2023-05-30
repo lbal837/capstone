@@ -27,6 +27,7 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: FutureBuilder<bool>(
         future: isLoggedInFuture,
@@ -43,7 +44,6 @@ class HomeScreenState extends State<HomeScreen> {
 
           if (isLoggedIn) {
             return MainScreen(
-              isLoggedIn: isLoggedIn,
               isLoaded: isLoaded,
               userService: userService,
             );

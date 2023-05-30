@@ -12,7 +12,9 @@ class SignupUserEmail extends StatelessWidget {
       leading: const Icon(Icons.email),
       title: TextFormField(
         decoration: const InputDecoration(
-            hintText: 'example@inspire.my', labelText: 'Email'),
+          hintText: 'example@inspire.my',
+          labelText: 'Email',
+        ),
         keyboardType: TextInputType.emailAddress,
         onSaved: (n) => user.email = n,
       ),

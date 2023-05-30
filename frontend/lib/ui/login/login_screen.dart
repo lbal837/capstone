@@ -24,6 +24,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   Future<UserService> _getValues() async {
     await _userService.init();
+
     return _userService;
   }
 
@@ -66,13 +67,17 @@ class LoginScreenState extends State<LoginScreen> {
             Navigator.pop(context);
             if (!_user.confirmed) {
               await Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/confirmResetPassword',
-                  arguments: {_user.email ?? 'no email found'},
-                  (Route<dynamic> route) => false);
+                context,
+                '/confirmResetPassword',
+                arguments: {_user.email ?? 'no email found'},
+                (Route<dynamic> route) => false,
+              );
             } else {
               await Navigator.pushNamedAndRemoveUntil(
-                  context, '/home', (Route<dynamic> route) => false);
+                context,
+                '/home',
+                (Route<dynamic> route) => false,
+              );
             }
           }
         },
@@ -91,32 +96,35 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return FutureBuilder(
-        future: _getValues(),
-        builder: (context, AsyncSnapshot<UserService> snapshot) {
-          if (snapshot.hasData) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Login'),
-              ),
-              body: Builder(
-                builder: (BuildContext context) {
-                  return Form(
-                    key: _formKey,
-                    child: ListView(
-                      children: <Widget>[
-                        LoginUserEmail(widget: widget, user: _user),
-                        LoginUserPassword(user: _user),
-                        LoginUserButton(onPressed: () => submit(context)),
-                        LoginResetPasswordButton(screenSize: screenSize),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            );
-          }
-          return Scaffold(appBar: AppBar(title: const Text('Loading...')));
-        });
+      future: _getValues(),
+      builder: (context, AsyncSnapshot<UserService> snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Login'),
+            ),
+            body: Builder(
+              builder: (BuildContext context) {
+                return Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: <Widget>[
+                      LoginUserEmail(widget: widget, user: _user),
+                      LoginUserPassword(user: _user),
+                      LoginUserButton(onPressed: () => submit(context)),
+                      LoginResetPasswordButton(screenSize: screenSize),
+                    ],
+                  ),
+                );
+              },
+            ),
+          );
+        }
+
+        return Scaffold(appBar: AppBar(title: const Text('Loading...')));
+      },
+    );
   }
 }

@@ -9,13 +9,11 @@ import 'package:intl/intl.dart';
 class PatientsPortalScreen extends StatefulWidget {
   final UserRepository userRepository = UserDefaultRepository();
   final UserService userService;
-  final bool isLoggedIn;
   final bool isLoaded;
 
   PatientsPortalScreen({
     Key? key,
     required this.userService,
-    required this.isLoggedIn,
     required this.isLoaded,
   }) : super(key: key);
 
@@ -26,11 +24,12 @@ class PatientsPortalScreen extends StatefulWidget {
 class PatientPortalScreenState extends State<PatientsPortalScreen> {
   List<Patient> patientList = [];
   bool isLoaded = false;
+  Future? getDataFuture;
 
   @override
   void initState() {
     super.initState();
-    getData();
+    getDataFuture = getData();
   }
 
   Future<void> getData() async {
@@ -48,6 +47,7 @@ class PatientPortalScreenState extends State<PatientsPortalScreen> {
     final dateTime = format.parseUtc(dateTimeString);
     final now = DateTime.now().toUtc().add(const Duration(hours: 12));
     final difference = now.difference(dateTime);
+
     return difference.inSeconds.abs() < 60;
   }
 
@@ -55,32 +55,43 @@ class PatientPortalScreenState extends State<PatientsPortalScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    if (!isLoaded) {
-      return const Center(
-        child: SpinKitPumpingHeart(color: Colors.purple),
-      );
-    }
-
-    return Scaffold(
-      body: Stack(
-        children: [
-          SizedBox(
-            height: screenSize.height,
-            width: screenSize.width,
-            child: ListView(
-              children: <Widget>[
-                for (Patient patient in patientList)
-                  ProfileBox(
-                    name: patient.fullName,
-                    id: patient.userId,
-                    picture: patient.avatarImage,
-                    isConnected: isWithinOneMinute(patient.dateTime),
+    return FutureBuilder(
+      future: getDataFuture,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: SpinKitPumpingHeart(color: Colors.purple),
+          );
+        } else {
+          return Scaffold(
+            body: Stack(
+              children: [
+                SizedBox(
+                  height: screenSize.height,
+                  width: screenSize.width,
+                  child: ListView(
+                    children: <Widget>[
+                      for (Patient patient in patientList)
+                        ProfileBox(
+                          name: patient.fullName,
+                          id: patient.userId,
+                          picture: patient.avatarImage,
+                          isConnected: isWithinOneMinute(patient.dateTime),
+                        ),
+                    ],
                   ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getDataFuture = getData();
   }
 }

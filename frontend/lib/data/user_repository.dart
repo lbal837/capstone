@@ -16,7 +16,9 @@ abstract class UserRepository {
   Future<Response> subscribeToPatient(String caregiverEmail, String patientId);
 
   Future<Response> unsubscribeFromPatient(
-      String caregiverEmail, String patientId);
+    String caregiverEmail,
+    String patientId,
+  );
 
   Future<Patient> fetchPatient(String id);
 }
@@ -32,10 +34,12 @@ class UserDefaultRepository extends UserRepository {
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
       final Patient patient = Patient.fromJson(jsonResponse['data']);
+
       return patient;
     } else {
       debugPrint(
-          'Error: status code ${response.statusCode}, response body: ${response.body}');
+        'Error: status code ${response.statusCode}, response body: ${response.body}',
+      );
       throw Exception('Failed to load data');
     }
   }
@@ -43,10 +47,11 @@ class UserDefaultRepository extends UserRepository {
   @override
   Future<List<Patient>> fetchUserPatients(String caregiverEmail) async {
     final response = await http.get(
-        Uri.parse('$apiEndpoint/GetUserPatients?UserId=$caregiverEmail'),
-        headers: {
-          'x-api-key': apiKey,
-        });
+      Uri.parse('$apiEndpoint/GetUserPatients?UserId=$caregiverEmail'),
+      headers: {
+        'x-api-key': apiKey,
+      },
+    );
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
@@ -61,7 +66,8 @@ class UserDefaultRepository extends UserRepository {
       return patients;
     } else {
       debugPrint(
-          'Error: status code ${response.statusCode}, response body: ${response.body}');
+        'Error: status code ${response.statusCode}, response body: ${response.body}',
+      );
       throw Exception('Failed to load data');
     }
   }
@@ -89,7 +95,9 @@ class UserDefaultRepository extends UserRepository {
 
   @override
   Future<Response> subscribeToPatient(
-      String caregiverEmail, String patientId) async {
+    String caregiverEmail,
+    String patientId,
+  ) async {
     const apiUrl = '$apiEndpoint/SubscribeCaregiverToPatient';
 
     try {
@@ -108,22 +116,30 @@ class UserDefaultRepository extends UserRepository {
       final responseJson = jsonDecode(response.body);
       if (response.statusCode == 200) {
         debugPrint(responseJson['message']);
+
         return Response(isSuccess: true, message: responseJson['message']);
       } else {
         debugPrint(
-            'Failed to subscribe to patient. Status code: ${response.statusCode}. Message: ${responseJson['message']}');
+          'Failed to subscribe to patient. Status code: ${response.statusCode}. Message: ${responseJson['message']}',
+        );
+
         return Response(isSuccess: false, message: responseJson['message']);
       }
     } catch (e) {
       debugPrint('Failed to subscribe to patient: $e');
+
       return Response(
-          isSuccess: false, message: 'Failed to subscribe to patient: $e');
+        isSuccess: false,
+        message: 'Failed to subscribe to patient: $e',
+      );
     }
   }
 
   @override
   Future<Response> removePatientFromUser(
-      String userId, String patientId) async {
+    String userId,
+    String patientId,
+  ) async {
     final response = await http.post(
       Uri.parse('$apiEndpoint/RemovePatientFromCaregiver'),
       headers: {'x-api-key': apiKey, 'Content-type': 'application/json'},
@@ -145,7 +161,9 @@ class UserDefaultRepository extends UserRepository {
 
   @override
   Future<Response> unsubscribeFromPatient(
-      String caregiverEmail, String patientId) async {
+    String caregiverEmail,
+    String patientId,
+  ) async {
     const apiUrl = '$apiEndpoint/UnsubscribeCaregiverFromPatient';
 
     try {
@@ -163,12 +181,14 @@ class UserDefaultRepository extends UserRepository {
 
       final responseJson = jsonDecode(response.body);
       debugPrint(responseJson['message']);
+
       return Response(
         isSuccess: response.statusCode == 200,
         message: responseJson['message'],
       );
     } catch (e) {
       debugPrint('Failed to unsubscribe from patient: $e');
+
       return Response(
         isSuccess: false,
         message: 'Failed to unsubscribe from patient: $e',

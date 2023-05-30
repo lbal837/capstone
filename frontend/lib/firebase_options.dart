@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '926526125124',
     projectId: 'lifesavers-cbe0d',
     storageBucket: 'lifesavers-cbe0d.appspot.com',
-    iosClientId: '926526125124-jfdsv5kdgj715v7ehq79ffhe5alp19st.apps.googleusercontent.com',
+    iosClientId:
+        '926526125124-jfdsv5kdgj715v7ehq79ffhe5alp19st.apps.googleusercontent.com',
     iosBundleId: 'com.example.frontend',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '926526125124',
     projectId: 'lifesavers-cbe0d',
     storageBucket: 'lifesavers-cbe0d.appspot.com',
-    iosClientId: '926526125124-jfdsv5kdgj715v7ehq79ffhe5alp19st.apps.googleusercontent.com',
+    iosClientId:
+        '926526125124-jfdsv5kdgj715v7ehq79ffhe5alp19st.apps.googleusercontent.com',
     iosBundleId: 'com.example.frontend',
   );
 }

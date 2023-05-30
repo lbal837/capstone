@@ -119,24 +119,25 @@ class ConfirmationScreenState extends State<ConfirmationScreen> {
         title: const Text('Confirm Account'),
       ),
       body: Builder(
-          builder: (BuildContext context) => Form(
-                key: _formKey,
-                child: ListView(
-                  children: <Widget>[
-                    ConfirmUserEmail(widget: widget, user: _user),
-                    ConfirmUserCode(
-                      confirmationCode: confirmationCode,
-                      onSaved: (c) => confirmationCode = c ?? '',
-                    ),
-                    ConfirmUserButton(onPressed: () {
-                      _submit(context);
-                    }),
-                    ConfirmResendCode(onTap: () {
-                      _resendConfirmation(context);
-                    }),
-                  ],
-                ),
-              )),
+        builder: (BuildContext context) => Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              ConfirmUserEmail(widget: widget, user: _user),
+              ConfirmUserCode(
+                confirmationCode: confirmationCode,
+                onSaved: (c) => confirmationCode = c ?? '',
+              ),
+              ConfirmUserButton(onPressed: () {
+                _submit(context);
+              }),
+              ConfirmResendCode(onTap: () {
+                _resendConfirmation(context);
+              }),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

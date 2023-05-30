@@ -3,18 +3,15 @@ import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/ui/add_patient/add_patient_screen.dart';
 import 'package:frontend/ui/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
-import 'package:frontend/ui/remove_patient/remove_patient_screen.dart';
 import 'package:frontend/ui/settings/settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final UserService userService;
-  final bool isLoggedIn;
   final bool isLoaded;
 
   const MainScreen({
     Key? key,
     required this.userService,
-    required this.isLoggedIn,
     required this.isLoaded,
   }) : super(key: key);
 
@@ -28,12 +25,11 @@ class MainScreenState extends State<MainScreen> {
   List<Widget> get _widgetOptions {
     return <Widget>[
       PatientsPortalScreen(
-          userService: widget.userService,
-          isLoggedIn: widget.isLoggedIn,
-          isLoaded: widget.isLoaded),
+        userService: widget.userService,
+        isLoaded: widget.isLoaded,
+      ),
       const AddPatientScreen(),
-      const RemovePatientScreen(),
-      SettingsScreen(userService: widget.userService)
+      SettingsScreen(userService: widget.userService),
     ];
   }
 

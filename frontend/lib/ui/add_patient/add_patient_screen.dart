@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/user_service.dart';
 import 'package:frontend/data/user_repository.dart';
@@ -24,6 +25,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
     final patientId = _addPatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
+
     return userRepository.subscribeToPatient(caregiverEmail!, patientId);
   }
 
@@ -32,6 +34,7 @@ class AddPatientScreenState extends State<AddPatientScreen> {
     final patientId = _addPatientIdController.text.toUpperCase();
 
     final caregiverEmail = caregiver?.email;
+
     return userRepository.addPatientToUser(caregiverEmail!, patientId);
   }
 
