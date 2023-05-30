@@ -51,34 +51,3 @@ class Storage extends CognitoStorage {
     await _prefs.clear();
   }
 }
-
-class MemoryStorage extends CognitoStorage {
-  @override
-  Future<dynamic> setItem(String key, dynamic value) async {
-    _dataMemory[key] = value;
-
-    return _dataMemory[key];
-  }
-
-  @override
-  Future<dynamic> getItem(String key) async {
-    final item = _dataMemory[key];
-    if (item != null) {
-      return item;
-    }
-
-    return null;
-  }
-
-  @override
-  Future<dynamic> removeItem(String key) async {
-    return _dataMemory.remove(key);
-  }
-
-  @override
-  Future<void> clear() async {
-    _dataMemory = {};
-  }
-}
-
-Map<String, dynamic> _dataMemory = {};
