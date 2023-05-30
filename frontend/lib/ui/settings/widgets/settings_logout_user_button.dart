@@ -6,7 +6,7 @@ class SettingsLogoutUserButton extends StatelessWidget {
   final Size screenSize;
 
   const SettingsLogoutUserButton(
-      {super.key, required this.userService, required this.screenSize});
+      {super.key, required this.userService, required this.screenSize,});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SettingsLogoutUserButton extends StatelessWidget {
         onPressed: () {
           userService.signOut();
           Navigator.pushNamedAndRemoveUntil(
-              context, '/home', (Route<dynamic> route) => false);
+              context, '/home', (Route<dynamic> route) => false,);
         },
         child: const Text(
           'Logout',

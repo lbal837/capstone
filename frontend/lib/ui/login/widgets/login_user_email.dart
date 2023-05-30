@@ -19,7 +19,9 @@ class LoginUserEmail extends StatelessWidget {
       title: TextFormField(
         initialValue: widget.email,
         decoration: const InputDecoration(
-            hintText: 'example@inspire.my', labelText: 'Email'),
+          hintText: 'example@inspire.my',
+          labelText: 'Email',
+        ),
         keyboardType: TextInputType.emailAddress,
         onSaved: (n) => _user.email = n,
       ),

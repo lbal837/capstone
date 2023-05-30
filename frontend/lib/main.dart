@@ -43,13 +43,15 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'LifeSavers',
       theme: ThemeData(
-          fontFamily: 'Urbanist',
-          useMaterial3: true,
-          colorScheme: lightColorScheme),
+        fontFamily: 'Urbanist',
+        useMaterial3: true,
+        colorScheme: lightColorScheme,
+      ),
       darkTheme: ThemeData(
-          fontFamily: 'Urbanist',
-          useMaterial3: true,
-          colorScheme: darkColorScheme),
+        fontFamily: 'Urbanist',
+        useMaterial3: true,
+        colorScheme: darkColorScheme,
+      ),
       routes: routes,
       onGenerateRoute: onGenerateRoutes,
       initialRoute: '/home',

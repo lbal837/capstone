@@ -10,6 +10,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -17,7 +18,9 @@ class SettingsScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           SettingsLogoutUserButton(
-              userService: userService, screenSize: screenSize),
+            userService: userService,
+            screenSize: screenSize,
+          ),
         ],
       ),
     );

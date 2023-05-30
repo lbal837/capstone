@@ -104,5 +104,6 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
       builder: (_) => SettingsScreen(userService: userService),
     );
   }
+
   return null;
 }
