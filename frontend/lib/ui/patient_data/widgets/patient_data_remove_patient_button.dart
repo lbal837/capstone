@@ -4,11 +4,13 @@ import 'package:frontend/domain/response.dart';
 class RemovePatientButton extends StatelessWidget {
   final Future<Response> Function() unsubscribeFromPatient;
   final Future<Response> Function() removePatientFromUser;
+  final VoidCallback afterSuccessfulRemoval;
 
   const RemovePatientButton({
     Key? key,
     required this.unsubscribeFromPatient,
     required this.removePatientFromUser,
+    required this.afterSuccessfulRemoval,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class RemovePatientButton extends StatelessWidget {
                   duration: Duration(milliseconds: 1000),
                   content:
                       Text('Patient successfully removed and unsubscribed!')));
+              afterSuccessfulRemoval();
             } else {
               String errorMsg = 'Failed to remove or unsubscribe patient!\n';
               if (!unsubscribeResponse.isSuccess) {

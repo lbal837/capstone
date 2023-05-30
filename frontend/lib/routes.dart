@@ -6,6 +6,7 @@ import 'package:frontend/ui/confirmation/confirmation_screen.dart';
 import 'package:frontend/ui/home/home_screen.dart';
 import 'package:frontend/ui/initiate_reset_password/initiate_reset_password_screen.dart';
 import 'package:frontend/ui/login/login_screen.dart';
+import 'package:frontend/ui/main/main_screen.dart';
 import 'package:frontend/ui/map/map_screen.dart';
 import 'package:frontend/ui/patient_data/patient_data_screen.dart';
 import 'package:frontend/ui/patients_portal/patients_portal_screen.dart';
@@ -51,15 +52,13 @@ final Map<String, WidgetBuilder> routes = {
     );
   },
   '/patientsPortal': (context) {
-    final Map<String, dynamic> arguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Map<Object, Object> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<Object, Object>;
     final UserService userService = arguments['userService'] as UserService;
-    final bool isLoggedIn = arguments['isLoggedIn'] as bool;
     final bool isLoaded = arguments['isLoaded'] as bool;
 
     return PatientsPortalScreen(
       userService: userService,
-      isLoggedIn: isLoggedIn,
       isLoaded: isLoaded,
     );
   },
@@ -70,6 +69,17 @@ final Map<String, WidgetBuilder> routes = {
 
     return SettingsScreen(
       userService: userService,
+    );
+  },
+  '/mainScreen': (context) {
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final UserService userService = arguments['userService'] as UserService;
+    final bool isLoaded = arguments['isLoaded'] as bool;
+
+    return MainScreen(
+      userService: userService,
+      isLoaded: isLoaded,
     );
   },
 };

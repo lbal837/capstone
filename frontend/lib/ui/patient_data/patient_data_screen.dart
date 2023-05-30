@@ -15,12 +15,16 @@ import 'package:intl/intl.dart';
 class PatientDataScreenState extends State<PatientDataScreen> {
   Patient? patient;
   bool isLoaded = false;
-  final UserService _userService = UserService(userPool);
+  final UserService userService = UserService(userPool);
   final UserRepository userRepository = UserDefaultRepository();
 
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  void afterDataChange() {
     getData();
   }
 
@@ -35,7 +39,7 @@ class PatientDataScreenState extends State<PatientDataScreen> {
   }
 
   Future<Response> _unsubscribeFromPatient() async {
-    final caregiver = await _userService.getCurrentUser();
+    final caregiver = await userService.getCurrentUser();
 
     final caregiverEmail = caregiver?.email;
     return userRepository.unsubscribeFromPatient(
@@ -43,7 +47,7 @@ class PatientDataScreenState extends State<PatientDataScreen> {
   }
 
   Future<Response> _removePatientFromUser() async {
-    final caregiver = await _userService.getCurrentUser();
+    final caregiver = await userService.getCurrentUser();
 
     final caregiverEmail = caregiver?.email;
     return userRepository.removePatientFromUser(
@@ -80,8 +84,15 @@ class PatientDataScreenState extends State<PatientDataScreen> {
               isConnected: isWithinOneMinute(patient!.dateTime),
             ),
             RemovePatientButton(
-                unsubscribeFromPatient: _unsubscribeFromPatient,
-                removePatientFromUser: _removePatientFromUser),
+              unsubscribeFromPatient: _unsubscribeFromPatient,
+              removePatientFromUser: _removePatientFromUser,
+              afterSuccessfulRemoval: () {
+                Navigator.pushNamed(context, '/mainScreen', arguments: {
+                  'userService': userService,
+                  'isLoaded': false,
+                });
+              },
+            ),
             HeartRateWidget(heartRate: patient?.heartRate.toString()),
             GPSWidget(
               latitude: patient?.latitude,
