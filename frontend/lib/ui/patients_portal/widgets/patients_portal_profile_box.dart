@@ -18,8 +18,11 @@ class ProfileBox extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (id != null) {
-          Navigator.pushNamed(context, '/patientData',
-              arguments: {'userId': id});
+          Navigator.pushNamed(
+            context,
+            '/patientData',
+            arguments: {'userId': id},
+          );
         }
       },
       child: Card(
@@ -31,10 +34,11 @@ class ProfileBox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: CircleAvatar(
-                  radius: 35, // Image radius
-                  backgroundImage: NetworkImage(
-                    picture!,
-                  )),
+                radius: 35, // Image radius
+                backgroundImage: NetworkImage(
+                  picture!,
+                ),
+              ),
             ),
             Container(
               padding: const EdgeInsets.all(5.0),

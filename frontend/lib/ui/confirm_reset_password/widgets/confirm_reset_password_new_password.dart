@@ -16,6 +16,7 @@ class ConfirmResetPasswordNewPassword extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return 'Please enter your new password';
           }
+
           return null;
         },
         decoration: const InputDecoration(

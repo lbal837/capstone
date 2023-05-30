@@ -15,6 +15,7 @@ class AddPatientButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
+
     return Container(
       padding: const EdgeInsets.all(20.0),
       width: screenSize.width,
@@ -29,8 +30,9 @@ class AddPatientButton extends StatelessWidget {
 
             if (subscribeResponse.isSuccess && addUserResponse.isSuccess) {
               scaffoldMessenger.showSnackBar(const SnackBar(
-                  duration: Duration(milliseconds: 1000),
-                  content: Text('Patient successfully added and subscribed!')));
+                duration: Duration(milliseconds: 1000),
+                content: Text('Patient successfully added and subscribed!'),
+              ));
             } else {
               String errorMsg = 'Failed to add or subscribe patient!\n';
               if (!subscribeResponse.isSuccess) {
@@ -41,14 +43,15 @@ class AddPatientButton extends StatelessWidget {
               }
 
               scaffoldMessenger.showSnackBar(SnackBar(
-                  duration: const Duration(milliseconds: 5000),
-                  content: Text(errorMsg)));
+                duration: const Duration(milliseconds: 5000),
+                content: Text(errorMsg),
+              ));
             }
           } catch (e) {
             scaffoldMessenger.showSnackBar(SnackBar(
-                duration: const Duration(milliseconds: 5000),
-                content:
-                    Text('Failed to add or subscribe patient! Error: $e')));
+              duration: const Duration(milliseconds: 5000),
+              content: Text('Failed to add or subscribe patient! Error: $e'),
+            ));
           }
         },
         child: const Text('Add Patient'),

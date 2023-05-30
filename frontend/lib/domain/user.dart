@@ -17,12 +17,15 @@ class User {
         user.email = attribute.getValue();
       } else if (attribute.getName() == 'name') {
         user.name = attribute.getValue();
-      } else if (attribute.getName() != null && attribute.getName()!.toLowerCase().contains('verified')) {
-        if (attribute.getValue() != null && attribute.getValue()!.toLowerCase() == 'true') {
+      } else if (attribute.getName() != null &&
+          attribute.getName()!.toLowerCase().contains('verified')) {
+        if (attribute.getValue() != null &&
+            attribute.getValue()!.toLowerCase() == 'true') {
           user.confirmed = true;
         }
       }
     }
+
     return user;
   }
 }

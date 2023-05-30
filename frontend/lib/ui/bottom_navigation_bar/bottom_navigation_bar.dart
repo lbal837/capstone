@@ -4,9 +4,11 @@ class CustomBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
 
-  const CustomBottomNavigationBar(
-      {Key? key, required this.selectedIndex, required this.onItemSelected})
-      : super(key: key);
+  const CustomBottomNavigationBar({
+    Key? key,
+    required this.selectedIndex,
+    required this.onItemSelected,
+  }) : super(key: key);
 
   @override
   CustomBottomNavigationBarState createState() =>
@@ -26,9 +28,7 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           icon: Icon(Icons.add),
           label: 'Add Patient',
         ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.remove), label: 'Remove Patient'),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings')
+        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
       ],
       currentIndex: widget.selectedIndex,
       selectedItemColor: Colors.deepPurple,

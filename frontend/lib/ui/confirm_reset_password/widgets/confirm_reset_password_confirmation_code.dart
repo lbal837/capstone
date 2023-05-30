@@ -16,6 +16,7 @@ class ConfirmResetPasswordCode extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return 'Please enter the confirmation code';
           }
+
           return null;
         },
         decoration: const InputDecoration(
