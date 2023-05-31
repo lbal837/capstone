@@ -47,7 +47,7 @@ def remove_patient_from_user(user_id, patient_id):
     return result
 
 
-# Lambda function
+# Lambda function.
 def lambda_handler(event, context):
     # Debugging.
     print(event)
@@ -67,22 +67,22 @@ def lambda_handler(event, context):
                 return {
                     "statusCode": 400,
                     "headers": {"Content-Type": "application/json"},
-                    "body": json.dumps({"status": "error", "message": result["error"]})
+                    "body": json.dumps({"message": result["error"]})
                 }
             else:
                 return {
                     "statusCode": 404,
                     "headers": {"Content-Type": "application/json"},
-                    "body": json.dumps({"status": "error", "message": result["error"]})
+                    "body": json.dumps({"message": result["error"]})
                 }
         return {
             "statusCode": 200,
             "headers": {"Content-Type": "application/json"},
-            "body": json.dumps({"status": "success"})
+            "body": json.dumps({"message": "Successfully removed patient from user"})
         }
     except Exception as e:
         return {
             "statusCode": 500,
             "headers": {"Content-Type": "application/json"},
-            "body": json.dumps({"status": "error", "message": str(e)})
+            "body": json.dumps({"message": str(e)})
         }

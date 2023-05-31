@@ -2,9 +2,10 @@ import os
 import psycopg2
 import sys
 import json
+import boto3
 
 sys.path.insert(0, "/var/task/dependencies")
-
+dynamodb = boto3.resource('dynamodb')
 
 def add_patient_to_user(user_id, patient_id):
     db_host = os.environ.get("DB_HOST")
@@ -35,6 +36,18 @@ def add_patient_to_user(user_id, patient_id):
             if patient_id in patient_ids:
                 return {"error": "User is already subscribed to this Patient"}
 
+            # Check DynamoDB for patient existence
+            table = dynamodb.Table(os.environ.get("DYNAMO_DB_PATIENT_NAME"))
+            response = table.get_item(
+                Key={
+                    'PatientId': patient_id
+                }
+            )
+
+            # If patient does not exist in DynamoDB, return error
+            if 'Item' not in response:
+                return {"error": "Patient not found in DynamoDB"}
+
             patient_ids.append(patient_id)
 
             # Update the patient_ids in the users table
@@ -47,7 +60,7 @@ def add_patient_to_user(user_id, patient_id):
     return result
 
 
-# Lambda function
+# Lambda function.
 def lambda_handler(event, context):
     # Debugging.
     print(event)
@@ -67,22 +80,22 @@ def lambda_handler(event, context):
                 return {
                     "statusCode": 400,
                     "headers": {"Content-Type": "application/json"},
-                    "body": json.dumps({"status": "error", "message": result["error"]})
+                    "body": json.dumps({"message": result["error"]})
                 }
             else:
                 return {
                     "statusCode": 404,
                     "headers": {"Content-Type": "application/json"},
-                    "body": json.dumps({"status": "error", "message": result["error"]})
+                    "body": json.dumps({"message": result["error"]})
                 }
         return {
             "statusCode": 200,
             "headers": {"Content-Type": "application/json"},
-            "body": json.dumps({"status": "success"})
+            "body": json.dumps({"message": "Successfully added patient to User"})
         }
     except Exception as e:
         return {
             "statusCode": 500,
             "headers": {"Content-Type": "application/json"},
-            "body": json.dumps({"status": "error", "message": str(e)})
+            "body": json.dumps({ "message": str(e)})
         }
