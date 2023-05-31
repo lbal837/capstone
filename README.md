@@ -11,7 +11,7 @@ Our Final Report is [Here](https://docs.google.com/document/d/1YlUvtqlReOlDLZJfM
 ## Technologies Used to build the project:
 AWS:
 - Python
-- Javascript - Node 14
+- Javascript - Node 18
 
 Mobile application:
 - Flutter
