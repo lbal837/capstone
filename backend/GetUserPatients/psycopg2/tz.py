@@ -129,6 +129,7 @@ class LocalTimezone(datetime.tzinfo):
 
     This is the exact implementation from the Python 2.3 documentation.
     """
+
     def utcoffset(self, dt):
         if self._isdst(dt):
             return DSTOFFSET
@@ -154,5 +155,3 @@ class LocalTimezone(datetime.tzinfo):
 
 
 LOCAL = LocalTimezone()
-
-# TODO: pre-generate some interesting time zones?
