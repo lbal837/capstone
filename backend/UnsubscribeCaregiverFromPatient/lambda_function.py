@@ -13,12 +13,12 @@ def get_patient_topic_arn(patient_id):
     return response["Item"]["TopicArn"]
 
 
-def get_subscription_arn(caregiver_email, topic_arn):
+def get_subscription_arn_and_status(caregiver_email, topic_arn):
     subscriptions = sns.list_subscriptions_by_topic(TopicArn=topic_arn)['Subscriptions']
     for subscription in subscriptions:
         if subscription['Protocol'] == 'email' and subscription['Endpoint'] == caregiver_email:
-            return subscription['SubscriptionArn']
-    return None
+            return subscription['SubscriptionArn'], subscription['SubscriptionArn'].split(":")[-1]
+    return None, None
 
 
 # Lambda function
@@ -34,13 +34,20 @@ def lambda_handler(event, context):
 
     try:
         topic_arn = get_patient_topic_arn(patient_id)
-        subscription_arn = get_subscription_arn(caregiver_email, topic_arn)
+        subscription_arn, subscription_status = get_subscription_arn_and_status(caregiver_email, topic_arn)
 
         if subscription_arn is None:
             return {
                 "statusCode": 400,
                 "headers": {"Content-Type": "application/json"},
                 "body": json.dumps({"message": "Caregiver is not subscribed to the patient."})
+            }
+
+        if subscription_status == 'PendingConfirmation':
+            return {
+                "statusCode": 400,
+                "headers": {"Content-Type": "application/json"},
+                "body": json.dumps({"message": "Confirm the subscription through your email and try again!"})
             }
 
         sns.unsubscribe(SubscriptionArn=subscription_arn)
