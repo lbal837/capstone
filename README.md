@@ -25,8 +25,8 @@ External APIs:
 
 
 ## Instructions on how to install and setup the project (specify all dependencies).
-Installing Fitbit App (Backend) [Here](https://github.com/uoa-compsci399-s1-2023/project-team-4/tree/main/fitbit#readme)
-Intalling Andriod App (Frontend) [Here](https://github.com/uoa-compsci399-s1-2023/project-team-4/blob/main/frontend/README.md)
+- Installing Fitbit App (Backend) [Here](https://github.com/uoa-compsci399-s1-2023/project-team-4/tree/main/fitbit#readme)
+- Intalling Andriod App (Frontend) [Here](https://github.com/uoa-compsci399-s1-2023/project-team-4/blob/main/frontend/README.md)
 
 ## Usage Examples
 Add screenshots here
