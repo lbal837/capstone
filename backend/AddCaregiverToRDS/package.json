@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1370.0",
+    "aws-sdk": "^2.1369.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.4",
     "pg-promise": "^11.4.3"
   }
 }
