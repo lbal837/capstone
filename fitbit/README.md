@@ -1,21 +1,19 @@
-# Installation Instructions
+# Installation Guidelines
 
+Refer to the following link to get started with Fitbit development:
 https://dev.fitbit.com/getting-started/
 
-Follow these instructions:
+Here are the step-by-step instructions:
 ![image](https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/fdf0d207-2381-4295-992f-00de2c9cc1e6)
 
-
-If you have windows install nvm here:
+For Windows users, install nvm from this link:
 https://github.com/coreybutler/nvm-windows#readme
 
-otherwise for MacOS: 
+For macOS users, use this link instead:
 https://github.com/nvm-sh/nvm#troubleshooting-on-macos
 
-You then need to become a Fitbit Dev
+You'll then need to sign up as a Fitbit Developer
 ![image](https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/34bcbba4-6a4e-4ca2-9a55-935ecc385dd0)
-
-then follow the instructions :)
 
 ## Pre-requisites
 
@@ -24,19 +22,19 @@ then follow the instructions :)
 
 ## Setup and Running
 
-1. Run `nvm install 14`
-2. Run `nvm alias default 14`
-3. Verify the correct version of Node is installed with `node --version` (we want `v14.21.3`)
-4. Run `npm install --global yarn` to set up Yarn
-5. Set up the Fitbit OS Simulator
-6. If running the Fitbit OS Simulator for the first time, navigate to the `settings` tab first and ensure there is a
+1. Execute `nvm install 14`
+2. Execute `nvm alias default 14`
+3. Verify the correct Node version with `node --version` (you should have v14.21.3)
+4. Run `npm install --global yarn` to install Yarn
+5. Initialize the Fitbit OS Simulator
+6. If it's your first time using the Fitbit OS Simulator, navigate to the settings tab and check for the
    message `Device bridge is waiting for a debugger`
-7. If running for the first time, run `yarn`
-8. To run the application run `npx fitbit` then `bi` -> means build and install (not the other one)
+7. If launching for the first time, run `yarn`
+8. To execute the application, run `npx fitbit` then `bi` - this stands for "build and install"
 
-## Testing and Developing
+## Future Plans
 
-- If you wanna test the fetch requests, hit the login button on the Fitbit phone simulator (which should show up after
-  running `bi`)
-- All the back-end functions are somewhere on lambda so gl with that
-  Update 
+### Patient ID Modification
+
+Our plans include implementing functionality that allows patient IDs to be modified in the app. The patient ID is
+currently hardcoded and linked to the device, which may pose security risks down the line.

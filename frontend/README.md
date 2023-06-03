@@ -1,22 +1,67 @@
 # Frontend
 
-## To get started
+## Pre-requisites
 
-Install Flutter [Here](https://docs.flutter.dev/get-started/install)
+### Flutter
 
-If you are using Visual Studio Code then install the extention [Here](https://docs.flutter.dev/tools/vs-code)
+Ensure that Flutter is installed on your system. You can download and install Flutter from
+this [link](https://docs.flutter.dev/get-started/install). Install the
+Flutter extension from [here](https://docs.flutter.dev/tools/vs-code) if you're using Visual Studio Code. A quick way to
+confirm a successful installation is by
+running the `flutter doctor` command and following the instructions. For additional help with Flutter, consider checking
+the official documentation [here](https://docs.flutter.dev/).
 
-You will need to have our secrets.dart file so please contact us if needed.
+### Android Studio
 
-Connect your Andriod mobile device or an emulator.
+If you own an Android device, switch to developer mode and enable USB debugging. If you don't have a physical device,
+Android Studio can be used to create an emulator for testing our application.
 
-Change your directory in the repo to the frontend. ```cd frontend```
+You can download and install Android Studio from this [link](https://developer.android.com/studio). You can create a new
+device through Android Studio with any
+screen size. Choose any images with an API level above 22 regarding the system image. We recommend using UpsideDownCake.
+The official documentation is available [here](https://developer.android.com/studio/intro) if you need further
+assistance with Android Studio.
 
-then run the command ```flutter run```
+### The secrets.dart file
 
-This will install the app onto your phone or the emulator.
+Due to security reasons, the secrets.dart file is not publicly accessible. If you require access to this file, kindly
+contact us. It should be placed under frontend/lib if you have obtained it. The following fields are contained in the
+secrets.dart file:
 
-## Documentation
+```agsl
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 
-If you need any help please read here for documentation [Here](https://docs.flutter.dev/)
+const cognitoUserPoolId = 'XXXXXXXXXXXXXXXXXXXXXXXXXX
+const cognitoClientId = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
+const cognitoIdentityPoolId ='XXXXXXXXXXXXXXXXXXXXXXXXXX';
+const apiEndpoint ='XXXXXXXXXXXXXXXXXXXXXXXXXX';
+const apiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
+const mapboxSecretAccessToken ='XXXXXXXXXXXXXXXXXXXXXXXXXX';
 
+final userPool = CognitoUserPool(cognitoUserPoolId, cognitoClientId);
+```
+
+## Running the application
+
+To launch the application, run `flutter pub get` to install all dependencies, then `flutter run` to start the
+application.
+
+Make sure to select the correct Android device before running the application.
+
+## Creation of APK File for Deployment
+
+To create the APK file for Android deployment, execute the command `flutter build apk --release`. Please note that
+testing for iOS deployment has yet to be conducted.
+
+The generated APK file can be located in the path `build/app/outputs/flutter-apk/app-release.apk`
+
+## Future Plans
+
+### Expansion of Communication Channels
+
+We plan to incorporate additional communication channels into the application. This could include SMS or push
+notifications via Firebase.
+
+### iOS Compatibility
+
+We intend to evaluate the iOS application and make the required modifications to assure compatibility.
