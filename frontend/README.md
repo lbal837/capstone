@@ -4,25 +4,29 @@
 
 ### Flutter
 
-Install Flutter [here](https://docs.flutter.dev/get-started/install), if you are using Visual Studio Code then install
-the extension [here](https://docs.flutter.dev/tools/vs-code). One easy way to know if everything is installed correctly
-is by running `flutter doctor` and following the instructions there. If you need any assistance with Flutter, you can
-read the documentation [here](https://docs.flutter.dev/).
+Ensure that Flutter is installed on your system. You can download and install Flutter from
+this [link](https://docs.flutter.dev/get-started/install). Install the
+Flutter extension from [here](https://docs.flutter.dev/tools/vs-code) if you're using Visual Studio Code. A quick way to
+confirm a successful installation is by
+running the `flutter doctor` command and following the instructions. For additional help with Flutter, consider checking
+the official documentation [here](https://docs.flutter.dev/).
 
 ### Android Studio
 
-If you have a physical android device, simply enable developer mode and USB debugging. If you do not have a physical
-device, utilise android studio to create an emulator to test our application on.
+If you own an Android device, switch to developer mode and enable USB debugging. If you don't have a physical device,
+Android Studio can be used to create an emulator for testing our application.
 
-Install Android Studio [here](https://developer.android.com/studio). Create a new device through Android Studio, any
-screen would suffice. When it comes to the system image, any images above an API level of 22 should suffice, however we
-recommend using `UpsideDownCake`. If you need any assistance with Android Studio, you can read the
-documentation [here](https://developer.android.com/studio/intro).
+You can download and install Android Studio from this [link](https://developer.android.com/studio). You can create a new
+device through Android Studio with any
+screen size. Choose any images with an API level above 22 regarding the system image. We recommend using UpsideDownCake.
+The official documentation is available [here](https://developer.android.com/studio/intro) if you need further
+assistance with Android Studio.
 
 ### The secrets.dart file
 
-For security purposes, the `secrets.dart` file has been hidden away. If you need access to this file, please contact us.
-If you have received it, place it under `frontend/lib` Below are the fields which the `secrets.dart` file will contain:
+Due to security reasons, the secrets.dart file is not publicly accessible. If you require access to this file, kindly
+contact us. It should be placed under frontend/lib if you have obtained it. The following fields are contained in the
+secrets.dart file:
 
 ```agsl
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
@@ -39,9 +43,9 @@ final userPool = CognitoUserPool(cognitoUserPoolId, cognitoClientId);
 
 ## Running the application
 
-Run the application with `flutter pub get` to install all the dependencies, followed by `flutter run` to run the
-application. Ensure you have selected the appropriate android device to run the application on.
-
+To launch the application, run `flutter pub get` to install all dependencies, then `flutter run` to start the
+application.
+Make sure to select the correct Android device before running the application.
 
 ## Usage Examples
 
