@@ -18,8 +18,9 @@ class UserService {
 
   /// Initiate user session from local storage if present
   Future<bool> init() async {
-    final prefs = await SharedPreferences.getInstance();
-    final storage = Storage(prefs);
+    // final prefs = await SharedPreferences.getInstance();
+    // final storage = Storage(prefs);
+    final storage = CognitoMemoryStorage();
     _userPool.storage = storage;
 
     _cognitoUser = await _userPool.getCurrentUser();
@@ -33,6 +34,7 @@ class UserService {
 
   /// Get existing user from session with his/her attributes
   Future<User?> getCurrentUser() async {
+    await init();
     if (_cognitoUser == null || _session == null) {
       return null;
     }

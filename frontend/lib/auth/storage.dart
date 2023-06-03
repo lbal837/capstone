@@ -4,8 +4,7 @@ import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Extend CognitoStorage with Shared Preferences to persist account
-/// login sessions
+/// Extend CognitoStorage with Shared Preferences to persist account login sessions
 class Storage extends CognitoStorage {
   final SharedPreferences _prefs;
 
