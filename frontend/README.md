@@ -48,8 +48,6 @@ application.
 
 Make sure to select the correct Android device before running the application.
 
-## Usage Examples
-
 ## Generating the APK file for deployment
 
 To generate the APK file for android deployment, run the command `flutter build apk --release`. The application has not
@@ -58,8 +56,11 @@ been tested with an IOS deployment yet.
 You will find the released APK file in `build/app/outputs/flutter-apk/app-release.apk`
 
 ## Future Plans
+
 ### Increasing the number of communication channels
-Involves adding more communication channels to the application, such as SMS or push notifications through Firebase. 
+
+Involves adding more communication channels to the application, such as SMS or push notifications through Firebase.
 
 ### IOS Compatibility
+
 Involves testing the application on IOS devices and making the necessary changes to ensure compatibility.
