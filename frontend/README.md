@@ -48,19 +48,20 @@ application.
 
 Make sure to select the correct Android device before running the application.
 
-## Generating the APK file for deployment
+## Creation of APK File for Deployment
 
-To generate the APK file for android deployment, run the command `flutter build apk --release`. The application has not
-been tested with an IOS deployment yet.
+To create the APK file for Android deployment, execute the command `flutter build apk --release`. Please note that
+testing for iOS deployment has yet to be conducted.
 
-You will find the released APK file in `build/app/outputs/flutter-apk/app-release.apk`
+The generated APK file can be located in the path `build/app/outputs/flutter-apk/app-release.apk`
 
 ## Future Plans
 
-### Increasing the number of communication channels
+### Expansion of Communication Channels
 
-Involves adding more communication channels to the application, such as SMS or push notifications through Firebase.
+We plan to incorporate additional communication channels into the application. This could include SMS or push
+notifications via Firebase.
 
-### IOS Compatibility
+### iOS Compatibility
 
-Involves testing the application on IOS devices and making the necessary changes to ensure compatibility.
+We intend to evaluate the iOS application and make the required modifications to assure compatibility.
