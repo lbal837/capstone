@@ -30,6 +30,9 @@ External APIs:
 
 ## Usage Examples
 Add screenshots here
+Generate client id on the fitbit:
+<img width="406" alt="fitbit-image" src="https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/91184091/e22ba665-bd45-44ab-8635-bf01d1539219">
+
 
 ## Future Plan
 * Add push notification or SMS notifications.
