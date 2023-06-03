@@ -29,10 +29,13 @@ External APIs:
 - Intalling Andriod App (Frontend) [Here](https://github.com/uoa-compsci399-s1-2023/project-team-4/blob/main/frontend/README.md)
 
 ## Usage Examples
-Add screenshots here
 Generate client id on the fitbit:
-<img width="406" alt="fitbit-image" src="https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/91184091/e22ba665-bd45-44ab-8635-bf01d1539219">
 
+<img width="200" alt="fitbit-image" src="https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/91184091/e22ba665-bd45-44ab-8635-bf01d1539219">
+
+Data displayed is as follows: 
+
+(top: "12:16")current time of day, (middle: "BKDHYR")the patient's unique id used for subscribing a caregiver to that patient on the companion app and (bottom: "1")the number is the number of times data is sent to the database since the watch was last active, which is fetched every minute and changes accordingly.
 
 ## Future Plan
 * Add push notification or SMS notifications.
