@@ -94,7 +94,8 @@ Page, each individual Patient Data Page and the Settings Page where they are abl
 
 Add Patient Page:
 
-<img width="200" alt="add-patient-page" src="https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/e1123fd0-3cee-49af-adfd-4174da29c3f7">
+<img width="200" alt="add-patient-page" src="https://github.com/uoa-compsci399-s1-2023/project-team-4/assets/67040087/668b7a7a-e13b-402a-8bd7-d5610f61919d">
+
 
 
 From here they can enter the Patient ID from the LifeSaver Application on the Fitbit. Once added they can now be
