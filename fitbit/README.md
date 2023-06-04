@@ -38,3 +38,20 @@ You'll then need to sign up as a Fitbit Developer
 
 Our plans include implementing functionality that allows patient IDs to be modified in the app. The patient ID is
 currently hardcoded and linked to the device, which may pose security risks down the line.
+
+### Location Alerts
+
+We aim to enhance patient safety by introducing a feature that allows caregivers to set a defined location range for the
+patient. This location-based system will alert the caregiver whenever the patient strays beyond the specified scope.
+Such functionality will be particularly beneficial for caregivers of patients with dementia, where wandering can be a
+concern.
+
+### Usability improvements
+
+Future improvements also include making our application as user-friendly as possible. These include:
+
+1. **Empty State Handling:** We will introduce custom screens for scenarios when the user isn't subscribed to patients.
+   This will provide a more engaging user experience and clear direction for newcomers to our application.
+2. **Seamless Subscription Experience:** To make subscribing to patients more intuitive, we plan to improve the user
+   interface of our patients_portal screen. In the future, patients will only appear on the patients_portal screen once
+   the user has confirmed the subscription, ensuring a smoother and more streamlined experience for users.
