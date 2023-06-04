@@ -119,9 +119,14 @@ This is a map of the patient and where the patient is located.
 
 ## Future Plans
 
-* Incorporate push notifications or SMS notifications.
-* Provide medical suggestions and analyses based on the data collected.
-* Introduce location alerts when the patient strays beyond a defined range.
+- Refer to the Fitbit App
+  README [here](https://github.com/uoa-compsci399-s1-2023/project-team-4/tree/main/fitbit#readme)
+- for specific future plans
+  Refer to the Android App
+  README [here](https://github.com/uoa-compsci399-s1-2023/project-team-4/blob/main/frontend/README.md) for specific
+  future plans
+- Refer to the Backend
+  README [here](https://github.com/uoa-compsci399-s1-2023/project-team-4/blob/main/backend/README.md)
 
 ## Acknowledgements
 
