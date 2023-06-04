@@ -128,10 +128,6 @@ This is a map of the patient and where the patient is located.
 - Refer to the Backend
   README [here](https://github.com/uoa-compsci399-s1-2023/project-team-4/blob/main/backend/README.md)
 
-The below encompasses the future plans for the project which has reliance on AWS to some capacity.
-
-* Provide medical suggestions and analyses based on the data collected.
-
 ## Acknowledgements
 
 We would like to acknowledge the following resources that were indispensable in our development process:
