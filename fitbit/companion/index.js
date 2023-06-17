@@ -9,7 +9,7 @@ import getCurrentDateInNZST from "./dateUtils";
 import {fetchUserProfile} from "./fetchUserProfile";
 import {sendDataToEndpoint} from "./sendDataToEndpoint";
 import {fetchGeoLocationData} from "./fetchGeolocationData";
-import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
+import {CLIENT_ID, CLIENT_SECRET} from "../constants";
 
 // Getting and persisting the access token
 settingsStorage.onchange = function (evt) {
