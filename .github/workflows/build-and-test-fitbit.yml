@@ -21,6 +21,13 @@ jobs:
         with:
           node-version: 18
 
+      - name: Decode base64 secrets
+        run: |
+          cd fitbit
+          echo $SECRETS_FILE_CONTENTS | base64 -di > constants.js
+        env:
+          SECRETS_FILE_CONTENTS: ${{ secrets.FITBIT_FILE_CONTENTS }}
+
       - name: Change to Fitbit directory, build and run tests
         run: |
           cd fitbit
