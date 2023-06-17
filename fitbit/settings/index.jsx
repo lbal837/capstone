@@ -1,7 +1,7 @@
 /**
  * Code related to the visual design of the companion app.
  */
-import {CLIENT_ID, CLIENT_SECRET} from "../common/constants";
+import {CLIENT_ID, CLIENT_SECRET} from "../constants";
 
 function mySettings(props) {
     return (
